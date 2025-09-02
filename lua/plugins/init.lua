@@ -13,11 +13,18 @@ return {
     end,
   },
   {import ="configs.auto-save"},
+  {import = "configs.dispatch"},
   {
     import = "configs.oil"
   },
-
+  {import = "configs.blank-line"},
+  {import = "configs.nvim-autopairs"},
   {import ="configs.nvim-saga"},
+
+  {import ="configs.statuscol"},
+  {import ="configs.ufo"},
+
+
   -- {
   --   "neovim/nvim-lspconfig",
   --   config = function()

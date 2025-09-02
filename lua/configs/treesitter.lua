@@ -48,7 +48,7 @@ return {
       rainbow = {
         enable = true,
         extended_mode = true,
-        max_file_lines = 1000,
+        max_file_lines = nil,
       },
 
       -- Playground para ver árbol de parseo
