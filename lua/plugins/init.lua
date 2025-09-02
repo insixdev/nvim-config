@@ -61,6 +61,9 @@ return {
       require "configs.cmp"
     end,
   },
+  {
+    import = "configs.treesitter"
+  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
@@ -69,6 +72,7 @@ return {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {
   -- 		ensure_installed = {
+  --
   -- 			"vim", "lua", "vimdoc",
   --      "html", "css"
   -- 		},
