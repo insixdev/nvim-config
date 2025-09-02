@@ -12,10 +12,55 @@ return {
       require "configs.lspconfig"
     end,
   },
+  {import ="configs.auto-save"},
   {
-    import ="configs.auto-save",
     import = "configs.oil"
-  }
+  },
+
+  {import ="configs.nvim-saga"},
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   config = function()
+  --     require "configs.lspconfig"
+  --   end,
+  -- },
+  --
+  -- -- Mason
+  -- {
+  --   "williamboman/mason.nvim",
+  --   opts = function()
+  --     return require "configs.mason"
+  --   end,
+  -- },
+  --
+  -- -- Mason + LSP integration
+  -- {
+  --   "williamboman/mason-lspconfig.nvim",
+  --   dependencies = { "mason.nvim", "nvim-lspconfig" },
+  --   config = function()
+  --     require("mason-lspconfig").setup({
+  --       ensure_installed = {
+  --         "rust_analyzer",
+  --         "clangd", 
+  --         "pyright",
+  --         "tsserver",
+  --         "html",
+  --         "cssls",
+  --         "lua_ls",
+  --       },
+  --       automatic_installation = true,
+  --     })
+  --   end,
+  -- },
+
+  -- Rust tools específico
+  -- Tu cmp existente
+  {
+    "hrsh7th/nvim-cmp",
+    config = function()
+      require "configs.cmp"
+    end,
+  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
