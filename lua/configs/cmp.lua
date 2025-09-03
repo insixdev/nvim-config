@@ -225,7 +225,6 @@ local function setup_minimal_cmp()
       { name = "path" },
     },
   }
-  
   cmp.setup(options)
   
   -- Cmdline setup minimalista
@@ -236,18 +235,34 @@ local function setup_minimal_cmp()
     }
   })
   
-  cmp.setup.cmdline(":", {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      {
-        name = "path",
-        option = {
-          trailing_slash = true,
-        }, 
-      },
-      { name = "cmdline" }
-    })
-  })
+
+local cmp = require("cmp")
+
+cmp.setup({
+  mapping = {
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.confirm({ select = true })
+        local entry = cmp.get_selected_entry()
+        if entry then
+          local item = entry:get_completion_item()
+          local path = item.label or item.abbr
+          local stat = vim.loop.fs_stat(path)
+          if stat and stat.type == "directory" then
+            vim.api.nvim_feedkeys("/", "n", true)
+          end
+        end
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+  },
+  sources = {
+    { name = "path" },
+    { name = "buffer" },
+  },
+})
 end
 
 -- ═══════════════════════════════════════════════════════════════
