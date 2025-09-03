@@ -13,11 +13,18 @@ return {
     end,
   },
   {import ="configs.auto-save"},
+  {import = "configs.dispatch"},
   {
     import = "configs.oil"
   },
-
+  {import = "configs.blank-line"},
+  {import = "configs.nvim-autopairs"},
   {import ="configs.nvim-saga"},
+
+  {import ="configs.statuscol"},
+  {import ="configs.ufo"},
+
+
   -- {
   --   "neovim/nvim-lspconfig",
   --   config = function()
@@ -61,6 +68,9 @@ return {
       require "configs.cmp"
     end,
   },
+  {
+    import = "configs.treesitter"
+  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
@@ -69,6 +79,7 @@ return {
   -- 	"nvim-treesitter/nvim-treesitter",
   -- 	opts = {
   -- 		ensure_installed = {
+  --
   -- 			"vim", "lua", "vimdoc",
   --      "html", "css"
   -- 		},

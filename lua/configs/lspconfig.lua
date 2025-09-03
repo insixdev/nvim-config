@@ -27,6 +27,11 @@ local server_configs = {
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
+        diagnostics = {
+          experimental = {
+            enable = true,
+          },
+        },
         cargo = {
           allFeatures = true,
           loadOutDirsFromCheck = true,
@@ -228,10 +233,10 @@ map("n", "<leader>wl", function()
   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { desc = "List workspace folders" })
 
--- Configuración de diagnósticos
 vim.diagnostic.config({
   virtual_text = {
-    prefix = "●", -- Could be '■', '▎', 'x', '●'
+    prefix = "●",       -- puedes poner '●', '■', '▎', etc.
+    spacing = 2,
   },
   signs = true,
   underline = true,
@@ -240,15 +245,16 @@ vim.diagnostic.config({
   float = {
     border = "rounded",
     source = "always",
-    header = "",
-    prefix = "",
   },
 })
-
--- Definir los signos de diagnóstico
-local signs = { Error = "✘", Warn = "▲", Hint = "⚑", Info = "ℹ" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-end
+vim.diagnostic.config({
+  signs = {
+    active = {
+      Error = { text = "✘" },
+      Warn  = { text = "▲" },
+      Info  = { text = "" },
+      Hint  = { text = "⚑" },
+    }
+  }
+})
 

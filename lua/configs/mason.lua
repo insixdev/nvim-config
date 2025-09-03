@@ -14,7 +14,6 @@ local options = {
     "bash-language-server",
     "json-lsp",
     "yaml-language-server",
-    
     -- Formatters
     "prettier",
     "black",
@@ -23,7 +22,6 @@ local options = {
     "clang-format",
     "stylua",
     "shfmt",
-    
     -- Linters  
     "eslint_d",
     "flake8",
