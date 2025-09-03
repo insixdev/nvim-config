@@ -43,6 +43,7 @@ local server_configs = {
           command = "check", -- o "clippy" para más estricto
           extraArgs = { "--target-dir", "/tmp/rust-analyzer-check" },
         },
+        
         procMacro = {
           enable = true,
           ignored = {

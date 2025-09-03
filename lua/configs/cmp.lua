@@ -1,4 +1,5 @@
--- configs/cmp.lua - CMP MINIMALISTA ADAPTATIVO ESTILO NVCHAD
+
+-- /cmp.lua - CMP MINIMALISTA ADAPTATIVO ESTILO NVCHAD
 local cmp = require("cmp")
 
 -- ═══════════════════════════════════════════════════════════════
@@ -6,20 +7,19 @@ local cmp = require("cmp")
 -- ═══════════════════════════════════════════════════════════════
 local function get_nvchad_colors()
   local status, base46 = pcall(require, "base46")
-  
   if status then
     local colors = base46.get_theme_tb("base_30")
     if colors then
       return colors
     end
   end
-  
+
   -- Fallback: colores por defecto
   return {
     white = "#D9E0EE",
     darker_black = "#191B28",
     black = "#1E2030",
-    black2 = "#252738", 
+    black2 = "#252738",
     one_bg = "#2D3348",
     one_bg2 = "#363A4F",
     one_bg3 = "#3E4255",
@@ -36,7 +36,7 @@ local function get_nvchad_colors()
     nord_blue = "#5E81AC",
     blue = "#61AFEF",
     yellow = "#E5C07B",
-    sun = "#FFCB6B", 
+    sun = "#FFCB6B",
     purple = "#C678DD",
     dark_purple = "#A569BD",
     teal = "#56B6C2",
@@ -50,25 +50,15 @@ end
 -- ═══════════════════════════════════════════════════════════════
 local function apply_minimal_highlights()
   local colors = get_nvchad_colors()
-  
   local highlights = {
-    -- Pmenu principal - estilo NvChad
     CmpPmenu = { bg = colors.darker_black, fg = colors.white },
     CmpPmenuBorder = { bg = colors.darker_black, fg = colors.grey },
     CmpPmenuSbar = { bg = colors.one_bg },
     CmpPmenuThumb = { bg = colors.grey },
-    
-    -- Selección - minimalista
     CmpPmenuSel = { bg = colors.one_bg, bold = true },
-    
-    -- Documentación - limpia
     CmpDoc = { bg = colors.black, fg = colors.light_grey },
     CmpDocBorder = { bg = colors.black, fg = colors.blue },
-    
-    -- Items - colores del tema actual
     CmpItemKindDefault = { fg = colors.white },
-    
-    -- Solo los más importantes con colores
     CmpItemKindFunction = { fg = colors.blue },
     CmpItemKindMethod = { fg = colors.blue },
     CmpItemKindKeyword = { fg = colors.purple },
@@ -76,74 +66,59 @@ local function apply_minimal_highlights()
     CmpItemKindConstant = { fg = colors.orange },
     CmpItemKindText = { fg = colors.white },
     CmpItemKindSnippet = { fg = colors.green },
-    
-    -- Texto principal
     CmpItemAbbr = { fg = colors.white },
     CmpItemAbbrMatch = { fg = colors.nord_blue, bold = true },
     CmpItemAbbrMatchFuzzy = { fg = colors.blue },
     CmpItemMenu = { fg = colors.grey_fg },
   }
-  
   for group, hl in pairs(highlights) do
     vim.api.nvim_set_hl(0, group, hl)
   end
 end
 
 -- ═══════════════════════════════════════════════════════════════
--- 🎨 ICONOS MINIMALISTAS (estilo NvChad)
+-- 🎨 ICONOS MINIMALISTAS
 -- ═══════════════════════════════════════════════════════════════
 local kind_icons = {
   Text = "󰉿",
   Method = "󰆧",
-  Function = "󰊕", 
-  Constructor = "",
+  Function = "󰊕",
   Field = "󰜢",
   Variable = "󰀫",
   Class = "󰠱",
-  Interface = "",
-  Module = "",
   Property = "󰜢",
   Unit = "󰑭",
   Value = "󰎠",
-  Enum = "",
   Keyword = "󰌋",
-  Snippet = "",
   Color = "󰏘",
   File = "󰈚",
   Reference = "󰈇",
   Folder = "󰉋",
-  EnumMember = "",
   Constant = "󰏿",
   Struct = "󰙅",
-  Event = "",
   Operator = "󰆕",
-  TypeParameter = "",
 }
 
 -- ═══════════════════════════════════════════════════════════════
--- ⚙️ CONFIGURACIÓN MINIMALISTA (estilo NvChad UI)
+-- ⚙️ CONFIGURACIÓN MINIMALISTA CMP
 -- ═══════════════════════════════════════════════════════════════
 local function setup_minimal_cmp()
-  -- Aplicar highlights adaptativos
   apply_minimal_highlights()
-  
-  local options = {
-    completion = {
-      completeopt = "menu,menuone,noselect",
-    },
-    
+
+  cmp.setup({
+    completion = { completeopt = "menu,menuone,noselect" },
+
     snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
       end,
     },
-    
-    -- Ventana minimalista - bordes simples
+
     window = {
       completion = {
-        border = "rounded", -- Bordes simples
+        border = "rounded",
         winhighlight = "Normal:CmpPmenu,CursorLine:CmpPmenuSel,Search:None,FloatBorder:CmpPmenuBorder",
-        scrollbar = false, -- Sin scrollbar, más limpio
+        scrollbar = false,
         col_offset = -2,
         side_padding = 1,
       },
@@ -154,37 +129,28 @@ local function setup_minimal_cmp()
         max_height = 15,
       },
     },
-    
-    -- Formato minimalista pero funcional
+
     formatting = {
       fields = { "kind", "abbr", "menu" },
       format = function(entry, item)
-        local icons = kind_icons
-        if icons[item.kind] then
-          item.kind = icons[item.kind] .. " " .. item.kind
+        if kind_icons[item.kind] then
+          item.kind = kind_icons[item.kind] .. " " .. item.kind
         end
-        
-        -- Truncar texto si es muy largo
         if #item.abbr > 40 then
           item.abbr = string.sub(item.abbr, 1, 37) .. "..."
         end
-        
-        -- Menu simple
         local source_names = {
           nvim_lsp = "LSP",
           luasnip = "Snippet",
-          buffer = "Buffer", 
+          buffer = "Buffer",
           path = "Path",
           nvim_lua = "Lua",
         }
-        
         item.menu = string.format("[%s]", source_names[entry.source.name] or entry.source.name)
-        
         return item
       end,
     },
-    
-    -- Mappings básicos de NvChad
+
     mapping = {
       ["<C-p>"] = cmp.mapping.select_prev_item(),
       ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -192,10 +158,8 @@ local function setup_minimal_cmp()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      }),
+      ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -205,6 +169,7 @@ local function setup_minimal_cmp()
           fallback()
         end
       end, { "i", "s" }),
+
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
@@ -215,8 +180,7 @@ local function setup_minimal_cmp()
         end
       end, { "i", "s" }),
     },
-    
-    -- Sources simples
+
     sources = {
       { name = "nvim_lsp" },
       { name = "luasnip" },
@@ -224,55 +188,20 @@ local function setup_minimal_cmp()
       { name = "nvim_lua" },
       { name = "path" },
     },
-  }
-  cmp.setup(options)
-  
-  -- Cmdline setup minimalista
+  })
+
+  -- Cmdline (búsqueda con "/")
   cmp.setup.cmdline("/", {
     mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = "buffer" }
-    }
+    sources = { { name = "buffer" } },
   })
-  
-
-local cmp = require("cmp")
-
-cmp.setup({
-  mapping = {
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.confirm({ select = true })
-        local entry = cmp.get_selected_entry()
-        if entry then
-          local item = entry:get_completion_item()
-          local path = item.label or item.abbr
-          local stat = vim.loop.fs_stat(path)
-          if stat and stat.type == "directory" then
-            vim.api.nvim_feedkeys("/", "n", true)
-          end
-        end
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-  },
-  sources = {
-    { name = "path" },
-    { name = "buffer" },
-  },
-})
 end
 
 -- ═══════════════════════════════════════════════════════════════
 -- 🔄 AUTO-ACTUALIZACIÓN CUANDO CAMBIA TEMA
 -- ═══════════════════════════════════════════════════════════════
-
--- Configurar al inicio
 setup_minimal_cmp()
 
--- Auto-update cuando cambie el tema
 vim.api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     vim.defer_fn(function()
@@ -281,7 +210,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
--- Update cuando base46 cambie
 vim.api.nvim_create_autocmd("User", {
   pattern = "NvChadThemeReload",
   callback = function()
@@ -290,11 +218,11 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- ═══════════════════════════════════════════════════════════════
--- 📦 EXPORTAR MÓDULO (estilo NvChad)
+-- 📦 EXPORTAR MÓDULO
 -- ═══════════════════════════════════════════════════════════════
 return {
-  -- Función para refrescar manualmente
   refresh = function()
     apply_minimal_highlights()
-  end
+  end,
 }
+
