@@ -14,6 +14,7 @@ return {
   },
   {import ="configs.auto-save"},
   {import = "configs.dispatch"},
+  {import = "configs.render-markdown"},
   {
     import = "configs.oil"
   },

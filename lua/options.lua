@@ -8,6 +8,7 @@ vim.opt.termguicolors = false
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
+
 vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
 vim.g.neovide_antialiasing = true
 vim.g.neovide_cursor_antialiasing = true
