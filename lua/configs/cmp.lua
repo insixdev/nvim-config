@@ -151,6 +151,7 @@ local function setup_minimal_cmp()
       end,
     },
 
+   
     mapping = {
       ["<C-p>"] = cmp.mapping.select_prev_item(),
       ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -158,11 +159,27 @@ local function setup_minimal_cmp()
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.close(),
-      ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
 
+      -- ENTER normal
+      ["<CR>"] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      }),
+
+      -- TAB inteligente
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
-          cmp.select_next_item()
+          local entry = cmp.get_selected_entry()
+          if entry then
+            cmp.confirm({ select = true }) -- confirma selección
+            local item = entry:get_completion_item()
+            local path = item.label or item.abbr
+            local stat = vim.loop.fs_stat(path)
+            if stat and stat.type == "directory" then
+              vim.api.nvim_feedkeys("/", "n", true) -- agrega slash si es dir
+            end
+            return
+          end
         elseif require("luasnip").expand_or_jumpable() then
           require("luasnip").expand_or_jump()
         else
@@ -180,6 +197,7 @@ local function setup_minimal_cmp()
         end
       end, { "i", "s" }),
     },
+
 
     sources = {
       { name = "nvim_lsp" },
