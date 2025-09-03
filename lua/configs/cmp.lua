@@ -1,7 +1,6 @@
 
 -- /cmp.lua - CMP MINIMALISTA ADAPTATIVO ESTILO NVCHAD
 local cmp = require("cmp")
-
 -- ═══════════════════════════════════════════════════════════════
 -- 🎨 FUNCIÓN PARA OBTENER COLORES DEL TEMA NVCHAD
 -- ═══════════════════════════════════════════════════════════════
@@ -186,7 +185,15 @@ local function setup_minimal_cmp()
           fallback()
         end
       end, { "i", "s" }),
-
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()        -- Mueve al siguiente item
+        elseif require("luasnip").expand_or_jumpable() then
+          require("luasnip").expand_or_jump()
+        else
+          fallback()
+        end
+end, { "i", "s" }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()

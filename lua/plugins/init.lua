@@ -12,6 +12,8 @@ return {
     end,
   },
   {import ="configs.auto-save"},
+
+  {import ="configs.gitsigns"},
   {import = "configs.dispatch"},
   {import = "configs.render-markdown"},
   {
