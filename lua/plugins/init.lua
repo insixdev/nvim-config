@@ -12,14 +12,17 @@ return {
     end,
   },
   {import ="configs.auto-save"},
-
+  {import ="configs.lazy-git"},
   {import ="configs.gitsigns"},
   {import = "configs.dispatch"},
   {import = "configs.render-markdown"},
   {
     import = "configs.oil"
   },
+
   {import = "configs.blank-line"},
+
+  {import ="configs.themes"},
   {import = "configs.nvim-autopairs"},
   {import ="configs.nvim-saga"},
 

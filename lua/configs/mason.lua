@@ -9,6 +9,8 @@ local options = {
     "html-lsp",
     "css-lsp", 
     "tailwindcss-language-server",
+    "gopls",
+    "marksman",
     "emmet-ls",
     "lua-language-server",
     "bash-language-server",

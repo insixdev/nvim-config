@@ -11,8 +11,8 @@ return {
       signs = {
         add          = { text = "▎", texthl = "GitSignsAdd", numhl = "GitSignsAddNr" },
         change       = { text = "▎", texthl = "GitSignsChange", numhl = "GitSignsChangeNr" },
-        delete       = { text = "契", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
-        topdelete    = { text = "契", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
+        delete       = { text = "|", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
+        topdelete    = { text = "|", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
         changedelete = { text = "▎", texthl = "GitSignsChange", numhl = "GitSignsChangeNr" },
         untracked    = { text = "▎", texthl = "GitSignsAdd", numhl = "GitSignsAddNr" },
       },
@@ -24,7 +24,8 @@ return {
       },
       current_line_blame_formatter = "<author>, <author_time:%R> • <summary>",
 
-      on_attach = function(bufnr)
+     on_attach = function(bufnr)
+
         local gs = package.loaded.gitsigns
         local function map(mode, lhs, rhs, desc)
           vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })

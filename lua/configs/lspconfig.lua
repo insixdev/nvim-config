@@ -1,11 +1,11 @@
 -- plugins/configs/lspconfig.lua
 local configs = require("nvchad.configs.lspconfig")
-
 -- Lista de servidores LSP que queremos
 local servers = {
   -- Sistemas
   "rust_analyzer",     -- Rust
   "clangd",           -- C/C++
+  "gopls",
   "pyright",          -- Python (mejor que pylsp)
   "pylsp",            -- Python alternativo
   -- Web
@@ -14,6 +14,7 @@ local servers = {
   "tailwindcss",      -- Tailwind CSS
   "emmet_ls",         -- Emmet
   
+  "marksman",
   -- Otros útiles
   "lua_ls",           -- Lua
   "bashls",           -- Bash
@@ -23,7 +24,77 @@ local servers = {
 
 -- Configuraciones específicas para cada servidor
 local server_configs = {
-  -- Rust Analyzer - configuración extensiva
+  gopls = {
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+          shadow = true,
+        },
+        staticcheck = true,
+        gofumpt = true,
+        hints = {
+          assignVariableTypes = true,
+          compositeLiteralFields = true,
+          constantValues = true,
+          functionTypeParameters = true,
+          parameterNames = true,
+          rangeVariableTypes = true,
+        },
+      },
+    },
+  },
+  -- Asegúrate de que tailwindcss solo se active en los tipos correctos
+tailwindcss = {
+  filetypes = { 
+    "aspnetcorerazor", "astro", "blade", "clojure", "django-html", "htmldjango", 
+    "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", 
+    "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", 
+    "jade", "leaf", "liquid", "mustache", "njk", "nunjucks", "php", "razor", 
+    "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", 
+    "sugarss", "javascript", "javascriptreact", "reason", "rescript", 
+    "typescript", "typescriptreact", "vue", "svelte", "templ"
+    -- NOTA: Eliminé "markdown" y "mdx" de aquí
+  },
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+      includeLanguages = {
+        eelixir = "html-eex",
+        elixir = "phoenix-heex",
+        eruby = "erb",
+        heex = "phoenix-heex",
+        htmlangular = "html",
+        templ = "html"
+      },
+      lint = {
+        cssConflict = "warning",
+        invalidApply = "error",
+        invalidConfigPath = "error",
+        invalidScreen = "error",
+        invalidTailwindDirective = "error",
+        invalidVariant = "error",
+        recommendedVariantOrder = "warning"
+      },
+      validate = true
+    }
+  }
+},
+
+marksman = {
+  filetypes = { "markdown" },
+  single_file_support = true,
+  settings = {
+    completion = {
+      wiki = {
+        enabled = true,
+      },
+    },
+    core = {
+      text_sync = "full",
+    },
+  },
+}, -- Rust Analyzer - configuración extensiva
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
@@ -53,33 +124,39 @@ local server_configs = {
           },
         },
         inlayHints = {
-          bindingModeHints = {
-            enable = false,
-          },
-          chainingHints = {
+          bindingModeHints = { -- si se infiere o no & &mut
             enable = true,
           },
-          closingBraceHints = {
+          rangeExclusiveHints = {
+            enable = true,
+          },
+          implicitReturnTypeHints = {
+            enable = true,
+          },
+          chainingHints = { -- Te muestra los tipos intermedios en un chain de métodos:
+            enable = true,
+          },
+          closingBraceHints = { -- comentarios para funciones o estructura largas al final de }
             enable = true,
             minLines = 25,
           },
           closureReturnTypeHints = {
-            enable = "never",
+            enable = false,
           },
           lifetimeElisionHints = {
-            enable = "never",
+            enable = "always",
             useParameterNames = false,
           },
           maxLength = 25,
           parameterHints = {
-            enable = true,
+            enable = false,
           },
           reborrowHints = {
-            enable = "never",
+            enable = true,
           },
           renderColons = true,
           typeHints = {
-            enable = true,
+            enable = false,
             hideClosureInitialization = false,
             hideNamedConstructor = false,
           },
@@ -187,19 +264,35 @@ local server_configs = {
     },
   },
 }
-
 -- Configurar cada servidor
 for _, lsp in ipairs(servers) do
   local config = server_configs[lsp] or {}
-  
+
   -- Fusionar con configuración base de NvChad
-  config.on_attach = configs.on_attach
-  config.on_init = configs.on_init  
-  config.capabilities = configs.capabilities
+  config.on_attach = function(client, bufnr)
+    -- primero llama al on_attach base de NvChad
+    if configs.on_attach then
+      configs.on_attach(client, bufnr)
+    end
 
-  require("lspconfig")[lsp].setup(config)
+    -- 🔹 Fix específico para rust-analyzer
+    if client.name == "rust_analyzer" then
+      -- Desactivar semantic tokens (causan Invalid 'col')
+      client.server_capabilities.semanticTokensProvider = nil
+
+      -- Activar inlay hints con pcall (no rompe si hay error)
+      if client.server_capabilities.inlayHintProvider then
+        pcall(function()
+          vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        end)
+config.on_init = configs.on_init
+config.capabilities = configs.capabilities
+require("lspconfig")[lsp].setup(config)
+
+      end
+    end
+  end
 end
-
 -- Keymaps adicionales para LSP (mejorados)
 local map = vim.keymap.set
 
