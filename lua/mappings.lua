@@ -30,11 +30,11 @@ local current = vim.g.colors_name  -- obtiene el colorscheme activo
 
 vim.keymap.set(
   "n",
-  "<leader>bq",
+  "<leader>u",
   '<Esc>:%bdelete|edit #|normal`"<Return>',
   { desc = "Delete other buffers but the current one" }
 )
-
-vim.defer_fn(function()
-  vim.cmd("colorscheme sakura")
-end, 2000) -- 2000 ms = 2 segundos
+--
+-- vim.defer_fn(function()
+--   vim.cmd("colorscheme sakura")
+-- end, 2000) -- 2000 ms = 2 segundos
