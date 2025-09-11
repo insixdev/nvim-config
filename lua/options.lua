@@ -18,4 +18,12 @@ vim.g.neovide_cursor_antialiasing = true
 
 vim.o.termguicolors = true
 
-vim.cmd("colorscheme sakura")
+-- En tu init.lua o dentro de autocmds
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "rust",
+  callback = function()
+    vim.opt_local.shiftwidth = 3 -- cuántos espacios al indentar
+    vim.opt_local.tabstop = 3     -- ancho del tab visual
+    vim.opt_local.softtabstop = 3 -- para <Tab> en insert mode
+  end,
+})

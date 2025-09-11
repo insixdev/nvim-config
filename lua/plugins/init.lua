@@ -13,7 +13,6 @@ return {
   },
   {import ="configs.auto-save"},
 
-  {import ="configs.obsidian"},
   {import ="configs.bullets"},
   {import ="configs.lazy-git"},
   {import ="configs.gitsigns"},
