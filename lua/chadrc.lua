@@ -2,7 +2,7 @@
 local M = {}
 
  M.base46 = {
-  theme = "kanagawa-dragon",
+  theme = "gruvchad",
   hl_override = {
     ["@type"]        = { fg = "#ebbc2f", bold = false},
     ["@type.builtin"]= { fg = "#ebbc2f", bold = false},
