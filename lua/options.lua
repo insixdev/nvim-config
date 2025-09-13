@@ -18,6 +18,12 @@ vim.g.neovide_cursor_antialiasing = true
 
 vim.o.termguicolors = true
 
+vim.opt.foldcolumn = "1"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = -1
+vim.opt.foldenable = true
+vim.opt.foldmethod= "indent"
+
 -- En tu init.lua o dentro de autocmds
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "rust",

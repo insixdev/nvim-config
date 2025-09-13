@@ -33,11 +33,6 @@ return {
   dependencies = { "kevinhwang91/promise-async" },
   lazy = false,
   init = function()
-    vim.o.foldcolumn = "1"
-    vim.o.foldlevel = 99
-    vim.o.foldlevelstart = -1
-    vim.o.foldenable = true
-
     -- Definir signos de fold
   end,
   config = function()
@@ -53,7 +48,7 @@ return {
         win_config = {
           border = "rounded",
           winhighlight = "Normal:Normal,FloatBorder:Normal",
-          winblend = 0,
+          winblend = 2,
         },
         mappings = {
           scrollU = "<C-u>",

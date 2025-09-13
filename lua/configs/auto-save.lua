@@ -14,7 +14,7 @@ return {
     }
 
     -- Timer que guarda cada segundo mientras estás en modo normal
-    local timer = vim.loop.new_timer()
+--    local timer = vim.loop.new_timer()
     -- timer:start(
     --   1000, -- 1000ms = 1s
     --   1000,

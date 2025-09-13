@@ -9,16 +9,15 @@ return {
       fold = {
         width = 1,           -- current width of the fold column
         -- 'fillchars' option values:
-        close = "",         -- foldclose
+        close = "<",         -- foldclose
         open = "",          -- foldopen
-        sep = " "            -- foldsep
+        sep = ""            -- foldsep
       },
 
       segments = {
         { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
         { text = { '%s' }, click = 'v:lua.ScSa' },
-        { sign = { name = { "GitSignsAdd", "GitSignsChange", "GitSignsDelete" }, maxwidth = 1 } },
-        
+        { sign = { name = { "GitSignsAdd", "GitSignsChange", "GitSignsDelete" }, maxwidth = 0, text = {"c", "<", ">"} } },
         {
           text = { builtin.lnumfunc, ' ' },
           condition = { true, builtin.not_empty },

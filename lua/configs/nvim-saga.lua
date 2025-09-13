@@ -75,10 +75,10 @@ return {
       ui = {
         title = true,
         border = "rounded",
-        winblend = 10,
+        winblend = 5,
         expand = "",
         collapse = "",
-        code_action = "c",
+        code_action = "",
         incoming = "",
         outgoing = "",
         hover = "",
