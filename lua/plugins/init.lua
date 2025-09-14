@@ -14,8 +14,14 @@ return {
   {import ="configs.auto-save"},
 
   {import ="configs.harpoon"},
+
+  {import ="configs.yazi"},
+  {import ="configs.flash"},
   {import ="configs.bullets"},
   {import ="configs.obsidian"},
+
+
+  {import ="configs.bullets"},
   {import ="configs.bullets"},
   {import ="configs.lazy-git"},
   {import ="configs.gitsigns"},

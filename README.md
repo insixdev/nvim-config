@@ -50,6 +50,13 @@ Este repositorio contiene todos los archivos necesarios para transformar tu expe
 - [gitsigns.nvim](https://github.com/lewis6991/gitsigns.nvim)
 - ...y más
 
+## Configuracion propia
+tienes que configurar obsidian y ir al path de tu propio obsidian 
+o mismo desactivar el plugin si no lo utilizas
+para 
+lazyGit 
+
+necesitas las herramientas de la terminal instaladas y funcionando 
 ## 💡 Consejos
 
 - Consulta los archivos en `lua/` para ver cómo están organizados los módulos.

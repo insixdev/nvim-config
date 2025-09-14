@@ -9,7 +9,7 @@ return {
       fold = {
         width = 1,           -- current width of the fold column
         -- 'fillchars' option values:
-        close = "<",         -- foldclose
+        close = "<",         -- foldclose
         open = "",          -- foldopen
         sep = ""            -- foldsep
       },

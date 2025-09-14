@@ -15,10 +15,9 @@ vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
 vim.g.neovide_antialiasing = true
 vim.g.neovide_cursor_antialiasing = true
 
-
 vim.o.termguicolors = true
 
-vim.opt.foldcolumn = "1"
+vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = -1
 vim.opt.foldenable = true
