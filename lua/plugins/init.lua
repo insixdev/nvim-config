@@ -17,6 +17,8 @@ return {
 
   {import ="configs.yazi"},
   {import ="configs.flash"},
+
+  {import ="configs.treesj"},
   {import ="configs.bullets"},
   {import ="configs.obsidian"},
 
