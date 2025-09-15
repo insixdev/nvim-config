@@ -27,13 +27,16 @@ map("n", "<esc><esc>", "<CMD>q<CR>")
 vim.lsp.inlay_hint.enable(true)
 -- ~/.config/nvim/lua/colors.lua
 local current = vim.g.colors_name  -- obtiene el colorscheme activo
-
+-- treesj config keymap
+vim.keymap.set("n", "gS", require("treesj").split, { desc = "Split code block" })
+vim.keymap.set("n", "gJ", require("treesj").join,  { desc = "Join code block" })
 vim.keymap.set(
   "n",
   "<leader>u",
   '<Esc>:%bdelete|edit #|normal`"<Return>',
   { desc = "Delete other buffers but the current one" }
 )
+--
 --
 -- vim.defer_fn(function()
 --   vim.cmd("colorscheme sakura")
