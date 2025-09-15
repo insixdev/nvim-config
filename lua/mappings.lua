@@ -7,6 +7,12 @@ map("n", ",", ";")
 map("n", ",", ";")
 map("i", "jk", "<ESC>")
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    require("lualine").refresh()
+  end,
+})
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })    
 
 vim.api.nvim_create_autocmd("BufEnter", {
@@ -20,8 +26,12 @@ vim.api.nvim_create_user_command('R', function(opts)
   vim.cmd.split()
   vim.cmd.terminal(opts.args)
 end, { nargs = '*' })
-
-map("n", "<C-a>", "<CMD>colorscheme sakura<CR>")
+-- Reemplaza tu keymap problemático con este:
+vim.keymap.set("n", "<C-a>", function()
+  require("telescope.builtin").colorscheme({
+    enable_preview = true,
+  })
+end, { desc = "Telescope Colorscheme Picker" })
 map("n", "<esc><esc>", "<CMD>q<CR>")
 
 vim.lsp.inlay_hint.enable(true)
@@ -36,7 +46,10 @@ vim.keymap.set(
   '<Esc>:%bdelete|edit #|normal`"<Return>',
   { desc = "Delete other buffers but the current one" }
 )
---
+vim.defer_fn(function()
+  vim.cmd("Lazy load lualine.nvim")
+end, 100) -- 2000 ms = 2 segundos
+
 --
 -- vim.defer_fn(function()
 --   vim.cmd("colorscheme sakura")

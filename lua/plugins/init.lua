@@ -14,10 +14,11 @@ return {
   {import ="configs.auto-save"},
 
   {import ="configs.harpoon"},
-
+  {import ="configs.lualine"},
   {import ="configs.yazi"},
   {import ="configs.flash"},
 
+  {import ="configs.base16"},
   {import ="configs.treesj"},
   {import ="configs.bullets"},
   {import ="configs.obsidian"},

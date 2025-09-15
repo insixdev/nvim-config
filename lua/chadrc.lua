@@ -3,6 +3,10 @@ local M = {}
 
  M.base46 = {
   theme = "monochrome",
+  hl_override = {
+    LualineNormal = { fg = "#ffffff", bg = "#000000" },
+    LualineInsert = { fg = "#ffffff", bg = "#00ff00" },
+  },
  --  hl_override = {
  --    ["@type"]        = { fg = "#ebbc2f", bold = false},
  --    ["@type.builtin"]= { fg = "#ebbc2f", bold = false},
@@ -34,8 +38,11 @@ local M = {}
 -- M.nvdash = { load_on_startup = true }
 M.ui = {
   tabufline = {
-    lazyload =true
-  }
+  },
+  lualine = {
+    icons_enabled = false,       -- desactiva iconos
+    theme = "base16-monochrome", -- podes poner tu theme base16
+  },
 }
 
 return M
