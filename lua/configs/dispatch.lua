@@ -1,5 +1,4 @@
 
-
 return {
   "tpope/vim-dispatch",
   event = "VeryLazy",
@@ -15,7 +14,7 @@ return {
     -- :Make
     vim.api.nvim_set_keymap("n", "S", ":Make<CR>", opts)
     -- :Start (si quieres otro comando, por ejemplo Start!)
-    vim.api.nvim_set_keymap("n", "<leader>r", ":Start<CR>", opts)
+    vim.api.nvim_set_keymap("n", "<leader>Rr", ":Start<CR>", opts)
   end,
 }
 

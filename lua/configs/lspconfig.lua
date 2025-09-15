@@ -8,6 +8,7 @@ local servers = {
   "gopls",
   "pyright",          -- Python (mejor que pylsp)
   "pylsp",            -- Python alternativo
+  "jdtls", -- java lsp
   -- Web
   "ts_ls",         -- TypeScript/JavaScript
   "cssls",            -- CSS
