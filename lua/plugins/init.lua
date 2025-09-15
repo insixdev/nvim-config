@@ -20,7 +20,8 @@ return {
   {import ="configs.bullets"},
   {import ="configs.obsidian"},
 
-
+  {import ="configs.surround"},
+  {import ="configs.markdown-preview"},
   {import ="configs.bullets"},
   {import ="configs.bullets"},
   {import ="configs.lazy-git"},
