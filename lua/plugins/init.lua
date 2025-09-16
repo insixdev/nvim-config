@@ -24,8 +24,6 @@ return {
 
   {import ="configs.surround"},
   {import ="configs.markdown-preview"},
-  {import ="configs.bullets"},
-  {import ="configs.bullets"},
   {import ="configs.lazy-git"},
   {import ="configs.gitsigns"},
   {import = "configs.dispatch"},
