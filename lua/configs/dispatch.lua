@@ -33,7 +33,7 @@ return {
       vim.api.nvim_set_keymap("n", "Y", ":AsyncRun -mode=term ", opts)
       -- :AsyncStart (similar a :Start en dispatch)
       -- :AsyncRun con quickfix
-      vim.api.nvim_set_keymap("n", "L", ":AsyncRun <CR>", opts)
+      vim.api.nvim_set_keymap("n", "L", ":AsyncRun ", opts)
       -- Otro ejemplo de mapeo
       vim.api.nvim_set_keymap("n", "<leader>Rr", ":AsyncRun ", opts)
     end,
