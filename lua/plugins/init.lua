@@ -20,7 +20,6 @@ return {
 
   {import ="configs.base16"},
   {import ="configs.treesj"},
-  {import ="configs.bullets"},
   {import ="configs.obsidian"},
 
   {import ="configs.surround"},
