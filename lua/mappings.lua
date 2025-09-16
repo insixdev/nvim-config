@@ -2,9 +2,8 @@ require "nvchad.mappings"
 
 -- add yours here
 local map = vim.keymap.set
-map("n", ",", ";")
 
-map("n", ",", ";")
+-- Siempre repetir f/t como en Vim clásico
 map("i", "jk", "<ESC>")
 
 vim.api.nvim_create_autocmd("ColorScheme", {
