@@ -49,6 +49,13 @@ vim.defer_fn(function()
   vim.cmd("Lazy load lualine.nvim")
 end, 100) -- 2000 ms = 2 segundos
 
+-- Usando vim.keymap.set
+vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-h", ":tabprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", ":tabNext<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<C-A-q>", ":tabclose<CR>", { noremap = true, silent = true })
 --
 -- vim.defer_fn(function()
 --   vim.cmd("colorscheme sakura")

@@ -38,9 +38,10 @@ local M = {}
 -- M.nvdash = { load_on_startup = true }
 M.ui = {
   tabufline = {
+    enabled = false,
   },
   lualine = {
-    icons_enabled = false,       -- desactiva iconos
+    icons_enabled = true,       -- desactiva iconos
     theme = "base16-monochrome", -- podes poner tu theme base16
   },
 }
