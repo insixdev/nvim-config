@@ -52,10 +52,14 @@ end, 100) -- 2000 ms = 2 segundos
 -- Usando vim.keymap.set
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { noremap = true, silent = true })
 
-vim.keymap.set("n", "<C-h", ":tabprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "<C-l>", ":tabNext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<C-A-q>", ":tabclose<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("t", "|", [[<C-\><C-n>]], { noremap = true })
+
+vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = true })
 --
 -- vim.defer_fn(function()
 --   vim.cmd("colorscheme sakura")
