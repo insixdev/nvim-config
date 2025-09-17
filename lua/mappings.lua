@@ -25,6 +25,8 @@ vim.api.nvim_create_user_command('R', function(opts)
   vim.cmd.split()
   vim.cmd.terminal(opts.args)
 end, { nargs = '*' })
+
+vim.keymap.set("n", "<C-A-a>", ":R ")
 -- Reemplaza tu keymap problemático con este:
 vim.keymap.set("n", "<C-a>", function()
   require("telescope.builtin").colorscheme({
