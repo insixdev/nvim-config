@@ -80,3 +80,5 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 --
 vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', 'X', ':bd<CR>', { noremap = true, silent = true })
