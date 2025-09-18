@@ -14,11 +14,22 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })    
 
+
+
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
         require("ibl").refresh()
     end
 })
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>fg',
+  ":lua require('telescope.builtin').find_files({ search_file = vim.fn.expand('<cword>') })<CR>",
+  { noremap = true, silent = true }
+)
+
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- Este comando se cargará cada vez que inicies Neovim
 vim.api.nvim_create_user_command('R', function(opts)
@@ -66,3 +77,6 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 -- vim.defer_fn(function()
 --   vim.cmd("colorscheme sakura")
 -- end, 2000) -- 2000 ms = 2 segundos
+--
+vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
