@@ -1,8 +1,19 @@
-
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons", "RRethy/nvim-base16" },
   config = function()
+
+    local function project_and_cwd()
+      local cwd = vim.fn.getcwd()                          -- current working directory
+      local root = vim.fn.finddir(".git", cwd .. ";")      -- buscar .git hacia arriba
+      if root ~= "" then
+        root = vim.fn.fnamemodify(root, ":h")             -- obtener la carpeta que contiene .git
+      else
+        root = cwd                                        -- si no hay .git, usar cwd como root
+      end
+      return string.format("%s ", cwd)          -- formato: ROOT | CWD
+    end
+
     -- CARGAR EL THEME ANTES
     vim.cmd("colorscheme base16-black-metal-gorgoroth")
 
@@ -33,10 +44,10 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { { "filename", path = 2 }, { "cwd", color = { fg = "#a0a0f0"}} },
+        lualine_c = { { "filename", path = 2 }, { "cwd", color = { fg = "#a0a0f0"}}, project_and_cwd  },
         lualine_x = { "encoding", "fileformat", "filetype" },
         lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_z = { "location", },
       },
       inactive_sections = {
         lualine_a = {},
