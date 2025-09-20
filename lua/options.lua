@@ -34,3 +34,31 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.softtabstop = 3 -- para <Tab> en insert mode
   end,
 })
+
+local actions = require("oil.actions")
+local oil= require("oil")
+
+
+
+
+local actions = require("oil.actions")
+local oil = require("oil")
+-- joder tio cost
+vim.api.nvim_create_autocmd("DirChanged", {
+  callback = function()
+    -- Simula una "promesa": esperar a que Neovim termine la operación
+    vim.schedule(function()
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.bo[buf].filetype == "oil" then
+          oil.open(vim.fn.getcwd())
+          vim.api.nvim_buf_call(buf, function()
+            -- Primero refresca la lista de archivos
+            actions.refresh.callback({ force = true })
+            -- Luego abre el cwd actual
+          end)
+        end
+      end
+    end)
+  end,
+})
+
