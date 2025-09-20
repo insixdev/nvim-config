@@ -6,6 +6,7 @@ local folders = {
   "/mnt/data/proyect/",
 }
 
+vim.keymap.set("n", "<C-A-f>", ":Files<CR>")
 vim.keymap.set("n", "<C-g>", ":FavFolders<CR>")
 vim.keymap.set("n", "<C-f>", ":HomeFolder<CR>")
 vim.api.nvim_create_user_command("HomeFolders", function()
