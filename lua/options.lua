@@ -1,5 +1,5 @@
 require "nvchad.options"
-
+require("custom.fzf")
 vim.opt.conceallevel = 2
 vim.o.swapfile = false       -- Desactiva archivos swap
 vim.o.writebackup = false    -- Desactiva backup al guardar

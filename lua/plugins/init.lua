@@ -13,6 +13,17 @@ return {
   },
   {import ="configs.auto-save"},
 
+  {
+
+    lazy = false,
+    "junegunn/fzf",
+    build = "./install --bin"
+  },
+  {
+    lazy = false,
+    "junegunn/fzf.vim",
+    dependencies = { "junegunn/fzf" }
+  },
   {import ="configs.harpoon"},
   {import ="configs.lualine"},
   {import ="configs.yazi"},

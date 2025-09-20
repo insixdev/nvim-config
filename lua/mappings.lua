@@ -3,6 +3,10 @@ require "nvchad.mappings"
 -- add yours here
 local map = vim.keymap.set
 
+-- Busca carpetas con fzf
+vim.api.nvim_set_keymap("n", "<leader>fd",
+  ":call fzf#run({'source': 'fd --type d', 'sink': 'edit'})<CR>",
+  { noremap = true, silent = true })
 -- Siempre repetir f/t como en Vim clásico
 map("i", "jk", "<ESC>")
 
@@ -13,8 +17,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })    
-
-
 
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
