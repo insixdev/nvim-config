@@ -7,9 +7,8 @@ return {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
   keys = {
-    { "<leader>-", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open Yazi (actual file)" },
-    { "<leader>cw", "<cmd>Yazi cwd<cr>", desc = "Open file manager en cwd" },
-    { "<c-up>", "<cmd>Yazi toggle<cr>", desc = "Toggle último session de yazi" },
+    { "<leader>-", mode = { "n", "v" }, "<cmd>Yazi cwd<cr>", desc = "en la ultima ss"},
+    { "_", "<cmd>Yazi<cr>", desc = "abre actual" },
   },
   opts = {
     open_for_directories = false,

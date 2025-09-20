@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     require("lualine").refresh()
   end,
 })
+
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })    
 
 vim.api.nvim_create_autocmd("BufEnter", {

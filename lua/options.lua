@@ -61,4 +61,12 @@ vim.api.nvim_create_autocmd("DirChanged", {
     end)
   end,
 })
+-- Mapear _ solo en buffers de Oil
+-- Mapear _ solo en buffers de Oil
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil",
+  callback = function()
+    vim.keymap.set("n", "_", "<cmd>Yazi toggle<cr>", { buffer = true, desc = "Toggle Yazi desde Oil" })
+  end,
+})
 
