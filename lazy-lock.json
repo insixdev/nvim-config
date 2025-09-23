@@ -17,6 +17,8 @@
   "fzf": { "branch": "master", "commit": "2a92c7d792b45112ab82eef0be2aa11038e6185d" },
   "fzf.vim": { "branch": "master", "commit": "879db51d0965515cdaef9b7f6bdeb91c65d2829e" },
   "gitsigns.nvim": { "branch": "main", "commit": "f780609807eca1f783a36a8a31c30a48fbe150c5" },
+  "gruber-darker.nvim": { "branch": "main", "commit": "b22e1bbf06dd604d7d3483823d63103b86ebe942" },
+  "gruvbox.nvim": { "branch": "main", "commit": "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437" },
   "harpoon": { "branch": "master", "commit": "1bc17e3e42ea3c46b33c0bbad6a880792692a1b3" },
   "indent-blankline.nvim": { "branch": "master", "commit": "005b56001b2cb30bfa61b7986bc50657816ba4ba" },
   "kanagawa-paper.nvim": { "branch": "master", "commit": "ec8af01c782e4d2664bea953b2d14ba5b7d34b6b" },

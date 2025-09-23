@@ -11,6 +11,8 @@ return {
       require "configs.lspconfig"
     end,
   },
+  { "ellisonleao/gruvbox.nvim", },
+{ "blazkowolf/gruber-darker.nvim" },
   {import ="configs.auto-save"},
 
   {

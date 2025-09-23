@@ -2,8 +2,6 @@ require "nvchad.mappings"
 
 -- add yours here
 local map = vim.keymap.set
-map("n", "ñ", ":tabNext<CR>")
-map("n", "ñ", ":tabprevious<CR>")
 -- Busca carpetas con fzf
 vim.api.nvim_set_keymap("n", "<leader>fd",
   ":call fzf#run({'source': 'fd --type d', 'sink': 'edit'})<CR>",
@@ -43,11 +41,6 @@ end, { nargs = '*' })
 
 vim.keymap.set("n", "<C-A-a>", ":R ")
 -- Reemplaza tu keymap problemático con este:
-vim.keymap.set("n", "<C-a>", function()
-  require("telescope.builtin").colorscheme({
-    enable_preview = true,
-  })
-end, { desc = "Telescope Colorscheme Picker" })
 map("n", "<esc><esc>", "<CMD>q<CR>")
 
 vim.lsp.inlay_hint.enable(true)
@@ -83,7 +76,7 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
 --
-vim.api.nvim_set_keymap('n', 'X', ':bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-X>', ':bd<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
@@ -97,4 +90,11 @@ print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)
     end
   end,
 })
+vim.keymap.set("n", "<C-S-a>", function()
+  require("telescope.builtin").colorscheme({
+    enable_preview = true,
+  })
+end, { desc = "Telescope Colorscheme Picker" })
 
+vim.keymap.set("n", "<C-a>", "$", {noremap = true, silent = true})
+vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
