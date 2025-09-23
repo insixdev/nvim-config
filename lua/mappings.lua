@@ -77,7 +77,22 @@ vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
 --
 vim.api.nvim_set_keymap('n', '<C-S-X>', '<C-w>q', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-X>', ':bd<CR>', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<C-x>', function()
+    local cur = vim.api.nvim_get_current_buf()
+    
+    -- Si solo hay un buffer listado, cerramos la ventana
+    local listed = vim.fn.getbufinfo({buflisted = 1})
+    if #listed == 1 then
+        vim.cmd('q')
+        return
+    end
+
+    -- Moverse al buffer anterior
+    vim.cmd('bp')  
+    -- Borrar el buffer actual
+    vim.cmd('silent! bd ' .. cur)
+end, { noremap = true, silent = true })
 
 -- aumentar/disminuir alto
 vim.keymap.set("n", "<C-Up>",    ":resize +2<CR>")
