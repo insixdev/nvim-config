@@ -26,12 +26,37 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 vim.api.nvim_set_keymap(
   'n',
-  '<leader>fg',
+  'gG',
   ":lua require('telescope.builtin').find_files({ search_file = vim.fn.expand('<cword>') })<CR>",
   { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+  'n',
+  'gF',
+  ":lua require('telescope.builtin').live_grep({ default_text = vim.fn.expand('<cword>') })<CR>",
+  { noremap = true, silent = true }
+)
 
+vim.keymap.set(
+  {'n', 'v'},
+  'gR',
+  ":lua require('telescope.builtin').lsp_references()<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  'n',
+  'gd',
+  ":lua require('telescope.builtin').lsp_definitions()<CR>",
+  { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  'n',
+  'gE',
+  ":lua require('telescope.builtin').lsp_workspace_symbols()<CR>",
+  { noremap = true, silent = true }
+)
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- Este comando se cargará cada vez que inicies Neovim
 vim.api.nvim_create_user_command('R', function(opts)
