@@ -72,6 +72,8 @@ return {
         ["<C-A-l>"] = { "actions.select", opts = { vertical = true } },
         ["<C-A-h>"] = { "actions.select", opts = { horizontal = true } },
         ["<C-A-t>"] = { "actions.select", opts = { tab = true } },
+        ["<C-j>"] = false,
+        ["<C-k>"] = false,
 
         ["<C-h>"] = false,
         ["<C-l>"] = false,
