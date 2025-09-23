@@ -2,7 +2,8 @@ require "nvchad.mappings"
 
 -- add yours here
 local map = vim.keymap.set
-
+map("n", "ñ", ":tabNext<CR>")
+map("n", "ñ", ":tabprevious<CR>")
 -- Busca carpetas con fzf
 vim.api.nvim_set_keymap("n", "<leader>fd",
   ":call fzf#run({'source': 'fd --type d', 'sink': 'edit'})<CR>",
@@ -68,9 +69,6 @@ end, 100) -- 2000 ms = 2 segundos
 -- Usando vim.keymap.set
 vim.keymap.set("n", "<C-t>", ":tabnew<CR>", { noremap = true, silent = true })
 
-vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
-
 vim.keymap.set("n", "<C-A-q>", ":tabclose<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("t", "|", [[<C-\><C-n>]], { noremap = true })
@@ -80,8 +78,23 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 -- vim.defer_fn(function()
 --   vim.cmd("colorscheme sakura")
 -- end, 2000) -- 2000 ms = 2 segundos
---
+-- --
+
 vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
-
+--
 vim.api.nvim_set_keymap('n', 'X', ':bd<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    local ft = vim.bo.filetype
+    -- Solo asignar Tab si NO es un buffer de plugin
+    --
+print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)
+    if ft ~= "yazi" or ft ~= "fzf" or ft ~= "oil" then
+      vim.keymap.set("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true, buffer = true })
+      vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { noremap = true, silent = true, buffer = true })
+    end
+  end,
+})
+

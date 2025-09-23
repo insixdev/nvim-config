@@ -5,12 +5,10 @@ vim.o.swapfile = false       -- Desactiva archivos swap
 vim.o.writebackup = false    -- Desactiva backup al guardar
 -- add yours here!
 vim.wo.relativenumber = true
-vim.opt.termguicolors = false
 
 vim.o.showtabline = 0  -- 0 = nunca mostrar, 1 = solo si hay >1 tab, 2 = siempre mostrar
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
-
 
 vim.opt.wildmenu = true
 vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
