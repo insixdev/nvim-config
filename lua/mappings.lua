@@ -76,8 +76,16 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
 --
+vim.api.nvim_set_keymap('n', '<C-S-X>', '<C-w>q', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-X>', ':bd<CR>', { noremap = true, silent = true })
 
+-- aumentar/disminuir alto
+vim.keymap.set("n", "<C-Up>",    ":resize +2<CR>")
+vim.keymap.set("n", "<C-Down>",  ":resize -2<CR>")
+
+-- aumentar/disminuir ancho
+vim.keymap.set("n", "<C-Left>",  ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local ft = vim.bo.filetype
@@ -96,7 +104,7 @@ vim.keymap.set("n", "<C-S-a>", function()
   })
 end, { desc = "Telescope Colorscheme Picker" })
 
-vim.keymap.set("a", "<C-a>", "$", {noremap = true, silent = true})
+vim.keymap.set("n", "<C-a>", "$", {noremap = true, silent = true})
 vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
 
 vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
