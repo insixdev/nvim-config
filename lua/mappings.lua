@@ -104,7 +104,7 @@ vim.keymap.set("n", "<C-S-a>", function()
   })
 end, { desc = "Telescope Colorscheme Picker" })
 
-vim.keymap.set("n", "<C-a>", "$", {noremap = true, silent = true})
+vim.keymap.set({"n", "v", "i"}, "<C-a>", "$", {noremap = true, silent = true})
 vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
 
 vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
