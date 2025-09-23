@@ -1,3 +1,4 @@
+
 return {
   "pocco81/auto-save.nvim",
   lazy = false,
@@ -7,25 +8,19 @@ return {
     autosave.setup {
       enabled = true,
       execution_message = { message = function() return "" end },
-      trigger_events = {"InsertLeave", "TextChanged"}, -- guarda al salir de insert o al modificar
+      trigger_events = {"InsertLeave", "TextChanged"},
       condition = function(buf)
-        return vim.bo[buf].modifiable and vim.bo[buf].filetype ~= "gitcommit"
+        local ft = vim.bo[buf].filetype
+        local bt = vim.bo[buf].buftype
+
+        -- excluir Oil y otros buffers especiales
+        if ft == "oil" or ft == "gitcommit" or bt == "nofile" then
+          return false
+        end
+
+        return vim.bo[buf].modifiable
       end,
     }
-
-    -- Timer que guarda cada segundo mientras estás en modo normal
---    local timer = vim.loop.new_timer()
-    -- timer:start(
-    --   1000, -- 1000ms = 1s
-    --   1000,
-    --   vim.schedule_wrap(function()
-    --     if vim.fn.mode() == "n" then
-    --       if vim.bo.modified then
-    --         vim.cmd("silent! write")
-    --       end
-    --     end
-    --   end)
-    -- )
   end,
 }
 
