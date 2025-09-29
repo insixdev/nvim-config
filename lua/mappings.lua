@@ -138,13 +138,13 @@ print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)
     end
   end,
 })
-vim.keymap.set("n", "<C-S-a>", function()
+vim.keymap.set("n", "<C-c>", function()
   require("telescope.builtin").colorscheme({
     enable_preview = true,
   })
 end, { desc = "Telescope Colorscheme Picker" })
 
-vim.keymap.set({"n", "v", "i"}, "<C-a>", "$", {noremap = true, silent = true})
+vim.keymap.set({"n", "v", "i", "o"}, "<C-a>", "$", {noremap = true, silent = true})
 vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
 
 vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
