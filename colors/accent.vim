@@ -165,7 +165,7 @@ hi! link ErrorMsg     Error
 
 hi! Visual guibg=#303030 gui=NONE
 " desenlazar 
-hi! Statement guifg=#b39579 gui=italic
+hi! Statement guifg=#a5bae6 gui=italic
 
 " special stuff
 hi! link xmlAttrib    Normal
