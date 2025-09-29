@@ -11,10 +11,11 @@ return {
       require "configs.lspconfig"
     end,
   },
+  { "savq/melange-nvim" },
   { "ellisonleao/gruvbox.nvim", },
-{ "blazkowolf/gruber-darker.nvim" },
+  {  "nyoom-engineering/oxocarbon.nvim"},
+  { "blazkowolf/gruber-darker.nvim" },
   {import ="configs.auto-save"},
-
   {
 
     lazy = false,
