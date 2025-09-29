@@ -120,12 +120,12 @@ vim.keymap.set('n', '<C-x>', function()
 end, { noremap = true, silent = true })
 
 -- aumentar/disminuir alto
-vim.keymap.set("n", "<C-Up>",    ":resize +2<CR>")
-vim.keymap.set("n", "<C-Down>",  ":resize -2<CR>")
+vim.keymap.set("n", "<C-Down>",    ":resize +2<CR>")
+vim.keymap.set("n", "<C-Up>",  ":resize -2<CR>")
 
 -- aumentar/disminuir ancho
-vim.keymap.set("n", "<C-Left>",  ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-Right>",  ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local ft = vim.bo.filetype
