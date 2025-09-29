@@ -56,7 +56,7 @@ endif
 
 " foreground
 let s:fg      = ' guifg=#E2E2E4 ctermfg=250'
-let s:fg_b1   = ' guifg=#9EA3B5 ctermfg=255'
+let s:fg_b1   = ' guifg=#CDD2D6 ctermfg=255'
 let s:fg_d1   = ' guifg=#689340 '
 let s:fg_d2   = ' guifg=#777777 ctermfg=244'
 let s:fg_inv  = ' guifg=#282c34 ctermfg=236'
@@ -143,10 +143,10 @@ endif
 execute 'hi Comment'      . s:fg_d2 . s:bg_none . s:none
 " asi queremos las string siempre 
 execute 'hi String guifg=#93ad5a' . s:bg_none . s:none
-execute 'hi Type'         . s:fg_b1 . s:bg_none . s:none
+execute 'hi Type guifg=#a8bab1' . s:bg_none . s:none 
 execute 'hi PreProc guifg=#cfb07e'      . s:bg_none . s:none
 execute 'hi Underlined'   . s:fg    . s:bg_none . s:underline
-execute 'hi Special guifg= #92947b' . s:bg_none . s:none
+execute 'hi Special guifg= #9ba2a8' . s:bg_none . s:none
 execute 'hi Error'        . s:fg_b1 . s:bg_red  . s:none
 
 hi! link Operator     Normal

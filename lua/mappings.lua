@@ -149,6 +149,7 @@ vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = tr
 
 vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
+
 vim.defer_fn(function()
-  vim.cmd("colorscheme base16-accent")
+  vim.cmd("colorscheme accent")
 end, 100)
