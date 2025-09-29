@@ -11,13 +11,14 @@ return {
       else
         root = cwd                                        -- si no hay .git, usar cwd como root
       end
-      return string.format("%s ", cwd)          -- formato: ROOT | CWD
+      return string.format("%s ",  cwd)          -- formato: ROOT | CWD
     end
 
     -- CARGAR EL THEME ANTES
-    vim.cmd("colorscheme base16-black-metal-gorgoroth")
+    vim.cmd("colorscheme base16-black-metal")
 
     local base16_mod = require("base16-colorscheme")
+
     if not base16_mod or not base16_mod.colors then
       vim.notify("base16-colorscheme not loaded!", vim.log.levels.ERROR)
       return

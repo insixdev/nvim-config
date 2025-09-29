@@ -4,7 +4,7 @@
 " by alligator
 "
 " https://github.com/Alligator/accent.vim
-" 
+
 set background=dark
 hi clear
 
@@ -12,11 +12,11 @@ if exists('syntax on')
   syntax reset
 endif
 
-let g:colors_name = 'accent'
+let g:colors_name = 'base16-accent'
 
 let g:accent_colours = {}
 
-let g:accent_colours['insi']     = { 'fg': '  #78847A', 'bg': '#181818', 'ctermfg': '127', 'ctermbg': '131' }
+let g:accent_colours['insi']     = { 'fg': '#88B758', 'bg': '#181818', 'ctermfg': '127', 'ctermbg': '131' }
 let g:accent_colours['red']     = { 'fg': '#e06c75', 'bg': '#b04c55', 'ctermfg': '167', 'ctermbg': '131' }
 let g:accent_colours['orange']  = { 'fg': '#ee9360', 'bg': '#b66930', 'ctermfg': '173', 'ctermbg': '166' }
 let g:accent_colours['green']   = { 'fg': '#98c379', 'bg': '#689349', 'ctermfg': '149', 'ctermbg': '107' }
@@ -103,7 +103,6 @@ if s:invert_status
   execute 'hi StatusLine' . s:fg_invd .s:bg_c     . s:none
 else
   execute 'hi StatusLine' . s:fg_b1   . s:bg_c    . s:none
-       
 endif
 execute 'hi StatusLineNC' . s:fg_d1   . s:bg_b2   . s:none
 execute 'hi VertSplit'    . s:fg_c    . s:bg_b1   . s:none
@@ -141,12 +140,11 @@ else
 	execute 'hi Normal'       . s:fg    . s:bg
 endif
 execute 'hi Comment'      . s:fg_d2 . s:bg_none . s:none
-" asi queremos las string siempre 
-execute 'hi String guifg=#93ad5a' . s:bg_none . s:none
+execute 'hi String'       . s:fg_c  . s:bg_none . s:none
 execute 'hi Type'         . s:fg_b1 . s:bg_none . s:none
-execute 'hi PreProc guifg=#cfb07e'      . s:bg_none . s:none
+execute 'hi PreProc'      . s:fg_d1 . s:bg_none . s:none
 execute 'hi Underlined'   . s:fg    . s:bg_none . s:underline
-execute 'hi Special guifg= #92947b' . s:bg_none . s:none
+execute 'hi Special'      . s:fg_c  . s:bg_none . s:none
 execute 'hi Error'        . s:fg_b1 . s:bg_red  . s:none
 
 hi! link Operator     Normal
@@ -162,11 +160,10 @@ hi! link Function     Type
 hi! link Number       String
 hi! link Character    String
 hi! link ErrorMsg     Error
-
-hi! Visual guibg=#303030 gui=NONE
+hi! Visual guibg=#3e4452 gui=NONE
 " desenlazar 
-hi! Statement guifg=#b39579 gui=italic
 
+hi! Statement guifg=#e06c75 gui=bold
 " special stuff
 hi! link xmlAttrib    Normal
 hi! link sqlKeyword   Type
