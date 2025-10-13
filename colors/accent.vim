@@ -59,7 +59,7 @@ let s:fg      = ' guifg=#E2E2E4 ctermfg=250'
 let s:fg_b1   = ' guifg=#CDD2D6 ctermfg=255'
 let s:fg_d1   = ' guifg=#689340 '
 let s:fg_d2   = ' guifg=#777777 ctermfg=244'
-let s:fg_inv  = ' guifg=#282c34 ctermfg=236'
+let s:fg_inv  = ' guifg=#f82c34 ctermfg=236'
 let s:fg_invd = ' guifg=#181c24 ctermfg=234'
 let s:fg_c    = ' guifg=' . get(accent_colours, s:accent).fg . ' ctermfg=' . get(accent_colours, s:accent).ctermfg
 
@@ -121,6 +121,7 @@ execute 'hi PmenuSel'     . s:fg_c    . s:bg_b2   . s:none
 execute 'hi TabLine'      . s:fg_d1   . s:bg_b1   . s:none
 execute 'hi TabLineFill'  . s:fg_d1   . s:bg_b2   . s:none
 
+" hi! Character guifg=#fff333 gui=italic
 hi! link StatusLineTerm StatusLine
 hi! link StatusLineTermNC StatusLineNC
 
@@ -143,7 +144,7 @@ endif
 execute 'hi Comment'      . s:fg_d2 . s:bg_none . s:none
 " asi queremos las string siempre 
 execute 'hi String guifg=#93ad5a' . s:bg_none . s:none
-execute 'hi Type guifg=#a8bab1' . s:bg_none . s:none 
+execute 'hi Type guifg=#e0cad2' . s:bg_none . s:none 
 execute 'hi PreProc guifg=#cfb07e'      . s:bg_none . s:none
 execute 'hi Underlined'   . s:fg    . s:bg_none . s:underline
 execute 'hi Special guifg= #9ba2a8' . s:bg_none . s:none
@@ -163,10 +164,13 @@ hi! link Number       String
 hi! link Character    String
 hi! link ErrorMsg     Error
 
-hi! Visual guibg=#303030 gui=NONE
+hi! Statement guifg=#cc8f9c gui=italic
+hi! Visual guibg=#777777  gui=NONE
 " desenlazar 
-hi! Statement guifg=#a5bae6 gui=italic
 
+hi! link Include NONE
+hi! PreProc guifg=#a0d1f2 gui=italic
+hi! cppInclude guifg=#ffffff gui=none
 " special stuff
 hi! link xmlAttrib    Normal
 hi! link sqlKeyword   Type
@@ -183,3 +187,5 @@ hi! link sqlKeyword   Type
 "
 hi! link diffAdded    DiffAdd
 hi! link diffRemoved  DiffDelete
+
+set termguicolors
