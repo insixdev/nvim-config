@@ -16,6 +16,26 @@ return {
   {  "nyoom-engineering/oxocarbon.nvim"},
   { "blazkowolf/gruber-darker.nvim" },
   {import ="configs.auto-save"},
+
+  
+  {
+    "tiagovla/scope.nvim",
+    lazy = false,
+    config = function()
+      local scope = require("scope")
+      scope.setup()
+
+      -- ⚙️ Arreglo: volver a configurar scope al crear un nuevo tab
+      vim.api.nvim_create_autocmd("TabNewEntered", {
+        callback = function()
+          -- vuelve a aplicar aislamiento por tab
+          scope.setup()
+        end,
+      })
+    end,
+  },
+  
+
   {
 
     lazy = false,
@@ -27,7 +47,6 @@ return {
     "junegunn/fzf.vim",
     dependencies = { "junegunn/fzf" }
   },
-  {import ="configs.harpoon"},
   {import ="configs.lualine"},
   {import ="configs.yazi"},
   {import ="configs.flash"},

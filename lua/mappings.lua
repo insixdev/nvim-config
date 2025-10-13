@@ -98,8 +98,8 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 -- end, 2000) -- 2000 ms = 2 segundos
 -- --
 
-vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', {   silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', {  silent = true })
 --
 vim.api.nvim_set_keymap('n', '<C-S-X>', '<C-w>q', { noremap = true, silent = true })
 
@@ -149,7 +149,18 @@ vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = tr
 
 vim.keymap.set("n", "Ñ", ":tabprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
-
 vim.defer_fn(function()
   vim.cmd("colorscheme accent")
 end, 100)
+
+vim.keymap.set(
+  {'n', 'v'},
+  'gr',
+  ":lua vim.lsp.buf.rename()<CR>",
+  { noremap = true, silent = true }
+)
+
+-- para que scope no se rompa y funcione
+vim.keymap.set("n", "<C-w>t", ":tabnew | term<CR>", { noremap = true, silent = true })
+
+

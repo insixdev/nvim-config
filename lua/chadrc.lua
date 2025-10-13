@@ -1,6 +1,5 @@
 ---@type ChadrcConfig
 local M = {}
-
 M.base46 = {
   theme = "monochrome",
   hl_override = {
