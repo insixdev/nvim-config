@@ -94,4 +94,42 @@ require("gruvbox").setup({
   dim_inactive = false,
   transparent_mode = true,
 })
--- THEME     
+-- TREEE CONFIGURATIO=N 
+require("nvim-tree").setup({
+  disable_netrw = true,           -- desactiva netrw
+  hijack_netrw = true,            -- nvim-tree reemplaza netrw
+  auto_close = true,              -- cierra el tree cuando queda solo
+  view = {
+    width = 25,                   -- ancho del panel
+    side = "left",
+    hide_root_folder = true,      -- oculta el root folder
+    mappings = {
+      list = {
+        { key = "q", action = "close" }, -- cerrar con q
+      },
+    },
+  },
+  renderer = {
+    icons = {
+      show = {
+        git = false,
+        folder = true,
+        file = true,
+      },
+    },
+  },
+  view = {
+    number = false,
+    relativenumber = false,
+    signcolumn = "no",
+  },
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
+  filters = {
+    dotfiles = true,               -- oculta archivos .dot
+    custom = { "node_modules" },   -- oculta node_modules
+  },
+})
+
