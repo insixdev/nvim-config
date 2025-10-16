@@ -163,4 +163,9 @@ vim.keymap.set(
 -- para que scope no se rompa y funcione
 vim.keymap.set("n", "<C-w>t", ":tabnew | term<CR>", { noremap = true, silent = true })
 
+-- Resize windows con Ctrl-A + hjkl
+vim.api.nvim_set_keymap('n', '<C-A-h>', ':vertical resize -5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-l>', ':vertical resize +5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-j>', ':resize +5<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-A-k>', ':resize -5<CR>', { noremap = true, silent = true })
 
