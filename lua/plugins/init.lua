@@ -12,68 +12,79 @@ return {
     end,
   },
   { "savq/melange-nvim" },
-  { "ellisonleao/gruvbox.nvim", },
-  {  "nyoom-engineering/oxocarbon.nvim"},
+  { "ellisonleao/gruvbox.nvim" },
+  { "nyoom-engineering/oxocarbon.nvim" },
   { "blazkowolf/gruber-darker.nvim" },
-  {import ="configs.auto-save"},
+  { import = "configs.auto-save" },
 
-  
+
   {
     "tiagovla/scope.nvim",
     lazy = false,
     config = function()
-      local scope = require("scope")
-      scope.setup()
+      local scope = require "scope"
+      scope.setup({
+        highlight_current_scope = true, -- opcional: resalta el scope actual
+        show_tabline = true,
+        tabline = {
+          enable = true,
+          always_show_tabs = true,
+        },
+      })
 
       -- ⚙️ Arreglo: volver a configurar scope al crear un nuevo tab
       vim.api.nvim_create_autocmd("TabNewEntered", {
         callback = function()
           -- vuelve a aplicar aislamiento por tab
-          scope.setup()
+          scope.setup({
+            highlight_current_scope = true,
+            show_tabline = true,
+            tabline = {
+              enable = true,
+              always_show_tabs = true,
+            },
+          })
         end,
       })
     end,
   },
-  
-
   {
 
     lazy = false,
     "junegunn/fzf",
-    build = "./install --bin"
+    build = "./install --bin",
   },
   {
     lazy = false,
     "junegunn/fzf.vim",
-    dependencies = { "junegunn/fzf" }
+    dependencies = { "junegunn/fzf" },
   },
-  {import ="configs.lualine"},
-  {import ="configs.yazi"},
-  {import ="configs.flash"},
+  { import = "configs.lualine" },
+  { import = "configs.yazi" },
+  { import = "configs.flash" },
 
-  {import ="configs.base16"},
-  {import ="configs.treesj"},
-  {import ="configs.obsidian"},
+  { import = "configs.base16" },
+  { import = "configs.treesj" },
+  { import = "configs.obsidian" },
 
-  {import ="configs.surround"},
-  {import ="configs.markdown-preview"},
-  {import ="configs.lazy-git"},
-  {import ="configs.gitsigns"},
-  {import = "configs.dispatch"},
-  {import = "configs.render-markdown"},
+  { import = "configs.surround" },
+  { import = "configs.markdown-preview" },
+  { import = "configs.lazy-git" },
+  { import = "configs.gitsigns" },
+  { import = "configs.dispatch" },
+  { import = "configs.render-markdown" },
   {
-    import = "configs.oil"
+    import = "configs.oil",
   },
 
-  {import = "configs.blank-line"},
+  { import = "configs.blank-line" },
 
-  {import ="configs.themes"},
-  {import = "configs.nvim-autopairs"},
-  {import ="configs.nvim-saga"},
+  { import = "configs.themes" },
+  { import = "configs.nvim-autopairs" },
+  { import = "configs.nvim-saga" },
 
-  {import ="configs.statuscol"},
-  {import ="configs.ufo"},
-
+  { import = "configs.statuscol" },
+  { import = "configs.ufo" },
 
   -- {
   --   "neovim/nvim-lspconfig",
@@ -98,7 +109,7 @@ return {
   --     require("mason-lspconfig").setup({
   --       ensure_installed = {
   --         "rust_analyzer",
-  --         "clangd", 
+  --         "clangd",
   --         "pyright",
   --         "tsserver",
   --         "html",
@@ -119,7 +130,7 @@ return {
     end,
   },
   {
-    import = "configs.treesitter"
+    import = "configs.treesitter",
   },
 
   -- test new blink

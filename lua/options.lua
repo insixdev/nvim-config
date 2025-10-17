@@ -98,7 +98,6 @@ require("gruvbox").setup({
 require("nvim-tree").setup({
   disable_netrw = true,           -- desactiva netrw
   hijack_netrw = true,            -- nvim-tree reemplaza netrw
-  auto_close = true,              -- cierra el tree cuando queda solo
   view = {
     width = 25,                   -- ancho del panel
     side = "left",
@@ -132,4 +131,10 @@ require("nvim-tree").setup({
     custom = { "node_modules" },   -- oculta node_modules
   },
 })
+
+-- loual ine arriba aa 
+--
+--
+-- Habilitar winbar global
+vim.o.showtabline = 0  -- desactiva statusline de abajo
 

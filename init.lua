@@ -4,6 +4,14 @@ vim.g.mapleader = " "
 -- bootstrap lazy and all plugins
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "@preproc", { link = "PreProc" })
+    vim.api.nvim_set_hl(0, "@preproc.include", { link = "PreProc" })
+    vim.api.nvim_set_hl(0, "@include", { link = "PreProc" })
+  end,
+})
 
 vim.opt.rtp:prepend(lazypath)
 
