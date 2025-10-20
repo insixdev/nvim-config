@@ -6,7 +6,8 @@
       require("mason-lspconfig").setup({
         ensure_installed = {
           "rust_analyzer",
-          "clangd", 
+          "clangd",
+          "zls",
           "pyright",
           "ts_ls",
           "html",
