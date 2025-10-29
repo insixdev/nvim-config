@@ -4,26 +4,36 @@ return {
   "glepnir/lspsaga.nvim",
   event = "LspAttach",
   config = function()
+    vim.keyset("n", "gH", "<cmd>:Lspsaga show_workspace_diagnostics<CR>", { silent = true }) 
     local saga = require("lspsaga")
+    local signs = { Error = "🗴", Warn = "△", Info = "✦", Hint = "﹡" }
+    for type, icon in pairs(signs) do
+      local hl = "DiagnosticSign" .. type
+      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    end
 
     saga.setup({
       -- Scroll preview
       scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
 
+      -- Emojis y nerd font
       -- Diagnostics (inline y flotante)
       diagnostic = {
         on_insert = false,             -- no mostrar en insert mode
         show_code_action = true,
         show_source = true,
+        severity_sort = true,
+        underline =true,
         jump_num_shortcut = true,
-        max_width = 0.7,
+        max_width = 0.6,
         border = "rounded",
         winblend = 10,
+        show_layout = "float",
+        virutal_line = true,
+        virutal_text = false,
         show_header = true,
         text_hl_follow = true,
-        show_virt_line = true,         -- muestra la línea virtual
-        show_virt_text = true,         -- muestra texto inline
-        diagnostic_only_current = false,
+        diagnostic_only_current = false, -- mostrar solo el de la ventana actual
       },
 
       -- Código acciones y renombrar

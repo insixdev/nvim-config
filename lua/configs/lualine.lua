@@ -19,44 +19,52 @@ return {
     -- Configuración de lualine con bloques cuadrados y colores dinámicos
     require("lualine").setup({
       options = {
-        theme = {
-          normal = {
-            a = { fg = "#181818", bg = "#fab39b", gui = "bold" },
-            b = { fg = "#FFFEDB", bg = "#34383C" },
-            c = { fg = "#FFFEDB", bg = "#34383C" },
-          },
-          insert = {
-            a = { fg = "#181818", bg = "#d6b389", gui = "bold" },
-            b = { fg = "#FFFEDB", bg = "#34383C" },
-            c = { fg = "#FFFEDB", bg = "#34383C" },
-          },
-          visual = {
-            a = { fg = "#181818", bg = "#8B9698", gui = "bold" },
-            b = { fg = "#FFFEDB", bg = "#34383C" },
-            c = { fg = "#FFFEDB", bg = "#34383C" },
-          },
-          replace = {
-            a = { fg = "#181818", bg = "#f5e6d5", gui = "bold" },
-            b = { fg = "#FFFEDB", bg = "#34383C" },
-            c = { fg = "#FFFEDB", bg = "#34383C" },
-          },
-          inactive = {
-            a = { fg = "#888888", bg = "#222222" },
-            b = { fg = "#888888", bg = "#222222" },
-            c = { fg = "#888888", bg = "#222222" },
-          },
-        },
+        theme = "gruvbox",
+        -- theme = {
+        --   normal = {
+        --     a = { fg = "#181818", bg = "#fab39b", gui = "bold" },
+        --     b = { fg = "#FFFEDB", bg = "#34383C" },
+        --     c = { fg = "#FFFEDB", bg = "#34383C" },
+        --   },
+        --   insert = {
+        --     a = { fg = "#181818", bg = "#d6b389", gui = "bold" },
+        --     b = { fg = "#FFFEDB", bg = "#34383C" },
+        --     c = { fg = "#FFFEDB", bg = "#34383C" },
+        --   },
+        --   visual = {
+        --     a = { fg = "#181818", bg = "#8B9698", gui = "bold" },
+        --     b = { fg = "#FFFEDB", bg = "#34383C" },
+        --     c = { fg = "#FFFEDB", bg = "#34383C" },
+        --   },
+        --   replace = {
+        --     a = { fg = "#181818", bg = "#f5e6d5", gui = "bold" },
+        --     b = { fg = "#FFFEDB", bg = "#34383C" },
+        --     c = { fg = "#FFFEDB", bg = "#34383C" },
+        --   },
+        --   inactive = {
+        --     a = { fg = "#888888", bg = "#222222" },
+        --     b = { fg = "#888888", bg = "#222222" },
+        --     c = { fg = "#888888", bg = "#222222" },
+        --   },
+        -- },
         icons_enabled = false,
-        section_separators = { left = "", right = "" },
-        component_separators = { left = "", right = "" },
+        section_separators = { left = ":", right = "" },
+        component_separators = { left = ":", right = "" },
         globalstatus = true,
       },
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { { "filename", path = 2 }, project_and_cwd },
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
+        lualine_x = { "encoding", "fileformat", "filetype", {
+            'tabs',
+            mode = 0,       -- 0 = números normales, 1 = mostrar nombre de la pestaña
+          tabs_color = {
+            active = { fg = '#ffffff', bg = '#3c3446', gui='bold' },   -- tab activa
+            inactive = { fg = '#bbbbbb', bg = '#3c3836' },   
+          }
+        }},
+        lualine_y = { "progress"  },
         lualine_z = { "location" },
       },
       inactive_sections = {
@@ -64,8 +72,12 @@ return {
         lualine_b = {},
         lualine_c = { "filename" },
         lualine_x = { "location" },
-        lualine_y = {},
+        lualine_y = {
+        },
         lualine_z = {},
+      },
+      winbar= {
+
       },
       extensions = { "fugitive", "nvim-tree", "lazy", "quickfix" },
     })

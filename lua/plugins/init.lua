@@ -4,6 +4,30 @@ return {
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
+  {
+    import = "configs.avante",
+  },
+  {
+    lazy= false,
+    "grddavies/tidal.nvim",
+    opts = {
+      -- Your configuration here
+      -- See configuration section for defaults
+    },
+    -- Recommended: Install TreeSitter parsers for Haskell and SuperCollider
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = { ensure_installed = { "haskell", "supercollider" } },
+    },
+  },
+  {
+    lazy= false,
+    "gruvw/strudel.nvim",
+    build = "npm install",
+    config = function()
+      require("strudel").setup()
+    end,
+  },
   -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
@@ -31,7 +55,6 @@ return {
           always_show_tabs = true,
         },
       })
-
       -- ⚙️ Arreglo: volver a configurar scope al crear un nuevo tab
       vim.api.nvim_create_autocmd("TabNewEntered", {
         callback = function()
