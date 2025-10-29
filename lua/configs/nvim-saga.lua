@@ -4,7 +4,7 @@ return {
   "glepnir/lspsaga.nvim",
   event = "LspAttach",
   config = function()
-    vim.keyset("n", "gH", "<cmd>:Lspsaga show_workspace_diagnostics<CR>", { silent = true }) 
+    vim.keymap.set("n", "gH", "<cmd>:Lspsaga show_buf_diagnostics<CR>", { silent = true }) 
     local saga = require("lspsaga")
     local signs = { Error = "🗴", Warn = "△", Info = "✦", Hint = "﹡" }
     for type, icon in pairs(signs) do
@@ -25,10 +25,11 @@ return {
         severity_sort = true,
         underline =true,
         jump_num_shortcut = true,
-        max_width = 0.6,
+        max_width = 0.3,
         border = "rounded",
         winblend = 10,
-        show_layout = "float",
+        symbol_in_winbar = { show_file = true, show_package = false, separator = " > " },
+        show_layout = "auto",
         virutal_line = true,
         virutal_text = false,
         show_header = true,
@@ -57,7 +58,7 @@ return {
 
       finder = {
         max_height = 0.5,
-        min_width = 30,
+        min_width = 10,
         force_max_height = false,
         keys = {
           edit = { "o", "<CR>" },
@@ -71,7 +72,7 @@ return {
 
       outline = {
         win_position = "right",
-        win_width = 40,
+        win_width = 20,
         show_detail = true,
         auto_preview = true,
         auto_refresh = true,
@@ -99,10 +100,13 @@ return {
     -- Keymaps (inline y potente)
     local map = vim.keymap.set
     map("n", "K", "<cmd>Lspsaga hover_doc<CR>", { desc = "Hover Doc" })
+
+    map("n", "gW", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { desc = "Hover Doc" })
+    map("n", "gP", "<cmd>Lspsaga peek_definition<CR>", { desc = "Hover Doc" })
     map("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", { desc = "Signature Help" })
     map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "Rename Symbol" })
     map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
-    map("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { desc = "LSP Finder" })
+    map("n", "gh", "<cmd>Lspsaga finder<CR>", { desc = "LSP Finder" })
     map("n", "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
     map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Prev Diagnostic" })
     map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })

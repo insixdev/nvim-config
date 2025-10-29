@@ -5,7 +5,10 @@ return {
     opts = require "configs.conform",
   },
   {
-    import = "configs.avante",
+    import = "configs.windsurf",
+  },
+  {
+    import = "configs.lines",
   },
   {
     lazy= false,
