@@ -8,6 +8,9 @@ return {
     import = "configs.windsurf",
   },
   {
+    import = "configs.jabs",
+  },
+  {
     import = "configs.lines",
   },
   {
