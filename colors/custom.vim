@@ -30,8 +30,8 @@ highlight Error         guifg=#C34143 gui=undercurl
 highlight Function      guifg=#f5e6d5
 highlight Identifier    guifg=#e6c2aa
 
-highlight LineNrAbove   guifg=#888888 guibg=#181819
-highlight LineNrBelow   guifg=#888888 guibg=#181819
+highlight LineNrAbove   guifg=#888888 guibg=#1f1e1e
+highlight LineNrBelow   guifg=#888888 guibg=#1f1e1e
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
