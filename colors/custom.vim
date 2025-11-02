@@ -1,4 +1,4 @@
-" took many of these colors from github.com/Cose
+" took many of these colors from github.com/Coselau
 " Custom minimal theme
 " Took inspiration from github.com/CosecSecCot/cosec-twilight.nvim
 
@@ -43,7 +43,7 @@ highlight PmenuThumb    guifg=#918988 guibg=#262626 gui=reverse
 highlight Question      guifg=#9b8d7f
 highlight QuickFixLine  guibg=#303030
 highlight Search        guibg=#5F5958
-highlight Special       guifg=#f5bd73
+highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767
 highlight Statement     guifg=#e6aa87 gui=none
@@ -58,7 +58,7 @@ highlight TabLineFill   guifg=#A09998 guibg=#212121
 highlight TabLineSel    guifg=#A09998 guibg=#40474F
 highlight Title         guifg=#FFFEDB term=none cterm=none
 highlight Todo          guifg=#8B9698
-highlight Type          guifg=#e8b151 gui=italic
+highlight Type          guifg=#a89f8fgui=italic
 highlight Underlined    gui=undercurl
 highlight VertSplit     guifg=#303030
 highlight Visual        guibg=#454545
