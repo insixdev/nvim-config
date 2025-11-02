@@ -29,6 +29,7 @@ return {
       keymap = {
         -- h spñit
         h_split = "h",
+        close = "<C-q>",
         v_split= "v",
         preview = "<C-p>",
       },
@@ -58,7 +59,7 @@ vim.keymap.set("n", "gB", function()
 
   vim.cmd("wincmd L")
 
-  vim.cmd("vertical resize -50")
+  vim.cmd("vertical resize -40")
   else
 
     local ok, jabs = pcall(require, "jabs")

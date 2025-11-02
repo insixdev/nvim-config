@@ -137,4 +137,7 @@ require("nvim-tree").setup({
 --
 -- Habilitar winbar global
 vim.o.showtabline = 0  -- desactiva statusline de abajo
+--vim.o.winbar = ""
+vim.opt.fillchars:append({ eob = "~" })
+vim.opt.statusline = "f"
 

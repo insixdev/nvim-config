@@ -19,6 +19,7 @@ return {
     -- Configuración de lualine con bloques cuadrados y colores dinámicos
     require("lualine").setup({
       options = {
+        padding= 1,
         theme = "gruvbox",
         -- theme = {
         --   normal = {
@@ -47,20 +48,21 @@ return {
         --     c = { fg = "#888888", bg = "#222222" },
         --   },
         -- },
-        icons_enabled = false,
+        icons_enabled = true,
         section_separators = { left = ":", right = "" },
         component_separators = { left = ":", right = "" },
-        globalstatus = true,
+        globalstatus = false,
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_a = {},
+        lualine_b = {"mode",
+          "branch", "diff", "diagnostics" },
         lualine_c = { { "filename", path = 2 }, project_and_cwd },
-        lualine_x = { "encoding", "fileformat", "filetype", {
+        lualine_x = { "encoding",  "filetype", {
             'tabs',
             mode = 0,       -- 0 = números normales, 1 = mostrar nombre de la pestaña
           tabs_color = {
-            active = { fg = '#ffffff', bg = '#3c3446', gui='bold' },   -- tab activa
+            active = { fg = '#ffffff', bg = '#96866c', gui='bold' },   -- tab activa
             inactive = { fg = '#bbbbbb', bg = '#3c3836' },   
           }
         }},
@@ -68,11 +70,12 @@ return {
         lualine_z = { "location" },
       },
       inactive_sections = {
-        lualine_a = {},
+        lualine_a = {"fileformat"},
         lualine_b = {},
-        lualine_c = { "filename" },
+        lualine_c = { {"filename", path = 2} },
         lualine_x = { "location" },
         lualine_y = {
+          "progress"
         },
         lualine_z = {},
       },

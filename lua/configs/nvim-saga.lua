@@ -27,8 +27,8 @@ return {
         jump_num_shortcut = true,
         max_width = 0.3,
         border = "rounded",
-        winblend = 10,
-        symbol_in_winbar = { show_file = true, show_package = false, separator = " > " },
+       -- winblend = 10,
+--        symbol_in_winbar = { show_file = true, show_package = true, separator = " > puto " },
         show_layout = "auto",
         virutal_line = true,
         virutal_text = false,
@@ -95,6 +95,10 @@ return {
         hover = "",
         kind = {},
       },
+      symbol_in_winbar = {
+        enable = false,
+        separator = " > ",
+      }
     })
 
     -- Keymaps (inline y potente)

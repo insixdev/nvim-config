@@ -39,7 +39,14 @@ M.ui = {
   tabufline = {
     enabled = false,
   },
+  winbar = {
+    enabled = false,
+  },
+  statuscol = {
+    enabled = false,
+  },
   lualine = {
+    enabled = false,
     icons_enabled = true,       -- desactiva iconos
     theme = "base16-monochrome", -- podes poner tu theme base16
   },

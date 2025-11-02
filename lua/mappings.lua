@@ -47,7 +47,7 @@ vim.keymap.set(
 vim.api.nvim_set_keymap(
   'n',
   'gd',
-  ":Lspsaga goto_type_definition<CR>",
+  ":Lspsaga goto_definitiown<CR>",
   { noremap = true, silent = true, desc =  "Telescope LSP definitions" } 
 )
 
@@ -120,12 +120,12 @@ vim.keymap.set('n', '<C-x>', function()
 end, { noremap = true, silent = true })
 
 -- aumentar/disminuir alto
-vim.keymap.set("n", "<C-Down>",    ":resize +2<CR>")
-vim.keymap.set("n", "<C-Up>",  ":resize -2<CR>")
+vim.keymap.set("n", "<C-S-j>",    ":resize +2<CR>")
+vim.keymap.set("n", "<C-S-k>",  ":resize -2<CR>")
 
 -- aumentar/disminuir ancho
-vim.keymap.set("n", "<C-Right>",  ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
+vim.keymap.set("n", "<C-S-l>",  ":vertical resize -2<CR>")
+vim.keymap.set("n", "<C-S-h>", ":vertical resize +2<CR>")
 vim.api.nvim_create_autocmd("BufEnter", {
   callback = function()
     local ft = vim.bo.filetype
