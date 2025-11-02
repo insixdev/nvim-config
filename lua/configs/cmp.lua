@@ -22,6 +22,7 @@ cmp.setup({
     format = function(entry, item)
       -- sin iconos, simple y claro
       item.kind = nil
+      
       item.menu = ({
         nvim_lsp = "[LSP]",
         luasnip = "[Snip]",
@@ -100,7 +101,7 @@ cmp.setup.cmdline(":", {
 -- ═══════════════════════════════════════════════════════════════
 -- 🎨 Mejor legibilidad (tipo Gruvbox)
 -- ═══════════════════════════════════════════════════════════════
-vim.api.nvim_set_hl(0, "Pmenu", { bg = "#282828", fg = "#ebdbf2" })     -- texto más claro
+vim.api.nvim_set_hl(0, "Pmenu", { bg = "#2ff828", fg = "#fffbf2" })     -- texto más claro
 vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#3c3836", fg = "#fbf1c7", bold = true }) -- selección destacada
 vim.api.nvim_set_hl(0, "PmenuSbar", { bg = "#3c3836" })
 vim.api.nvim_set_hl(0, "PmenuThumb", { bg = "#665c54" })

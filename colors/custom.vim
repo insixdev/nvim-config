@@ -36,7 +36,7 @@ highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
 highlight Operator      guifg=#DEBF7C
-highlight Pmenu         guifg=#918988 guibg=#303030
+highlight Pmenu         guifg=#8f9988 guibg=#303030
 highlight PmenuSbar     guifg=#918988 guibg=#262626
 highlight PmenuSel      guifg=#BFBBBA guibg=#303030
 highlight PmenuThumb    guifg=#918988 guibg=#262626 gui=reverse
