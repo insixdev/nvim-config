@@ -299,7 +299,7 @@ local map = vim.keymap.set
 
 -- Navegación
 map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP declaration" })
-map("n", "gd", vim.lsp.buf.definition, { desc = "LSP definition" })
+--map("n", "gd", vim.lsp.buf.definition, { desc = "LSP definition" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "LSP references" })
 map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "LSP signature help" })

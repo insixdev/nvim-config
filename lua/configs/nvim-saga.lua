@@ -14,7 +14,7 @@ return {
 
     saga.setup({
       -- Scroll preview
-      scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
+      --scroll_preview = { scroll_down = "<C-f>", scroll_up = "<C-b>" },
 
       -- Emojis y nerd font
       -- Diagnostics (inline y flotante)
@@ -109,7 +109,8 @@ return {
     map("n", "gP", "<cmd>Lspsaga peek_definition<CR>", { desc = "Hover Doc" })
     map("i", "<C-k>", "<cmd>Lspsaga signature_help<CR>", { desc = "Signature Help" })
     map("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", { desc = "Rename Symbol" })
-    map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
+  map({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
+  map({"n", "t"}, "<A-t>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle Terminal" }, { silent = true }, { noremap = true })
     map("n", "gh", "<cmd>Lspsaga finder<CR>", { desc = "LSP Finder" })
     map("n", "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
     map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Prev Diagnostic" })

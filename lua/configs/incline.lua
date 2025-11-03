@@ -32,12 +32,16 @@ return {
       },
 
       render = function(props)
+        -- props.buf es el buffer actual de la ventana
         local buf = props.buf
-        local path = vim.fn.expand("%:~:.") -- ruta relativa al cwd
+        local path = vim.fn.bufname(buf)
         if path == "" then
           return {}
         end
-        return { " " .. path .. " " }
+
+        -- ruta relativa al cwd
+        local rel_path = vim.fn.fnamemodify(path, ":~:.")
+        return { " " .. rel_path .. " " }
       end,
     })
   end,

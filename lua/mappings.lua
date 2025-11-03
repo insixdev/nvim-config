@@ -47,7 +47,7 @@ vim.keymap.set(
 vim.api.nvim_set_keymap(
   'n',
   'gd',
-  ":Lspsaga goto_definitiown<CR>",
+  ":Lspsaga goto_definition<CR>",
   { noremap = true, silent = true, desc =  "Telescope LSP definitions" } 
 )
 

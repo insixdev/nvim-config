@@ -1,5 +1,8 @@
 return {
   {
+    import = "configs.amp"
+  },
+  {
   import = "configs.incline",
 
   },
