@@ -13,7 +13,8 @@ let g:colors_name = 'custom'
 " ─────────────────────────────────────────────────────────────
 " Core groups
 " ─────────────────────────────────────────────────────────────
-highlight Normal        guifg=#edddc0 guibg=#181818
+highlight Normal        guifg=#edddc0 guibg=None
+" guibg=#181818
 highlight NormalFloat   guifg=#edddc0 guibg=#202020
 
 highlight @variable guifg=#f5e7ce

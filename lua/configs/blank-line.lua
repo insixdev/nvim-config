@@ -13,7 +13,7 @@ return {
       -- 2️⃣ Configuración del plugin
       ibl.setup({
         indent = {
-          char = "┆",
+          char = ".",--┆
           highlight = { "Whitespace" },
         },
         whitespace = {

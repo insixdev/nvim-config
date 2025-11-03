@@ -7,6 +7,12 @@ return {
       vim.opt.background = "dark" -- or "light"
     end
   },
+  {
+    lazy = false,
+    "ramojus/mellifluous.nvim"
+
+
+  },
 {
   "kvrohit/rasmus.nvim",
     lazy =false,
