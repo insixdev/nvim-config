@@ -2,7 +2,8 @@
 -- plugins/configs/nvim-saga.lua
 return {
   "glepnir/lspsaga.nvim",
-  event = "LspAttach",
+  lazy = false,
+
   config = function()
     vim.keymap.set("n", "gH", "<cmd>:Lspsaga show_buf_diagnostics<CR>", { silent = true }) 
     local saga = require("lspsaga")

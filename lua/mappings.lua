@@ -2,6 +2,7 @@ require "nvchad.mappings"
 
 -- add yours here
 local map = vim.keymap.set
+
 -- Busca carpetas con fzf
 vim.api.nvim_set_keymap("n", "<leader>fd",
   ":call fzf#run({'source': 'fd --type d', 'sink': 'edit'})<CR>",
@@ -61,6 +62,8 @@ vim.api.nvim_set_keymap(
 -- Este comando se cargará cada vez que inicies Neovim
 vim.api.nvim_create_user_command('R', function(opts)
   vim.cmd.split()
+  -- resizear para que sea mas baja
+  vim.cmd.resize(10)
   vim.cmd.terminal(opts.args)
 end, { nargs = '*' })
 
@@ -145,7 +148,6 @@ vim.keymap.set("n", "<C-c>", function()
 end, { desc = "Telescope Colorscheme Picker" })
 
 vim.keymap.set({"n", "v", "i", "o"}, "<C-a>", "$", {noremap = true, silent = true})
-vim.keymap.set("n", "<A-n>", ":NvimTreeToggle<CR>", {noremap = true, silent = true})
 
 vim.keymap.set("n", "<A-c>", ":copen<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "c", ":tabprevious<CR>", { noremap = true, silent = true })
@@ -169,4 +171,34 @@ vim.api.nvim_set_keymap('n', '<C-A-h>', ':vertical resize -5<CR>', { noremap = t
 vim.api.nvim_set_keymap('n', '<C-A-l>', ':vertical resize +5<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-A-j>', ':resize +5<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-A-k>', ':resize -5<CR>', { noremap = true, silent = true })
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "c", "cpp" },
+--   command = "setlocal makeprg=gcc\\ %\\ -o\\ %<"
+-- })
+--
+--
+
+if vim.g.neovide then
+  -- Asegúrate de tener una fuente por defecto
+  if vim.o.guifont == "" then
+    vim.o.guifont = "Hack:h14"
+  end
+
+  -- Zoom in
+  vim.keymap.set('n', '<C-=>', function()
+    local font = vim.o.guifont
+    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
+    size = size + 1
+    vim.o.guifont = font:gsub("h%d+", "h"..size)
+  end, { desc = "Neovide Zoom In" })
+
+  -- Zoom out
+  vim.keymap.set('n', '<C-->', function()
+    local font = vim.o.guifont
+    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
+    size = size - 1
+    vim.o.guifont = font:gsub("h%d+", "h"..size)
+  end, { desc = "Neovide Zoom Out" })
+end
 

@@ -1,4 +1,17 @@
 return {
+
+{ "hrsh7th/nvim-cmp", enabled = false },
+{ "hrsh7th/cmp-buffer", enabled = false },
+{ "hrsh7th/cmp-path", enabled = false },
+{ "hrsh7th/cmp-nvim-lsp", enabled = false },
+{ "saadparwaiz1/cmp_luasnip", enabled = false },
+  {
+    import = "configs.blinkcmp"
+  },
+    {
+
+    import = "configs.fuzzy",
+  },
   {
     import = "configs.amp"
   },
@@ -101,7 +114,7 @@ return {
 
   { import = "configs.base16" },
   { import = "configs.treesj" },
-  { import = "configs.obsidian" },
+  -- { import = "configs.obsidian" },
 
   { import = "configs.surround" },
   { import = "configs.markdown-preview" },
@@ -159,12 +172,8 @@ return {
 
   -- Rust tools específico
   -- Tu cmp existente
-  {
-    "hrsh7th/nvim-cmp",
-    config = function()
-      require "configs.cmp"
-    end,
-  },
+  -- {
+  --   import = "plugins.cmp",
   {
     import = "configs.treesitter",
   },
@@ -211,4 +220,10 @@ return {
       vim.cmd("colorscheme rose-pine")
       ColorMyPencils()
     end,
-  },}
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    enabled = false,
+  }
+}
+

@@ -1,26 +1,24 @@
 -- plugins/configs/lspconfig.lua
 local configs = require("nvchad.configs.lspconfig")
--- Lista de servidores LSP que queremos
+
+-- Lista de servidores LSP
 local servers = {
-  -- Sistemas
-  "rust_analyzer",     -- Rust
-  "clangd",           -- C/C++
+  "rust_analyzer",
+  "clangd",
   "gopls",
-  "pyright",          -- Python (mejor que pylsp)
-  "pylsp",            -- Python alternativo
-  "jdtls", -- java lsp
-  -- Web
-  "ts_ls",         -- TypeScript/JavaScript
-  "cssls",            -- CSS
-  "tailwindcss",      -- Tailwind CSS
-  "emmet_ls",         -- Emmet
-  
+  "pyright",
+  "pylsp",
+  "jdtls",
+  "ts_language_server",
+  "ts_ls",
+  "cssls",
+  "tailwindcss",
+  "emmet_ls",
   "marksman",
-  -- Otros útiles
-  "lua_ls",           -- Lua
-  "bashls",           -- Bash
-  "jsonls",           -- JSON
-  "yamlls",           -- YAML
+  "lua_ls",
+  "bashls",
+  "jsonls",
+  "yamlls",
 }
 
 -- Configuraciones específicas para cada servidor
@@ -45,57 +43,90 @@ local server_configs = {
       },
     },
   },
-  -- Asegúrate de que tailwindcss solo se active en los tipos correctos
-tailwindcss = {
-  filetypes = { 
-    "aspnetcorerazor", "astro", "blade", "clojure", "django-html", "htmldjango", 
-    "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl", 
-    "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex", 
-    "jade", "leaf", "liquid", "mustache", "njk", "nunjucks", "php", "razor", 
-    "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", 
-    "sugarss", "javascript", "javascriptreact", "reason", "rescript", 
-    "typescript", "typescriptreact", "vue", "svelte", "templ"
-    -- NOTA: Eliminé "markdown" y "mdx" de aquí
-  },
-  settings = {
-    tailwindCSS = {
-      classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
-      includeLanguages = {
-        eelixir = "html-eex",
-        elixir = "phoenix-heex",
-        eruby = "erb",
-        heex = "phoenix-heex",
-        htmlangular = "html",
-        templ = "html"
-      },
-      lint = {
-        cssConflict = "warning",
-        invalidApply = "error",
-        invalidConfigPath = "error",
-        invalidScreen = "error",
-        invalidTailwindDirective = "error",
-        invalidVariant = "error",
-        recommendedVariantOrder = "warning"
-      },
-      validate = true
-    }
-  }
-},
 
-marksman = {
-  filetypes = { "markdown" },
-  single_file_support = true,
-  settings = {
-    completion = {
-      wiki = {
-        enabled = true,
+  -- tailwindcss = {
+  --   filetypes = {
+  --     "aspnetcorerazor", "astro", "blade", "clojure", "django-html", "htmldjango",
+  --     "edge", "eelixir", "elixir", "ejs", "erb", "eruby", "gohtml", "gohtmltmpl",
+  --     "haml", "handlebars", "hbs", "html", "htmlangular", "html-eex", "heex",
+  --     "jade", "leaf", "liquid", "mustache", "njk", "nunjucks", "php", "razor",
+  --     "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus",
+  --     "sugarss", "javascript", "javascriptreact", "reason", "rescript",
+  --     "typescript", "typescriptreact", "vue", "svelte", "templ"
+  --   },
+  --   settings = {
+  --     tailwindCSS = {
+  --       classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
+  --       includeLanguages = {
+  --         eelixir = "html-eex",
+  --         elixir = "phoenix-heex",
+  --         eruby = "erb",
+  --         heex = "phoenix-heex",
+  --         htmlangular = "html",
+  --         templ = "html"
+  --       },
+  --       lint = {
+  --         cssConflict = "warning",
+  --         invalidApply = "error",
+  --         invalidConfigPath = "error",
+  --         invalidScreen = "error",
+  --         invalidTailwindDirective = "error",
+  --         invalidVariant = "error",
+  --         recommendedVariantOrder = "warning"
+  --       },
+  --       validate = true
+  --     }
+  --   }
+  -- },
+
+  jdtls = {
+    filetypes = { "java" },
+    settings = {
+      java = {
+        configuration = {
+          updateBuildConfiguration = "automatic",
+        },
+        eclipse = {
+          downloadSources = true,
+        },
+        implementationsCodeLens = {
+          enabled = true,
+        },
+        referencesCodeLens = {
+          enabled = true,
+        },
+        references = {
+          includeDecompiledSources = true,
+        },
+        inlayHints = {
+          parameterNames = {
+            enabled = "all",
+          },
+          parameterTypes = {
+            enabled = "all",
+          },
+        },
       },
     },
-    core = {
-      text_sync = "full",
+  },
+
+  marksman = {
+    filetypes = { "markdown" },
+    single_file_support = true,
+    settings = {
+      marksman = {
+        completion = {
+          wiki = {
+            enabled = true,
+          },
+        },
+        core = {
+          text_sync = "full",
+        },
+      },
     },
   },
-}, -- Rust Analyzer - configuración extensiva
+
   rust_analyzer = {
     settings = {
       ["rust-analyzer"] = {
@@ -111,11 +142,6 @@ marksman = {
             enable = true,
           },
         },
-        checkOnSave = {
-          command = "check", -- o "clippy" para más estricto
-          extraArgs = { "--target-dir", "/tmp/rust-analyzer-check" },
-        },
-        
         procMacro = {
           enable = true,
           ignored = {
@@ -125,7 +151,7 @@ marksman = {
           },
         },
         inlayHints = {
-          bindingModeHints = { -- si se infiere o no & &mut
+          bindingModeHints = {
             enable = true,
           },
           rangeExclusiveHints = {
@@ -134,11 +160,11 @@ marksman = {
           implicitReturnTypeHints = {
             enable = true,
           },
-          chainingHints = { -- Te muestra los tipos intermedios en un chain de métodos:
+          chainingHints = {
             enable = true,
           },
-          closingBraceHints = { -- comentarios para funciones o estructura largas al final de }
-            enable = true,
+          closingBraceHints = {
+            enable = false,
             minLines = 25,
           },
           closureReturnTypeHints = {
@@ -166,7 +192,6 @@ marksman = {
     },
   },
 
-  -- Clangd para C/C++ - configuración extensiva  
   clangd = {
     cmd = {
       "clangd",
@@ -176,18 +201,24 @@ marksman = {
       "--completion-style=detailed",
       "--function-arg-placeholders",
       "--fallback-style=llvm",
+      "--query-driver=/usr/bin/clang++",
+      "--all-scopes-completion",
+      "--log=error",
+      "--pretty",
+      "--offset-encoding=utf-16",
     },
     init_options = {
       usePlaceholders = true,
+      clangdFileStatus = true,
+      completeUnimported = true,
     },
   },
 
-  -- Python - Pyright (más rápido)
   pyright = {
     settings = {
       python = {
         analysis = {
-          typeCheckingMode = "strict", -- "off", "basic", "strict"
+          typeCheckingMode = "strict",
           autoSearchPaths = true,
           useLibraryCodeForTypes = true,
           autoImportCompletions = true,
@@ -196,7 +227,6 @@ marksman = {
     },
   },
 
-  -- Python alternativo - pylsp
   pylsp = {
     settings = {
       pylsp = {
@@ -215,12 +245,19 @@ marksman = {
     },
   },
 
-  -- TypeScript/JavaScript
-  tsserver = {
+  ts_ls = {
+    init_options = {
+    -- root_dir = function(fname)
+    --   local util = require('lspconfig.util')
+    --   return util.root_pattern('package.json', 'tsconfig.json', 'jsconfig.json')(fname)
+    --     or util.root_pattern('.git')(fname)
+    --     or util.find_git_ancestor(fname)
+    --     or vim.fn.getcwd()
+    -- end,
     settings = {
       typescript = {
         inlayHints = {
-          includeInlayParameterNameHints = "literal", -- 'none' | 'literals' | 'all'
+          includeInlayParameterNameHints = "literal",
           includeInlayParameterNameHintsWhenArgumentMatchesName = false,
           includeInlayFunctionParameterTypeHints = true,
           includeInlayVariableTypeHints = false,
@@ -241,9 +278,10 @@ marksman = {
         },
       },
     },
+
+    }
   },
 
-  -- Lua para Neovim
   lua_ls = {
     settings = {
       Lua = {
@@ -265,41 +303,105 @@ marksman = {
     },
   },
 }
--- Configurar cada servidor
+
+local capa = require("blink.cmp").get_lsp_capabilities()
+
+-- Configurar cada servidor con la API moderna de Neovim 0.11
 for _, lsp in ipairs(servers) do
   local config = server_configs[lsp] or {}
-
-  -- Fusionar con configuración base de NvChad
+  
   config.on_attach = function(client, bufnr)
-    -- primero llama al on_attach base de NvChad
     if configs.on_attach then
       configs.on_attach(client, bufnr)
     end
 
-    -- 🔹 Fix específico para rust-analyzer
+    -- Fix específico para rust-analyzer
     if client.name == "rust_analyzer" then
-      -- Desactivar semantic tokens (causan Invalid 'col')
       client.server_capabilities.semanticTokensProvider = nil
-
-      -- Activar inlay hints con pcall (no rompe si hay error)
       if client.server_capabilities.inlayHintProvider then
         pcall(function()
           vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
         end)
-config.on_init = configs.on_init
-config.capabilities = configs.capabilities
-require("lspconfig")[lsp].setup(config)
-
       end
     end
   end
+
+  config.on_init = configs.on_init
+  config.capabilities = capa
+
+  -- Agregar filetypes si no están especificados
+  if not config.filetypes then
+    local default_filetypes = {
+      ts_ls = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+      lua_ls = { "lua" },
+      rust_analyzer = { "rust" },
+      clangd = { "c", "cpp" },
+      gopls = { "go" },
+      pyright = { "python" },
+      cssls = { "css", "scss", "less" },
+      bashls = { "sh", "bash" },
+      jsonls = { "json" },
+      yamlls = { "yaml" },
+      marksman = { "markdown" },
+    }
+    config.filetypes = default_filetypes[lsp]
+  end
+
+  -- Usar la API moderna de Neovim 0.11
+  vim.lsp.config(lsp, config)
 end
--- Keymaps adicionales para LSP (mejorados)
+
+-- Agregar Mason bin al PATH
+vim.env.PATH = vim.fn.stdpath("data") .. "/mason/bin:" .. vim.env.PATH
+
+-- Habilitar LSP automáticamente por filetype
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function(args)
+    local filetype = vim.bo[args.buf].filetype
+    
+    -- Mapeo de filetypes a servidores LSP
+    local ft_to_lsp = {
+      rust = "rust_analyzer",
+      c = "clangd",
+      cpp = "clangd",
+      go = "gopls",
+      python = "pyright",
+      java = "jdtls",
+      javascript = "ts_ls",
+      javascriptreact = "ts_ls",
+      typescript = "ts_ls",
+      typescriptreact = "ts_ls",
+      ["typescript.tsx"] = "ts_ls",
+      ["javascript.jsx"] = "ts_ls",
+      css = "cssls",
+      scss = "cssls",
+      less = "cssls",
+      html = "html",
+      lua = "lua_ls",
+      sh = "bashls",
+      bash = "bashls",
+      json = "jsonls",
+      yaml = "yamlls",
+      markdown = "marksman",
+    }
+    
+    local lsp_name = ft_to_lsp[filetype]
+    if lsp_name then
+      -- Intentar habilitar el LSP
+      local ok, err = pcall(vim.lsp.enable, lsp_name)
+      if not ok then
+        vim.notify("Error habilitando " .. lsp_name .. ": " .. tostring(err), vim.log.levels.WARN)
+      end
+    end
+  end,
+})
+
+-- Keymaps adicionales para LSP
 local map = vim.keymap.set
 
 -- Navegación
 map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP declaration" })
---map("n", "gd", vim.lsp.buf.definition, { desc = "LSP definition" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "LSP references" })
 map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "LSP signature help" })
@@ -328,12 +430,20 @@ map("n", "<leader>wl", function()
   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { desc = "List workspace folders" })
 
+-- Configuración de diagnósticos
 vim.diagnostic.config({
   virtual_text = {
-    prefix = "●",       -- puedes poner '●', '■', '▎', etc.
+    prefix = "●",
     spacing = 2,
   },
-  signs = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✘",
+      [vim.diagnostic.severity.WARN] = "▲",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "⚑",
+    }
+  },
   underline = true,
   update_in_insert = false,
   severity_sort = true,
@@ -342,14 +452,3 @@ vim.diagnostic.config({
     source = "always",
   },
 })
-vim.diagnostic.config({
-  signs = {
-    active = {
-      Error = { text = "✘" },
-      Warn  = { text = "▲" },
-      Info  = { text = "" },
-      Hint  = { text = "⚑" },
-    }
-  }
-})
-

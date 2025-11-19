@@ -11,7 +11,8 @@ vim.o.showtabline = 0  -- 0 = nunca mostrar, 1 = solo si hay >1 tab, 2 = siempre
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
 vim.opt.wildmenu = true
-vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
+
+--vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
 vim.g.neovide_antialiasing = true
 vim.g.neovide_cursor_antialiasing = true
 
@@ -95,42 +96,42 @@ require("gruvbox").setup({
   transparent_mode = true,
 })
 -- TREEE CONFIGURATIO=N 
-require("nvim-tree").setup({
-  disable_netrw = true,           -- desactiva netrw
-  hijack_netrw = true,            -- nvim-tree reemplaza netrw
-  view = {
-    width = 25,                   -- ancho del panel
-    side = "left",
-    hide_root_folder = true,      -- oculta el root folder
-    mappings = {
-      list = {
-        { key = "q", action = "close" }, -- cerrar con q
-      },
-    },
-  },
-  renderer = {
-    icons = {
-      show = {
-        git = false,
-        folder = true,
-        file = true,
-      },
-    },
-  },
-  view = {
-    number = false,
-    relativenumber = false,
-    signcolumn = "no",
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-  },
-  filters = {
-    dotfiles = true,               -- oculta archivos .dot
-    custom = { "node_modules" },   -- oculta node_modules
-  },
-})
+-- require("nvim-tree").setup({
+--   disable_netrw = true,           -- desactiva netrw
+--   hijack_netrw = true,            -- nvim-tree reemplaza netrw
+--   view = {
+--     width = 25,                   -- ancho del panel
+--     side = "left",
+--     hide_root_folder = true,      -- oculta el root folder
+--     mappings = {
+--       list = {
+--         { key = "q", action = "close" }, -- cerrar con q
+--       },
+--     },
+--   },
+--   renderer = {
+--     icons = {
+--       show = {
+--         git = false,
+--         folder = true,
+--         file = true,
+--       },
+--     },
+--   },
+--   view = {
+--     number = false,
+--     relativenumber = false,
+--     signcolumn = "no",
+--   },
+--   update_focused_file = {
+--     enable = true,
+--     update_cwd = true,
+--   },
+--   filters = {
+--     dotfiles = true,               -- oculta archivos .dot
+--     custom = { "node_modules" },   -- oculta node_modules
+--   },
+-- })
 
 -- loual ine arriba aa 
 --
@@ -141,3 +142,12 @@ vim.o.showtabline = 0  -- desactiva statusline de abajo
 vim.opt.fillchars:append({ eob = "~" })
 vim.opt.statusline = "f"
 
+-- NEOVIDEJko
+vim.api.nvim_create_user_command("OpenInNewNeovide", function()
+  local file = vim.fn.expand("%:p")
+  vim.fn.jobstart({ "neovide", "--", file }, { detach = true })
+end, {})
+
+
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")

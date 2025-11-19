@@ -7,8 +7,8 @@ return {
 
     -- Configura Neovim para usar lsp_lines en lugar del virtual_text estándar
     vim.diagnostic.config({
-      virtual_text = false, -- desactiva el inline clásico
-      virtual_lines = { only_current_line = false },
+      virtual_text = true, -- desactiva el inline clásico
+      virtual_lines = { only_current_line = true},
     })
   end,
 }

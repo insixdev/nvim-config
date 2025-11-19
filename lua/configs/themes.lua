@@ -9,6 +9,22 @@ return {
   },
   {
     lazy = false,
+    "datsfilipe/vesper.nvim",
+    config = function()
+    require('vesper').setup({
+      transparent = true,
+      italics = {
+        comments = true, -- Boolean: Italicizes comments
+        keywords = true, -- Boolean: Italicizes keywords
+        functions = true, -- Boolean: Italicizes functions
+        strings = true, -- Boolean: Italicizes strings
+        variables = true, -- Boolean: Italicizes variables
+      },
+    })
+    end
+  },
+  {
+    lazy = false,
     "ramojus/mellifluous.nvim"
 
 
@@ -34,6 +50,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      transparent = true,
       -- NO hay setup(), solo aplicá el colorscheme
       vim.cmd.colorscheme("mellow")
     end,  }

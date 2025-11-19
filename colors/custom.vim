@@ -13,23 +13,23 @@ let g:colors_name = 'custom'
 " ─────────────────────────────────────────────────────────────
 " Core groups
 " ─────────────────────────────────────────────────────────────
-highlight Normal        guifg=#edddc0 guibg=None
+highlight Normal        guifg=#edddc0 guibg=#1f1f1f"#121212
 " guibg=#181818
 highlight NormalFloat   guifg=#edddc0 guibg=#202020
 
 highlight @variable guifg=#f5e7ce
 
-highlight Comment       guifg=#6f7b68
+highlight Comment       guifg=#6f7b68 gui=Italic
 highlight Conceal       guibg=#262626
 highlight Constant      guifg=#edddcc
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
 highlight DiffChange    guifg=#FFFEDB guibg=#262636
 highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
-highlight Directory     guifg=#C1C88D
+highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
 highlight Function      guifg=#f5e6d5
-highlight Identifier    guifg=#e6c2aa
+highlight Identifier    guifg=#e0b79b
 
 highlight LineNrAbove   guifg=#888888 guibg=#1f1e1e
 highlight LineNrBelow   guifg=#888888 guibg=#1f1e1e
@@ -46,20 +46,20 @@ highlight QuickFixLine  guibg=#303030
 highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
-highlight SpecialKey    guifg=#676767
-highlight Statement     guifg=#e6aa87 gui=none
+highlight SpecialKey    guifg=#676767 gui=Italic
+highlight Statement     guifg=#c4a184 
 highlight StatusLineNC guifg=#888ccc guibg=#222222
-highlight PreProc       guifg=#c2a37e
+highlight PreProc       guifg=#c9a393
 highlight StatusLine    guifg=#ffcccB guibg=#34383C
 highlight String        guifg=#A2A970
-highlight Structure     guifg=#AA9AAC
+highlight Structure     guifg=#dbcdab
 highlight Substitute    guifg=#1A1A1A guibg=#C1C88D
-highlight TabLine       guifg=#c1c88d guibg=#212121
+highlight TabLine       guifg=#c4a584 guibg=#212121
 highlight TabLineFill   guifg=#A09998 guibg=#212121
 highlight TabLineSel    guifg=#A09998 guibg=#40474F
 highlight Title         guifg=#FFFEDB term=none cterm=none
 highlight Todo          guifg=#8B9698
-highlight Type          guifg=#a89f8fgui=italic
+highlight Type          guifg=#a89f8f gui=Italic
 highlight Underlined    gui=undercurl
 highlight VertSplit     guifg=#303030
 highlight Visual        guibg=#454545
