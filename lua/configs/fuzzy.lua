@@ -143,7 +143,6 @@ return {
         prompt = "Files  ",
         multiprocess = true,
         git_icons = true,
-        cwd_prompt = true,
         file_icons = true,
         color_icons = true,
         cmd = "fd --type f --hidden --follow --exclude .git",
@@ -156,7 +155,6 @@ return {
           ["ctrl-v"] = actions.file_vsplit,
           ["ctrl-t"] = actions.file_tabedit,
           ["alt-q"] = actions.file_sel_to_qf,
-          ["ctrl-i"] = actions.ex_run,
     --       ["backspace"] = function(selected, opts)
     --         require("fzf-lua").files({
     --           cwd = vim.fn.fnamemodify(opts.cwd or ".", ":h"),
@@ -328,7 +326,7 @@ return {
     -- Búsqueda de texto
     vim.keymap.set("n", "<leader>fw", ":FzfLua live_grep<CR>", { noremap = true , silent = true,  }) 
       vim.keymap.set("n", "<leader>fW", fzf.grep_cword, { desc = "Grep Word" })
-    vim.keymap.set("v", "<leader>fg", fzf.grep_visual, { desc = "Grep Visual" })
+    vim.keymap.set("v", "gV", fzf.grep_visual, { desc = "Grep Visual" })
     vim.keymap.set("n", "<leader>fl", fzf.blines, { desc = "Buffer Lines" })
     vim.keymap.set("n", "<leader>fL", fzf.lines, { desc = "All Lines" })
     

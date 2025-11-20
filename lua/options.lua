@@ -170,3 +170,13 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
+vim.opt.verbose = 0
+
+
+vim.notify = function(msg, log_level, opts)
+  if msg:match("Autocmd BufEnter fired!") then
+    return
+  end
+  vim.api.nvim_echo({{msg}}, true, {})
+end
+

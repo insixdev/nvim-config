@@ -3,7 +3,9 @@ local trigger_text = ";"
 
 return {
   "saghen/blink.cmp",
+  version = "1.*",
   enabled = true,
+  build = "cargo build --release",
   dependencies = {
     "moyiz/blink-emoji.nvim",
     "Kaiser-Yang/blink-cmp-dictionary",
@@ -19,7 +21,6 @@ return {
       end
       return true
     end
-    
     opts.appearance = {
       nerd_font_variant = 'mono',
     }

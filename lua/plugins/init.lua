@@ -1,4 +1,7 @@
 return {
+  {import = "configs.snacks"},
+  {import = "configs.neo-tree"},
+  {import = "configs.snacks"},
   { import = "configs.zen"},
   { "hrsh7th/nvim-cmp", enabled = false },
   { "hrsh7th/cmp-buffer", enabled = false },
@@ -45,14 +48,6 @@ return {
       "nvim-treesitter/nvim-treesitter",
       opts = { ensure_installed = { "haskell", "supercollider" } },
     },
-  },
-  {
-    lazy= false,
-    "gruvw/strudel.nvim",
-    build = "npm install",
-    config = function()
-      require("strudel").setup()
-    end,
   },
   -- These are some examples, uncomment them if you want to see them work!
   {

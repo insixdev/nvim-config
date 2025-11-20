@@ -25,69 +25,7 @@ return {
     end,
   },
 
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-      bigfile = { enabled = true },
-      dashboard = { enabled = true },
-      explorer = { 
-        enabled = true,
-        keys = {
-["ñ"] = "cut",
-        }
-      },
-      input = { enabled = true },
-      picker = { enabled = true },
-      notifier = { enabled = true },
-      quickfile = { enabled = true },
-      scope = { enabled = true, highlight = "SnacksIndentScope", underline = true,},
-      scroll = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-      indent = {
-        enabled = true,
 
-        animate = {
-          enabled = true,
-          duration = 40 ,
-        },
-        scope = {
-          enabled = true,
-
-          underline = true,   -- subraya la primera línea del bloque
-          --         underline_char = "─ .",
-          end_underline = true, -- subraya la última línea del bloque
-
-          highlight = "SnacksScopeBorder",
-        },
-      },
-      highlight = {
-        scope = {
-          enabled = true,
-          blend = 0.12, -- el "fade" suave del bloque
-          priority = 1200,
-        },
-      },
-    },
-    keys = {
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "<M-n>", function() Snacks.explorer() end, desc = "File Explorer", silent = true, nowait = true },
-      { "<leader>jb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-      { "<leader>jb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-      { "<leader>jf", function() Snacks.picker.files() end, desc = "Find Files" },
-      { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-      { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-      { "<leader>;",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
- { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" }
-
-    }
-  },
   {
 
     "lukas-reineke/indent-blankline.nvim",

@@ -101,8 +101,8 @@ vim.keymap.set("n", "gL", ":lua vim.diagnostic.setloclist()<CR>", { noremap = tr
 -- end, 2000) -- 2000 ms = 2 segundos
 -- --
 
-vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', {   silent = true })
-vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', {  silent = true })
+-- vim.api.nvim_set_keymap('n', '<Tab>', ':bnext<CR>', {   silent = true })
+-- vim.api.nvim_set_keymap('n', '<S-Tab>', ':bprevious<CR>', {  silent = true })
 --
 vim.api.nvim_set_keymap('n', '<C-S-X>', '<C-w>q', { noremap = true, silent = true })
 
