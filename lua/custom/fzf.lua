@@ -50,19 +50,21 @@ end, {})
 --   })
 -- end, {})
 
-
 local fzf = require("fzf-lua")
 
+-- Función que genera el comando Bash para listar directorios
 local function folder_list(cwd)
   cwd = cwd or vim.loop.cwd()
 
-  -- si estás en "/", no mostramos "../"
+  -- 1. Determina el directorio padre de 'cwd'.
+  local parent_dir = vim.fn.fnamemodify(cwd, ":h")
+
+  -- 2. Solo agregamos ".." si el directorio actual NO es el mismo que su padre.
   local up = ""
-  if cwd ~= "/home/insidev" then
-    up = "printf '../\n';"
+  if cwd ~= parent_dir then
+      up = "printf '../\n';"
   end
 
-  -- comando final
   local cmd = string.format(
     [[bash -lc "%s fd -t d --max-depth 1 --hidden --exclude .git 2>/dev/null | sed 's#^./##'" ]],
     up
@@ -70,42 +72,45 @@ local function folder_list(cwd)
 
   return cmd
 end
+
+-- Función global para iniciar la navegación de directorios con fzf-lua
 _G.browse_dirs = function(opts)
   opts = opts or {}
-  local cwd = opts.cwd or vim.loop.cwd()
+  -- Obtiene la ruta de trabajo actual o la definida en opts, y la limpia a una ruta absoluta.
+  local cwd = vim.fn.fnamemodify(opts.cwd or vim.loop.cwd(), ":p")
+  local prompt_cwd = cwd 
+  -- ya que la lógica de limpieza de ruta ya se maneja arriba con :p y la lógica de 'up' en folder_list.
 
-  -- Comando que muestra ".." y los subdirectorios
-
+  -- Ejecuta FZF con el comando generado y las opciones.
   fzf.fzf_exec(folder_list(cwd), {
     cwd = cwd,
-    prompt = cwd .. " > ",
-    
+    prompt = prompt_cwd .. " > ",
 
-    --
     fzf_opts = {
       ["--height"] = "100%",
       ["--layout"] = "reverse",
-      ["--info"]   = "inline",
+      ["--info"]    = "inline",
       ["--border"] = "none",
       ["--preview"] = "ls -la --color=always {}",
     },
 
-    --  Preview al costado
-   
     actions = {
-      -- Entrar en el directorio
+      -- Acción 'enter': Cambia al directorio seleccionado y relanza el buscador.
       ["enter"] = function(selected)
         if not selected or not selected[1] then return end
         local sel = selected[1]
 
         if sel == ".." then
+          -- Ir al directorio padre
           browse_dirs({ cwd = vim.fn.fnamemodify(cwd, ":h") })
           return
         end
 
+        -- Ir al subdirectorio seleccionado
         browse_dirs({ cwd = cwd .. "/" .. sel })
       end,
 
+      -- Acción 'space': Abre el directorio seleccionado con el plugin Oil (o similar).
       ["space"] = function(selected)
         if not selected or not selected[1] then return end
         local sel = selected[1]
@@ -124,4 +129,3 @@ _G.browse_dirs = function(opts)
     },
   })
 end
-
