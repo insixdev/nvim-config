@@ -1,4 +1,3 @@
-
 return {
   lazy =false,
   "matbme/JABS.nvim",

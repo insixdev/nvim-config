@@ -6,8 +6,9 @@ return {
 
   config = function()
     require("incline").setup({
-      debounce_threshold = { falling = 50, rising = 10 },
 
+
+      debounce_threshold = { falling = 50, rising = 10 },
       hide = {
         cursorline = false,
         focused_win = false,
@@ -31,18 +32,22 @@ return {
         zindex = 50,
       },
 
-      render = function(props)
-        -- props.buf es el buffer actual de la ventana
-        local buf = props.buf
-        local path = vim.fn.bufname(buf)
-        if path == "" then
-          return {}
-        end
-
-        -- ruta relativa al cwd
-        local rel_path = vim.fn.fnamemodify(path, ":~:.")
-        return { " " .. rel_path .. " " }
-      end,
+      -- render = function(props)
+      --   if vim.g.incline_enabled == false then
+      --     return ""
+      --   end
+      --
+      --   -- props.buf es el buffer actual de la ventana
+      --   local buf = props.buf
+      --   local path = vim.fn.bufname(buf)
+      --   if path == "" then
+      --     return {}
+      --   end
+      --
+      --   -- ruta relativa al cwd
+      --   local rel_path = vim.fn.fnamemodify(path, ":~:.")
+      --   return { " " .. rel_path .. " " }
+      -- end,
     })
   end,
 }

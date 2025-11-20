@@ -17,7 +17,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
-vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })    
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })
 
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
@@ -178,6 +178,8 @@ vim.api.nvim_set_keymap('n', '<C-A-k>', ':resize -5<CR>', { noremap = true, sile
 -- })
 --
 --
+
+vim.keymap.set("n", "<M-f>", ":lua browse_dirs()<CR>", { noremap = true, silent = true })
 
 if vim.g.neovide then
   -- Asegúrate de tener una fuente por defecto

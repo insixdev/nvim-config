@@ -69,5 +69,6 @@
   "volt": { "branch": "main", "commit": "620de1321f275ec9d80028c68d1b88b409c0c8b1" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
   "windsurf.vim": { "branch": "main", "commit": "a8d47ec54fe82df920b2545559f767003e8a7f8d" },
-  "yazi.nvim": { "branch": "main", "commit": "3f81faf0cf838acb312f0f0d75ac1a8ac69166ed" }
+  "yazi.nvim": { "branch": "main", "commit": "3f81faf0cf838acb312f0f0d75ac1a8ac69166ed" },
+  "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" }
 }

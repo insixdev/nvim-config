@@ -81,7 +81,12 @@ return {
       },
       
       -- Opciones de fzf para mejor experiencia
+      --
       fzf_opts = {
+        ["--bind"] = table.concat({
+          "ctrl-h:change-prompt(.. )+reload(builtin-dir)",
+          "ctrl-?:change-prompt(.. )+reload(builtin-dir)",
+        }, ","),
         ["--layout"] = "reverse",
         ["--info"] = "inline-right",
         ["--height"] = "100%",
@@ -138,6 +143,7 @@ return {
         prompt = "Files  ",
         multiprocess = true,
         git_icons = true,
+        cwd_prompt = true,
         file_icons = true,
         color_icons = true,
         cmd = "fd --type f --hidden --follow --exclude .git",
@@ -150,6 +156,12 @@ return {
           ["ctrl-v"] = actions.file_vsplit,
           ["ctrl-t"] = actions.file_tabedit,
           ["alt-q"] = actions.file_sel_to_qf,
+          ["ctrl-i"] = actions.ex_run,
+    --       ["backspace"] = function(selected, opts)
+    --         require("fzf-lua").files({
+    --           cwd = vim.fn.fnamemodify(opts.cwd or ".", ":h"),
+    --   })
+    -- end,
         },
         winopts = {
           preview = {
@@ -199,9 +211,9 @@ return {
         prompt = "Rg  ",
         input_prompt = "Grep For  ",
         multiprocess = true,
-        git_icons = false,
+        git_icons = true,
         file_icons = true,
-        color_icons = true,
+       color_icons = true,
         cmd = "rg --column --line-number --no-heading --color=always --smart-case",
         -- Preview del resultado con contexto
         previewer = "builtin",
@@ -223,6 +235,7 @@ return {
         sort_mru = true,
         show_all_buffers = true,
         ignore_current_buffer = false,
+        current_buffer = true,          -- permitir seleccionarlo
         cwd_only = false,
         previewer = "builtin",
         actions = {
@@ -231,6 +244,23 @@ return {
           ["ctrl-v"] = actions.buf_vsplit,
           ["ctrl-t"] = actions.buf_tabedit,
           ["alt-d"] = { fn = actions.buf_del, reload = true },
+
+          ["ctrl-d"] = {
+            fn = function(selected)
+              local actions = require("fzf-lua.actions")
+              local bufnr = tonumber(selected[1]:match("^(%d+)"))
+
+              if not bufnr then return end
+
+              if bufnr == vim.api.nvim_get_current_buf() then
+                vim.cmd("bnext")   -- mover a otro buffer
+              end
+
+              actions.buf_del({ tostring(bufnr) }, { force = true })
+            end,
+            reload = true,
+          },
+
         },
       },
       -- Oldfiles con preview
@@ -281,10 +311,7 @@ return {
     end, 200)
 
     -- ==========================================
-    -- KEYMAPS MEJORADOS
-    -- ==========================================
-
-    -- Búsqueda principal con Ctrl-g (como tu imagen)
+    -- KEYM    -- Búsqueda principal con Ctrl-g 
     vim.keymap.set("n", "<C-g>", function()
       fzf.files({
         winopts = {
@@ -295,6 +322,7 @@ return {
     
     -- Files y navegación
     vim.keymap.set("n", "<leader>fg", fzf.git_files, { desc = "Git Files" })
+
     vim.keymap.set("n", "<leader>fr", fzf.oldfiles, { desc = "Recent Files" })
     
     -- Búsqueda de texto

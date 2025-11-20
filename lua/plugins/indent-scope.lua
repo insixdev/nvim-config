@@ -1,6 +1,4 @@
-return {
-
-}
+return {}
 -- return {
 --   {
 --     "echasnovski/mini.indentscope",

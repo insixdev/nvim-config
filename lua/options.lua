@@ -151,3 +151,22 @@ end, {})
 
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+-- zen
+
+-- Apagar y prender incline al entrar/salir de ZenMode
+vim.api.nvim_create_autocmd("User", {
+  pattern = "ZenModeEnter",
+  callback = function()
+    vim.g.incline_enabled = false
+    require("incline").disable()
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "ZenModeLeave",
+  callback = function()
+    vim.g.incline_enabled = true
+    require("incline").enable()
+  end,
+})
+

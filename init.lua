@@ -18,6 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
 
+vim.g.incline_enabled = true,
 
 -- load plugins
 require("lazy").setup({

@@ -1,14 +1,14 @@
 return {
-
-{ "hrsh7th/nvim-cmp", enabled = false },
-{ "hrsh7th/cmp-buffer", enabled = false },
-{ "hrsh7th/cmp-path", enabled = false },
-{ "hrsh7th/cmp-nvim-lsp", enabled = false },
-{ "saadparwaiz1/cmp_luasnip", enabled = false },
+  { import = "configs.zen"},
+  { "hrsh7th/nvim-cmp", enabled = false },
+  { "hrsh7th/cmp-buffer", enabled = false },
+  { "hrsh7th/cmp-path", enabled = false },
+  { "hrsh7th/cmp-nvim-lsp", enabled = false },
+  { "saadparwaiz1/cmp_luasnip", enabled = false },
   {
     import = "configs.blinkcmp"
   },
-    {
+  {
 
     import = "configs.fuzzy",
   },
@@ -16,7 +16,7 @@ return {
     import = "configs.amp"
   },
   {
-  import = "configs.incline",
+    import = "configs.incline",
 
   },
   {
@@ -81,7 +81,7 @@ return {
           always_show_tabs = true,
         },
       })
-      -- ⚙️ Arreglo: volver a configurar scope al crear un nuevo tab
+      -- Arreglo: volver a configurar scope al crear un nuevo tab
       vim.api.nvim_create_autocmd("TabNewEntered", {
         callback = function()
           -- vuelve a aplicar aislamiento por tab
@@ -192,7 +192,7 @@ return {
   -- 	},
   -- },
   {
-  "vague-theme/vague.nvim",
+    "vague-theme/vague.nvim",
   },
   {
 
