@@ -18,12 +18,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })
-
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-        require("ibl").refresh()
-    end
-})
+-- no se para que pero interferia en neotree
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     callback = function()
+--         require("ibl").refresh()
+--     end
+-- })
 
 vim.api.nvim_set_keymap(
   'n',
@@ -129,13 +129,14 @@ vim.keymap.set("n", "<C-S-k>",  ":resize -2<CR>")
 -- aumentar/disminuir ancho
 vim.keymap.set("n", "<C-S-l>",  ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-S-h>", ":vertical resize +2<CR>")
-vim.api.nvim_create_autocmd("BufEnter", {
+
+vim.api.nvim_create_autocmd("BufEnter", { 
   callback = function()
     local ft = vim.bo.filetype
     -- Solo asignar Tab si NO es un buffer de plugin
-    --
-print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)
-    if ft ~= "yazi" or ft ~= "fzf" or ft ~= "oil" then
+    -- print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)  -- COMENTADA O ELIMINADA
+    
+    if ft ~= "yazi" and ft ~= "fzf" and ft ~= "oil" then
       vim.keymap.set("n", "<Tab>", ":bnext<CR>", { noremap = true, silent = true, buffer = true })
       vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", { noremap = true, silent = true, buffer = true })
     end
@@ -204,3 +205,5 @@ if vim.g.neovide then
   end, { desc = "Neovide Zoom Out" })
 end
 
+
+vim.opt.verbose = 0

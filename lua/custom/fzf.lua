@@ -106,7 +106,7 @@ _G.browse_dirs = function(opts)
         browse_dirs({ cwd = cwd .. "/" .. sel })
       end,
 
-      ["ctrl-o"] = function(selected)
+      ["space"] = function(selected)
         if not selected or not selected[1] then return end
         local sel = selected[1]
 

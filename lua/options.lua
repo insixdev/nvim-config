@@ -170,7 +170,6 @@ vim.api.nvim_create_autocmd("User", {
   end,
 })
 
-vim.opt.verbose = 0
 
 
 vim.notify = function(msg, log_level, opts)
