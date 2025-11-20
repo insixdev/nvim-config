@@ -304,7 +304,7 @@ return {
     vim.defer_fn(function() 
       vim.keymap.set("n", "<leader>fw", fzf.live_grep , { desc = "Grep", noremap = true }) 
 
-    vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
+     -- vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Buffers" })
       vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find Files" })
     end, 200)
 

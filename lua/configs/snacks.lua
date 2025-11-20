@@ -65,9 +65,9 @@ return  {
     { "<leader>jf", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>z",  function() Snacks.zen() end, desc = "Toggle Zen Mode" },
     { "<leader>;",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
-    { "<M-s>p", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Bufer" },
-    {"<M-s>d",function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "gn", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+    { "<A-s>p", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Bufer" },
+    { "<M-s>d",function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>pp", function() Snacks.toggle.profiler() end, desc = "Toggle Profiler" },
     { "<leader>ph", function() Snacks.toggle.profiler_highlights() end, desc = "Toggle Profiler Highlights" },
 
