@@ -8,9 +8,11 @@ vim.wo.relativenumber = true
 
 vim.o.showtabline = 0  -- 0 = nunca mostrar, 1 = solo si hay >1 tab, 2 = siempre mostrar
 -- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
-
+vim.o.cursorlineopt ='both' -- to enable cursorline!
 vim.opt.wildmenu = true
+vim.opt.cursorline = true
+vim.opt.linebreak = true 
+
 
 --vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
 vim.g.neovide_antialiasing = true
@@ -179,3 +181,9 @@ vim.notify = function(msg, log_level, opts)
   vim.api.nvim_echo({{msg}}, true, {})
 end
 
+
+vim.opt.signcolumn = "yes:1"
+vim.opt.numberwidth = 2
+
+
+require('mini.icons').setup()

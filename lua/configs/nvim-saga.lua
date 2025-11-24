@@ -116,7 +116,7 @@ return {
     map("n", "<leader>ld", "<cmd>Lspsaga show_line_diagnostics<CR>", { desc = "Line Diagnostics" })
     map("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { desc = "Prev Diagnostic" })
     map("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { desc = "Next Diagnostic" })
-    map("n", "<leader>o", "<cmd>Lspsaga outline<CR>", { desc = "Outline" })
+--    map("n", "<leader>o", "<cmd>Lspsaga outline<CR>", { desc = "Outline" })
   end,
 }
 

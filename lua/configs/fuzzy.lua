@@ -72,7 +72,7 @@ return {
             cursorline = true,
             cursorlineopt = 'both',
             cursorcolumn = false,
-            signcolumn = 'no',
+            signcolumn = 'yes',
             list = false,
             foldenable = false,
             foldmethod = 'manual',

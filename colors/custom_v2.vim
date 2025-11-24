@@ -13,10 +13,9 @@ let g:colors_name = 'custom'
 " ─────────────────────────────────────────────────────────────
 " Core groups
 " ─────────────────────────────────────────────────────────────
-highlight CursorLine cterm=NONE ctermbg=236 guibg=#1d1d1b
-highlight Normal        guifg=#edddc0 guibg=#1c1b1b"#1f1f1f"#121212
+highlight Normal        guifg=#b09e82 guibg=#111212"#1f1f1f"#121212
 " guibg=#181818
-highlight NormalFloat   guifg=#edddc0 guibg=#202020
+highlight NormalFloat   guifg=#b09e82 guibg=#1a1c1c
 
 highlight @variable guifg=#f5e7ce
 
@@ -29,14 +28,14 @@ highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
-highlight Function      guifg=#f5e6d5
+highlight Function      guifg=#feb454
 highlight Identifier    guifg=#e0b79b
 
 highlight LineNrAbove   guifg=#888888 guibg=#262626
 highlight LineNrBelow   guifg=#888888 guibg=#262626
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
-highlight NonText       guifg=#3e3d33
+highlight NonText       guifg=#3d3d33
 highlight Operator      guifg=#DEBF7C
 highlight Pmenu         guifg=#8f9988 guibg=#303030
 highlight PmenuSbar     guifg=#918988 guibg=#262626
@@ -48,8 +47,8 @@ highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 gui=Italic
-highlight Statement     guifg=#c4a184 
-highlight StatusLineNC guifg=#888ccc guibg=#222222
+highlight Statement     guifg=#fa8d3f
+highlight StatusLineNC  guifg=#888ccc guibg=#222222
 highlight PreProc       guifg=#c9a393
 highlight StatusLine    guifg=#ffcccB guibg=#34383C
 highlight String        guifg=#A2A970
@@ -69,6 +68,7 @@ highlight Float         guifg=#6f7b68
 highlight Number        guifg=#cf95a9
 highlight Boolean       guifg=#6f7b68
 highlight WinSeparator  guibg=#111111 guifg=#888888
+
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────

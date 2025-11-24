@@ -43,7 +43,7 @@ M.ui = {
     enabled = false,
   },
   statuscol = {
-    enabled = false,
+    enabled = true,
   },
   lualine = {
     enabled = false,

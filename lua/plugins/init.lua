@@ -8,16 +8,30 @@ return {
   { "hrsh7th/cmp-path", enabled = false },
   { "hrsh7th/cmp-nvim-lsp", enabled = false },
   { "saadparwaiz1/cmp_luasnip", enabled = false },
+  { import = "configs.buffer-list" },
+  { import = "configs.ui" },
   {
     import = "configs.blinkcmp"
   },
+{
+  "hedyhli/outline.nvim",
+    lazy = false,
+  config = function()
+    -- Example mapping to toggle outline
+    vim.keymap.set("n", "gc", "<cmd>Outline<CR>",
+      { desc = "Toggle Outline" })
+
+    require("outline").setup {
+      -- Your setup opts here (leave empty to use defaults)
+    }
+  end,
+},
   {
 
     import = "configs.fuzzy",
   },
   {
-    import = "configs.amp"
-  },
+    import = "configs.amp" },
   {
     import = "configs.incline",
 
@@ -33,9 +47,9 @@ return {
   {
     import = "configs.jabs",
   },
-  {
-    import = "configs.lines",
-  },
+  -- {
+  --   import = "configs.lines",
+  -- },
   {
     lazy= false,
     "grddavies/tidal.nvim",

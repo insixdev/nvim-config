@@ -7,14 +7,13 @@ return {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     input = { enabled = true },
-    notifier = { enabled = true },
-    profile = { enabled = true },
+    notifier = { enabled = true, timeout = 5000 },
+    profile = { enabled = false },
     quickfile = { enabled = true },
     scope = { enabled = true, highlight = "SnacksIndentScope", underline = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
-    
     picker = {
       enabled = true,
       sources = {
@@ -62,30 +61,28 @@ return {
           enabled = true,
           blend = 0.12,
           priority = 1200,
-        },
       },
     },
+  },
 
-    keys = {
-      -- Picker commands con <leader>j
-      { "<leader>j<space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-      { "<leader>jb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+
+  keys = {
+    -- Picker commands con <leader>j
+    { "<leader>j<space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>jb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
+    { "<leader>jg", function() Snacks.picker.git_diff() end, desc = "Git Diff" },
       { "<leader>jf", function() Snacks.picker.files() end, desc = "Find Files" },
-      { "<leader>jd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>jd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
 
-      -- Buffers
-      { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    -- Buffers
+    { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
 
-      -- Otras funcionalidades
-      { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
-      { "<leader>;", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+    -- Otras funcionalidades
+    { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+    { "<leader>;", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
 
-      -- LSP
-      { "gn", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
+    -- LSP
+    { "gn", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
 
-      -- Profiler
-      { "<leader>pp", function() Snacks.toggle.profiler() end, desc = "Toggle Profiler" },
-      { "<leader>ph", function() Snacks.toggle.profiler_highlights() end, desc = "Toggle Profiler Highlights" },
-      { "<leader>ps", function() Snacks.profiler.scratch() end, desc = "Profiler Scratch Buffer" },
-    },
-  }
+      },
+}
