@@ -67,6 +67,12 @@ vim.api.nvim_create_user_command('R', function(opts)
   vim.cmd.terminal(opts.args)
 end, { nargs = '*' })
 
+vim.api.nvim_create_user_command('D', function(opts)
+  -- resizear para que sea mas baja
+  vim.cmd("Dispatch" .. opts.args)
+end, { nargs = '*' })
+
+
 vim.keymap.set("n", "<C-A-a>", ":R ")
 -- Reemplaza tu keymap problemático con este:
 map("n", "<esc><esc>", "<CMD>q<CR>")
@@ -207,6 +213,7 @@ end
 
 local fyler = require("fyler")
 
+vim.keymap.set("n", "<A-r>", ":exe @:<CR>", { desc = "Open Fyler View" })
 -- Or via lua api
 vim.keymap.set("n", "<A-e>", ":Fyler<CR>", { desc = "Open Fyler View" })
 vim.keymap.set("n", "<A-S-e>",function() fyler.open({ kind = "split_left_most" }) end,  { desc = "Open Fyler View" })
@@ -220,3 +227,10 @@ fyler.setup({
 })
 --
 -- vim.keymap.set("n", "gc", ":Lspsaga outline<CR>", { desc = "Open Fyler View" })
+-- para debug
+vim.api.nvim_create_user_command('BufExec', function(opts)
+  local output = vim.fn.execute(opts.args)
+  vim.cmd('enew')
+  vim.bo.buftype = 'nofile'
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, '\n'))
+end, { nargs = '+' })

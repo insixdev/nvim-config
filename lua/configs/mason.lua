@@ -13,6 +13,7 @@ local options = {
     "marksman",
     "emmet-ls",
     "lua-language-server",
+    "ast-grep",
     "bash-language-server",
     "json-lsp",
     "yaml-language-server",

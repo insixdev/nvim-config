@@ -19,7 +19,7 @@ return {
     require("lualine").setup({
       options = {
         padding= 1,
-        theme = "gruvbox",
+        theme =  vim.g.colors_name,
         -- theme = {
         --   normal = {
         --     a = { fg = "#181818", bg = "#fab39b", gui = "bold" },
@@ -55,8 +55,8 @@ return {
       sections = {
         lualine_a = {},
         lualine_b = {"mode",
-          "branch", "diff", "diagnostics" },
-        lualine_c = { { "filename", path = 2 }, project_and_cwd },
+           "diff", "diagnostics" },
+        -- lualine_c = { { "filename", path = 2 }, project_and_cwd },
         lualine_x = { "encoding",  "filetype", {
             'tabs',
             mode = 0,       -- 0 = números normales, 1 = mostrar nombre de la pestaña
@@ -66,7 +66,7 @@ return {
           }
         }},
         lualine_y = { "progress"  },
-        lualine_z = { "location" },
+        --lualine_z = { "location" },
       },
       inactive_sections = {
         lualine_a = {"fileformat"},

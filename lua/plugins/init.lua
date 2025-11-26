@@ -2,6 +2,7 @@ return {
   {import = "configs.snacks"},
   {import = "configs.neo-tree"},
   {import = "configs.snacks"},
+  {import = "configs.difs"},
   { import = "configs.zen"},
   { "hrsh7th/nvim-cmp", enabled = false },
   { "hrsh7th/cmp-buffer", enabled = false },
@@ -9,7 +10,7 @@ return {
   { "hrsh7th/cmp-nvim-lsp", enabled = false },
   { "saadparwaiz1/cmp_luasnip", enabled = false },
   { import = "configs.buffer-list" },
-  { import = "configs.ui" },
+  --{ import = "configs.ui" },
   {
     import = "configs.blinkcmp"
   },
@@ -220,7 +221,8 @@ return {
       })
     end,
   },
-  {
+  -- En tu init.lua o donde cargues tu config
+    {
     "rose-pine/neovim",
     name = "rose-pine",
     config = function()
@@ -233,6 +235,17 @@ return {
   {
     "nvim-tree/nvim-tree.lua",
     enabled = false,
-  }
+  },
+{
+    dir = vim.fn.stdpath("config") .. "/lua",
+    name = "custom-newest",
+    priority = 1000,
+    config = function()
+      require("custom-newest").setup()
+      vim.cmd.colorscheme("custom-newest")
+    end,
+  },
+
 }
+
 

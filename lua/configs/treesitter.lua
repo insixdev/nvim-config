@@ -1,15 +1,16 @@
-
--- plugins/treesitter.lua
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "windwp/nvim-ts-autotag",
+  },
   config = function()
-    local ts = require("nvim-treesitter.configs")
-
-    ts.setup({
-      -- Lenguajes que queremos soportar
+    require("nvim-treesitter.configs").setup({
+      -- Instalación automática de parsers
       ensure_installed = {
+        -- Lenguajes principales
         "rust",
         "c",
         "cpp",
@@ -18,17 +19,42 @@ return {
         "lua",
         "python",
         "bash",
-        "json",
-        "yaml",
+        
+        -- Web
         "html",
         "css",
+        "tsx",
+        "vue",
+        "svelte",
+        
+        -- Configuración
+        "json",
+        "yaml",
+        "toml",
+        
+        -- Markdown y documentación
+        "markdown",
+        "markdown_inline",
+        
+        -- Otros útiles
+        "vim",
+        "vimdoc",
+        "regex",
+        "go",
+        "java",
       },
-
-      -- Resaltado
+      
+      -- Instalar parsers de forma sincrónica (solo aplicable a ensure_installed)
+      sync_install = false,
+      
+      -- Instalar parsers automáticamente cuando abras un archivo
+      auto_install = true,
+      
+      -- Resaltado de sintaxis
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = true,
-        -- opcional: desactivar en buffers muy grandes
+          additional_vim_regex_highlighting = false, -- 
+        -- Desactivar en archivos grandes para mantener performance
         disable = function(lang, buf)
           local max_filesize = 100 * 1024 -- 100 KB
           local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
@@ -36,65 +62,114 @@ return {
             return true
           end
         end,
+        
+        -- Necesario para spellcheck en comentarios
+        additional_vim_regex_highlighting = false,
       },
-
-      -- Indentación automática según Tree-sitter
+      
+      -- Indentación basada en Tree-sitter
       indent = {
-        enable = true,
-        disable = { "python" }, -- opcional: si no funciona bien
-      },
-
-      -- Resaltado de pares, anidamiento
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-        max_file_lines = nil,
-      },
-
-      -- Playground para ver árbol de parseo
-      playground = {
-        enable = true,
+        enable = false,
+        -- Python a veces tiene problemas, ajusta según necesites
         disable = {},
-        updatetime = 25, -- ms
-        persist_queries = false,
-        keybindings = {
-          toggle_query_editor = "o",
-          toggle_hl_groups = "i",
-          toggle_injected_languages = "t",
-          toggle_anonymous_nodes = "a",
-          toggle_language_display = "I",
-          focus_language = "f",
-          unfocus_language = "F",
-          update = "R",
-          goto_node = "<cr>",
-          show_help = "?",
-        },
       },
-
-      -- Autopairs integrados con Treesitter
-      autotag = {
-        enable = true, -- útil para html/css/jsx
-      },
-
-      -- Módulo incremental selection
+      
+      -- Selección incremental
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "gnn",
-          node_incremental = "grn",
-          scope_incremental = "grc",
-          node_decremental = "grm",
+          init_selection = "<CR>",
+          node_incremental = "<CR>",
+          scope_incremental = "<S-CR>",
+          node_decremental = "<BS>",
         },
       },
-
-      -- Refactor/Contextual code
-      context_commentstring = {
+      
+      -- Text objects para movimiento y manipulación de código
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            -- Funciones
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            
+            -- Clases
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+            
+            -- Parámetros/argumentos
+            ["aa"] = "@parameter.outer",
+            ["ia"] = "@parameter.inner",
+            
+            -- Bloques
+            ["ab"] = "@block.outer",
+            ["ib"] = "@block.inner",
+            
+            -- Condicionales
+            ["ai"] = "@conditional.outer",
+            ["ii"] = "@conditional.inner",
+            
+            -- Loops
+            ["al"] = "@loop.outer",
+            ["il"] = "@loop.inner",
+          },
+        },
+        
+        -- Moverse entre funciones, clases, etc.
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+            ["]a"] = "@parameter.inner",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@class.outer",
+            ["]A"] = "@parameter.inner",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+            ["[a"] = "@parameter.inner",
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@class.outer",
+            ["[A"] = "@parameter.inner",
+          },
+        },
+        
+        -- Swap de nodos (intercambiar parámetros, etc.)
+        swap = {
+          enable = true,
+          swap_next = {
+            ["<leader>sp"] = "@parameter.inner",
+          },
+          swap_previous = {
+            ["<leader>sP"] = "@parameter.inner",
+          },
+        },
+      },
+      
+      -- Auto-cerrado de tags HTML/JSX
+      autotag = {
         enable = true,
-        enable_autocmd = false,
+        enable_rename = true,
+        enable_close = true,
+        enable_close_on_slash = true,
       },
     })
-
-    -- Asegurarnos de que termguicolors está activo
+    
+    -- Habilitar colores verdaderos
     vim.opt.termguicolors = true
+    
+    -- Folding basado en Tree-sitter (opcional)
+    vim.opt.foldmethod = "expr"
+    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt.foldenable = false -- Empezar con folds abiertos
   end,
 }

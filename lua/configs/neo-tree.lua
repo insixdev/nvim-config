@@ -23,17 +23,23 @@ return {
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,
+        window = {
+          show_root = false,
+        },
+        indent = {
+          padding = 2,
+        },
         follow_current_file = {
           enabled = true,
           leave_dirs_open = false,
         },
-        -- icon = {
-        --   folder_closed = "",  -- Material Icons
-        --   folder_open = "",
-        --   folder_empty = "",
-        --   default = "", -- icono para archivos sin icono específico
-        --   highlight = "NeoTreeFileIcon",
-        -- },
+        icon = {
+          folder_closed = "󰉋",  -- Material Icons
+          folder_open = "",
+          folder_empty = "",
+          default = "", -- icono para archivos sin icono específico
+          highlight = "NeoTreeFileIcon",
+        },
         default_component_configs = {
           indent = {
             indent_size = 2,
@@ -54,6 +60,9 @@ return {
           },
         },
 
+        source_selector = {
+             truncate_path = true,  --  acorta la ruta arribawinbar = true,
+        },
         filesystem = {
           filtered_items = {
             hide_dotfiles = false,
@@ -115,6 +124,7 @@ return {
             [">C-v>"] = "open_vsplit",
           },
         },
+        
 
         buffers = {
           follow_current_file = true,

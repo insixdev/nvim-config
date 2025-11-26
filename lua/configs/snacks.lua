@@ -71,6 +71,9 @@ return {
     { "<leader>j<space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>jb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
     { "<leader>jg", function() Snacks.picker.git_diff() end, desc = "Git Diff" },
+    { "<leader>jl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "lazygit" },
       { "<leader>jf", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>jd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
 

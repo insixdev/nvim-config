@@ -6,6 +6,36 @@ return {
   priority = 1000,     -- que se aplique antes que otros
   lazy = false,
   {
+    'Yazeed1s/oh-lucy.nvim',
+    lazy = false,
+  },
+  {
+  'everviolet/nvim', name = 'evergarden',
+  lazy = false,
+  },
+  {
+    lazy = false,
+    "sainnhe/sonokai"
+  },
+{
+    "dgox16/oldworld.nvim",
+    lazy = false,
+    priority = 1000,
+},
+{
+  "gmr458/cold.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {}, -- Optional
+},
+{
+  "xero/miasma.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+  end,
+},
+  {
     "rebelot/kanagawa.nvim",
     lazy = false,
   } ,
@@ -52,9 +82,7 @@ return {
   "kvrohit/rasmus.nvim",
     lazy =false,
   priority = 1000,
-  config = function()
-    vim.cmd([[colorscheme rasmus]])
-  end,
+
 },
 
   {

@@ -106,3 +106,4 @@ highlight @tag.tsx guifg=#a7ccb4
 highlight! @tag.delimiter.tsx guifg=#b5bdb8   " mismo color que HTML delimiter
 highlight! link @tag.delimiter.tsx @tag.delimiter.html
 
+

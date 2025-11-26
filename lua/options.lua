@@ -187,3 +187,8 @@ vim.opt.numberwidth = 2
 
 
 require('mini.icons').setup()
+
+vim.defer_fn(function()
+  vim.cmd('TSToggle highlight')
+end, 200)
+
