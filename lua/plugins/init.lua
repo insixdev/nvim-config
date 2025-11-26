@@ -2,6 +2,8 @@ return {
   {import = "configs.snacks"},
   {import = "configs.neo-tree"},
   {import = "configs.snacks"},
+
+  {import = "configs.navic"},
   {import = "configs.difs"},
   { import = "configs.zen"},
   { "hrsh7th/nvim-cmp", enabled = false },

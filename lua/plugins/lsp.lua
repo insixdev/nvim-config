@@ -1,3 +1,4 @@
+
 return {
   priority = 2000,
   lazy = false,
@@ -6,7 +7,10 @@ return {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
   },
+
   config = function()
     require("configs.lspconfig")
+
   end,
 }
+

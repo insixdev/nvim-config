@@ -305,15 +305,28 @@ local server_configs = {
 }
 
 local capa = require("blink.cmp").get_lsp_capabilities()
-
+local navic = require("nvim-navic")
 -- Configurar cada servidor con la API moderna de Neovim 0.11
 for _, lsp in ipairs(servers) do
   local config = server_configs[lsp] or {}
-  
+
   config.on_attach = function(client, bufnr)
     if configs.on_attach then
       configs.on_attach(client, bufnr)
     end
+    -- activar navic si el server lo soporta
+    if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+    end
+
+    -- Habilitar inlay hints
+    if client.server_capabilities.inlayHintProvider then
+      pcall(function()
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end)
+    end
+    -- navic
+
 
     -- Fix específico para rust-analyzer
     if client.name == "rust_analyzer" then
@@ -359,7 +372,7 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function(args)
     local filetype = vim.bo[args.buf].filetype
-    
+
     -- Mapeo de filetypes a servidores LSP
     local ft_to_lsp = {
       rust = "rust_analyzer",
@@ -385,7 +398,7 @@ vim.api.nvim_create_autocmd("FileType", {
       yaml = "yamlls",
       markdown = "marksman",
     }
-    
+
     local lsp_name = ft_to_lsp[filetype]
     if lsp_name then
       -- Intentar habilitar el LSP
