@@ -210,21 +210,21 @@ if vim.g.neovide then
     vim.o.guifont = font:gsub("h%d+", "h"..size)
   end, { desc = "Neovide Zoom Out" })
 end
-
-local fyler = require("fyler")
-
+-- fyler lo agarrare mas adelant-- fyler lo agarrare mas adelantee
+-- local fyler = require("fyler")
+-- vim.keymap.set("n", "<A-e>", ":Fyler<CR>", { desc = "Open Fyler View" })
+-- fyler.setup({
+--   mappings = {
+--     ["<C-e>"] = "GotoParent",
+--   },
+--
+-- })
+-- vim.keymap.set("n", "<A-S-e>",function() fyler.open({ kind = "split_left_most" }) end,  { desc = "Open Fyler View" })
+--
 vim.keymap.set("n", "<A-r>", ":exe @:<CR>", { desc = "Open Fyler View" })
 -- Or via lua api
-vim.keymap.set("n", "<A-e>", ":Fyler<CR>", { desc = "Open Fyler View" })
-vim.keymap.set("n", "<A-S-e>",function() fyler.open({ kind = "split_left_most" }) end,  { desc = "Open Fyler View" })
 vim.opt.verbose = 0
 
-fyler.setup({
-  mappings = {
-    ["<C-e>"] = "GotoParent",
-  },
-
-})
 --
 -- vim.keymap.set("n", "gc", ":Lspsaga outline<CR>", { desc = "Open Fyler View" })
 -- para debug

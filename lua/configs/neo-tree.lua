@@ -1,13 +1,6 @@
-
 return {
-  {
+  { 
     lazy = false,
-    "A7Lavinraj/fyler.nvim",
-    dependencies = { "nvim-mini/mini.icons", "s1n7ax/nvim-window-picker" },
-    branch = "stable",  -- Use stable branch for production
-    opts = {}
-  },
-  { lazy = false,
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
     dependencies = {
@@ -17,29 +10,29 @@ return {
     },
     config = function()
       vim.g.neo_tree_remove_legacy_commands = 1
-
       require("neo-tree").setup({
         close_if_last_window = true,
         popup_border_style = "rounded",
         enable_git_status = true,
         enable_diagnostics = true,
-        window = {
-          show_root = false,
+        
+        -- OPTIMIZACIÓN: limitar profundidad de escaneo
+        hide_root_node = false,
+        retain_hidden_root_indent = false,
+        
+        source_selector = {
+          winbar = true,
+          statusline = false,
+          sources = {
+            { source = "filesystem", display_name = " 󰉋 Files " },
+            { source = "buffers", display_name = " 󰈚 Buffers " },
+            { source = "git_status", display_name = " 󰊢 Git " },
+          },
+          content_layout = "center",
+          tabs_layout = "equal",
+          show_separator_on_edge = false,
         },
-        indent = {
-          padding = 2,
-        },
-        follow_current_file = {
-          enabled = true,
-          leave_dirs_open = false,
-        },
-        icon = {
-          folder_closed = "󰉋",  -- Material Icons
-          folder_open = "",
-          folder_empty = "",
-          default = "", -- icono para archivos sin icono específico
-          highlight = "NeoTreeFileIcon",
-        },
+        
         default_component_configs = {
           indent = {
             indent_size = 2,
@@ -48,43 +41,63 @@ return {
           git_status = {
             symbols = {
               added     = "✚",
-              modified  = "",
+              modified  = "",
               deleted   = "✖",
               renamed   = "󰁕",
-              untracked = "",
-              ignored   = "",
+              untracked = "",
+              ignored   = "",
               unstaged  = "󰄱",
-              staged    = "",
-              conflict  = "",
+              staged    = "",
+              conflict  = "",
             },
           },
         },
-
-        source_selector = {
-             truncate_path = true,  --  acorta la ruta arribawinbar = true,
-        },
+        
         filesystem = {
           filtered_items = {
             hide_dotfiles = false,
-            hide_gitignored = false,
+            hide_gitignored = true,  -- IMPORTANTE: ocultar gitignored para mejor performance
             hide_hidden = false,
+            hide_by_name = {
+              "node_modules",  -- CRÍTICO: ignorar carpetas pesadas
+              ".git",
+              ".venv",
+              "__pycache__",
+              "venv",
+              "dist",
+              "build",
+              ".next",
+              ".nuxt",
+              "target",
+            },
+            hide_by_pattern = {
+              "*.pyc",
+              "*.pyo",
+              "*.cache",
+            },
+            never_show = {
+              ".DS_Store",
+              "thumbs.db",
+            },
           },
-
-          follow_current_file = true,
+          follow_current_file = {
+            enabled = false,  -- Deshabilitar para mejor performance
+            leave_dirs_open = false,
+          },
           group_empty_dirs = false,
-          use_libuv_file_watcher = true,
-
+          use_libuv_file_watcher = false,  -- Desactivar watcher en carpetas grandes
+          scan_mode = "shallow",  -- IMPORTANTE: escaneo superficial
+          async_directory_scan = "auto",  -- Escaneo async
+          
           window = {
             position = "left",
             width = 32,
-
             mappings = {
-              ["<space>"] = "toggle_node",
+              --["<space>"] = "toggle_node",
               ["<cr>"] = "open",
               ["l"] = "open",
               ["h"] = "close_node",
               ["H"] = "close_all_nodes",
-
               ["a"] = "add",
               ["A"] = "add_directory",
               ["d"] = "delete",
@@ -93,51 +106,73 @@ return {
               ["c"] = "copy_to_clipboard",
               ["x"] = "cut_to_clipboard",
               ["p"] = "paste_from_clipboard",
-
               ["P"] = "toggle_preview",
               ["o"] = "open_with_window_picker",
-
               ["s"] = "open_split",
               ["v"] = "open_vsplit",
               ["t"] = "open_tabnew",
-
               ["R"] = "refresh",
               ["q"] = "close_window",
-
               ["<bs>"] = "navigate_up",
               ["."] = "set_root",
-              ["g"] = "fuzzy_finder",       -- buscar dentro de la carpeta
+              ["g"] = "fuzzy_finder",
               ["G"] = "fuzzy_finder_directory",
-
-              ["f"] = "filter_on_submit",   -- filtrar por nombre
+              ["f"] = "filter_on_submit",
               ["F"] = "clear_filter",
-
               ["?"] = "show_help",
+              -- Navegación entre tabs
+              ["<Tab>"] = "next_source",
+              ["<S-Tab>"] = "prev_source",
             },
-          },
-
-          fuzzy_finder_mappings = {
-            ["<CR>"] = "open",
-            ["C-p"] = "next_item",
-            ["C-n"] = "prev_item",
-            ["<C-s>"] = "open_split",
-            [">C-v>"] = "open_vsplit",
           },
         },
         
-
         buffers = {
-          follow_current_file = true,
-          group_empty_dirs = true,
+          follow_current_file = {
+            enabled = false,  -- Deshabilitar para mejor performance
+          },
+          group_empty_dirs = false,
+          show_unloaded = false,  -- No mostrar buffers no cargados
+          bind_to_cwd = false,
+          
+          window = {
+            mappings = {
+              ["<cr>"] = "open",
+              ["l"] = "open",
+              --["<space>"] = "toggle_node",
+              ["bd"] = "buffer_delete",
+              ["<bs>"] = "navigate_up",
+              ["o"] = "open_with_window_picker",
+              ["s"] = "open_split",
+              ["v"] = "open_vsplit",
+              ["t"] = "open_tabnew",
+              ["R"] = "refresh",
+              ["q"] = "close_window",
+              -- Navegación entre tabs
+              ["<Tab>"] = "next_source",
+              ["<S-Tab>"] = "prev_source",
+            },
+          },
         },
-
+        
         git_status = {
           window = {
             position = "float",
             mappings = {
               ["<cr>"] = "open",
               ["l"] = "open",
-              ["h"] = "close_node",
+              ["A"] = "git_add_all",
+              ["gu"] = "git_unstage_file",
+              ["ga"] = "git_add_file",
+              ["gr"] = "git_revert_file",
+              ["gc"] = "git_commit",
+              ["gp"] = "git_push",
+              ["gg"] = "git_commit_and_push",
+              ["o"] = "open_with_window_picker",
+              ["q"] = "close_window",
+              -- Navegación entre tabs
+              ["<Tab>"] = "next_source",
+              ["<S-Tab>"] = "prev_source",
             },
           },
         },
@@ -146,8 +181,15 @@ return {
       -- Keymaps
       vim.keymap.set("n", "<A-n>", ":Neotree toggle<CR>", { silent = true, noremap = true, desc = "Toggle Neo-tree" })
       vim.keymap.set("n", "<leader>ee", ":Neotree filesystem reveal left<CR>", { silent = true, noremap = true, desc = "Explorer" })
-      vim.keymap.set("n", "<leader>be", ":Neotree buffers reveal float<CR>", { silent = true, noremap = true, desc = "Buffers" })
-      vim.keymap.set("n", "<leader>gs", ":Neotree git_status reveal float<CR>", { silent = true, noremap = true, desc = "Git Status" })
+      vim.keymap.set("n", "<C-A-e>", ":Neotree buffers reveal left<CR>", { silent = true, noremap = true, desc = "Buffers" })  -- Cambié a left
+
+      vim.keymap.set("n", "<leader>ge", ":Neotree git_status reveal float<CR>", { silent = true, noremap = true, desc = "Git Status" })
+      vim.keymap.set("n", "<leader>be", ":Neotree buffers reveal float<CR>", { silent = true, noremap = true, desc = "Git Status" })
+      
+      -- Navegación directa entre sources
+      vim.keymap.set("n", "<leader>1", ":Neotree filesystem show left<CR>", { silent = true, noremap = true, desc = "Files" })
+      vim.keymap.set("n", "<leader>2", ":Neotree buffers show left<CR>", { silent = true, noremap = true, desc = "Buffers" })
+      vim.keymap.set("n", "<leader>3", ":Neotree git_status show left<CR>", { silent = true, noremap = true, desc = "Git" })
     end,
   }
 }
