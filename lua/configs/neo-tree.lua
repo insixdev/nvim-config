@@ -142,9 +142,12 @@ return {
           },
         },
       })
-
-      -- Abrir neo-tree con <leader>e
-      vim.keymap.set("n", "<A-n>", ":Neotree toggle<CR>", { silent = true, noremap = true })
+      
+      -- Keymaps
+      vim.keymap.set("n", "<A-n>", ":Neotree toggle<CR>", { silent = true, noremap = true, desc = "Toggle Neo-tree" })
+      vim.keymap.set("n", "<leader>ee", ":Neotree filesystem reveal left<CR>", { silent = true, noremap = true, desc = "Explorer" })
+      vim.keymap.set("n", "<leader>be", ":Neotree buffers reveal float<CR>", { silent = true, noremap = true, desc = "Buffers" })
+      vim.keymap.set("n", "<leader>gs", ":Neotree git_status reveal float<CR>", { silent = true, noremap = true, desc = "Git Status" })
     end,
   }
 }

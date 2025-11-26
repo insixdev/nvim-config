@@ -1,7 +1,7 @@
 
 return {
   "b0o/incline.nvim",
-    dependencies = { "SmiteshP/nvim-navic", "nvim-lua/plenary.nvim",  },
+  dependencies = { "SmiteshP/nvim-navic", "nvim-lua/plenary.nvim",  },
   lazy = false,
   event = "VeryLazy",
 
@@ -30,24 +30,24 @@ return {
         },
         zindex = 50,
       },
-render = function(props)
-  local bufname = vim.api.nvim_buf_get_name(props.buf)
-  local filename = vim.fn.fnamemodify(bufname, ":t")
-  
-  if filename == "" then
-    filename = "[No Name]"
+      render = function(props)
+        local bufname = vim.api.nvim_buf_get_name(props.buf)
+        local filename = vim.fn.fnamemodify(bufname, ":t")
+
+        if filename == "" then
+          filename = "[No Name]"
+        end
+
+        -- Simplemente retornar el string completo
+        if require("nvim-navic").is_available(props.buf) then
+          local location = require("nvim-navic").get_location({}, props.buf)
+          if location and location ~= "" then
+            return filename .. " > " .. location
+          end
+        end
+
+        return filename
+      end,
+    })
   end
-  
-  -- Simplemente retornar el string completo
-  if require("nvim-navic").is_available(props.buf) then
-    local location = require("nvim-navic").get_location({}, props.buf)
-    if location and location ~= "" then
-      return filename .. " > " .. location
-    end
-  end
-  
-  return filename
-end,
-})
-end
 }
