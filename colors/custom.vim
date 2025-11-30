@@ -32,15 +32,15 @@ highlight Error         guifg=#C34143 gui=undercurl
 highlight Function      guifg=#f5e6d5
 highlight Identifier    guifg=#e0b79b
 
-highlight LineNrAbove   guifg=#888888 guibg=#262626
-highlight LineNrBelow   guifg=#888888 guibg=#262626
+highlight LineNrAbove   guifg=#888888 guibg=#1d1d1b 
+highlight LineNrBelow   guifg=#888888 guibg=#1d1d1b 
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3e3d33
 highlight Operator      guifg=#DEBF7C
 highlight Pmenu         guifg=#8f9988 guibg=#303030
 highlight PmenuSbar     guifg=#918988 guibg=#262626
-highlight PmenuSel      guifg=#BFBBBA guibg=#303030
+highlight PmenuSel      guifg=#ba9279 guibg=#303030
 highlight PmenuThumb    guifg=#918988 guibg=#262626 gui=reverse
 highlight Question      guifg=#9b8d7f
 highlight QuickFixLine  guibg=#303030
@@ -49,9 +49,9 @@ highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 gui=Italic
 highlight Statement     guifg=#c4a184 
-highlight StatusLineNC guifg=#888ccc guibg=#222222
+highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
 highlight PreProc       guifg=#c9a393
-highlight StatusLine    guifg=#ffcccB guibg=#34383C
+highlight StatusLine    guifg=#ffccff guibg=#33302b
 highlight String        guifg=#A2A970
 highlight Structure     guifg=#dbcdab
 highlight Substitute    guifg=#1A1A1A guibg=#C1C88D
@@ -68,7 +68,9 @@ highlight WarningMsg    guifg=#FFFEDB
 highlight Float         guifg=#6f7b68
 highlight Number        guifg=#cf95a9
 highlight Boolean       guifg=#6f7b68
-highlight WinSeparator  guibg=#111111 guifg=#888888
+highlight WinSeparator  guibg=#1d1d1b guifg=#888888
+highlight WinBar         guibg=#1c1b1b guifg=#888888
+highlight WinBarNC    guibg=#1c1b1b guifg=#888888
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────

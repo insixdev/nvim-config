@@ -15,7 +15,7 @@ let g:colors_name = 'custom'
 " ─────────────────────────────────────────────────────────────
 highlight Normal        guifg=#b09e82 guibg=#111212"#1f1f1f"#121212
 " guibg=#181818
-highlight NormalFloat   guifg=#b09e82 guibg=#1a1c1c
+highlight NormalFloat   guifg=#edddc0 guibg=#1a1c1c
 
 highlight @variable guifg=#f5e7ce
 
@@ -48,11 +48,12 @@ highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 gui=Italic
 highlight Statement     guifg=#fa8d3f
-highlight StatusLineNC  guifg=#888ccc guibg=#222222
+highlight StatusLineNC  guifg=#888ccc guibg=#c22222
 highlight PreProc       guifg=#c9a393
 highlight StatusLine    guifg=#ffcccB guibg=#34383C
 highlight String        guifg=#A2A970
 highlight Structure     guifg=#dbcdab
+highlight WinBar        guifg=#1A1A1A guibg=#C1C88D
 highlight Substitute    guifg=#1A1A1A guibg=#C1C88D
 highlight TabLine       guifg=#c4a584 guibg=#212121
 highlight TabLineFill   guifg=#A09998 guibg=#212121
@@ -67,7 +68,7 @@ highlight WarningMsg    guifg=#FFFEDB
 highlight Float         guifg=#6f7b68
 highlight Number        guifg=#cf95a9
 highlight Boolean       guifg=#6f7b68
-highlight WinSeparator  guibg=#111111 guifg=#888888
+highlight WinSeparator  guibg=#111212 guifg=#f88888
 
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
