@@ -36,11 +36,6 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-local actions = require("oil.actions")
-local oil= require("oil")
-
-
-
 
 local actions = require("oil.actions")
 local oil = require("oil")
@@ -192,3 +187,38 @@ vim.defer_fn(function()
   vim.cmd('TSToggle highlight')
 end, 200)
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("LualineThemeReload", { clear = true }),
+  callback = function()
+    local cs = vim.g.colors_name
+    reload_lualine(cs)
+  end,
+})
+
+
+local navic = require("nvim-navic")
+local devicons = require("nvim-web-devicons")
+vim.o.autochdir = false
+
+vim.o.winbar =
+  "%f %{%v:lua.WinbarIcon()%} > " .. "%{%v:lua.require'nvim-navic'.get_location()%}"
+
+-- porfin es asi p
+vim.api.nvim_create_autocmd("BufEnter", {
+  callback = function()
+    -- Restaurar cwd real automáticamente
+    vim.cmd("cd .")
+
+    -- Refrescar winbar + navic
+    pcall(function()
+      require("nvim-navic").refresh()
+    end)
+
+    vim.cmd("redrawstatus")
+  end,
+})
+
+
+vim.api.nvim_create_autocmd('BufWinEnter', {
+    command = 'set formatoptions-=cro',
+})

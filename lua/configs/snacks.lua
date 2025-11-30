@@ -75,7 +75,8 @@ return {
 
     { "<leader>gg", function() Snacks.lazygit() end, desc = "lazygit" },
       { "<leader>jf", function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>jd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>jD", function() Snacks.picker.code_actions() end, desc = "Diagnostics" },
+    
 
     -- Buffers
     { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },

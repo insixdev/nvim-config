@@ -6,16 +6,27 @@ return {
   {import = "configs.navic"},
   {import = "configs.difs"},
   { import = "configs.zen"},
+  { 's1n7ax/nvim-window-picker', name = 'window-picker', event = 'VeryLazy', version = '2.*' },
   { "hrsh7th/nvim-cmp", enabled = false },
   { "hrsh7th/cmp-buffer", enabled = false },
   { "hrsh7th/cmp-path", enabled = false },
   { "hrsh7th/cmp-nvim-lsp", enabled = false },
   { "saadparwaiz1/cmp_luasnip", enabled = false },
   { import = "configs.buffer-list" },
-  --{ import = "configs.ui" },
+  { import = "configs.ui" },
   {
     import = "configs.blinkcmp"
   },
+{
+    "rachartier/tiny-devicons-auto-colors.nvim",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons"
+    },
+    event = "VeryLazy",
+    config = function()
+        require('tiny-devicons-auto-colors').setup()
+    end
+},
 {
   "hedyhli/outline.nvim",
     lazy = false,
@@ -25,6 +36,7 @@ return {
       { desc = "Toggle Outline" })
 
     require("outline").setup {
+
       -- Your setup opts here (leave empty to use defaults)
     }
   end,
@@ -230,7 +242,6 @@ return {
     config = function()
       require("rose-pine").setup({ disable_background = true })
 
-      vim.cmd("colorscheme rose-pine")
       ColorMyPencils()
     end,
   },
@@ -244,7 +255,6 @@ return {
     priority = 1000,
     config = function()
       require("custom-newest").setup()
-      vim.cmd.colorscheme("custom-newest")
     end,
   },
 

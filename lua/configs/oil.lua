@@ -192,6 +192,7 @@ return {
           winblend = 0,
         },
       },
+ restore_win_options = true,
       -- Configuration for the floating progress window
       progress = {
         max_width = 0.9,

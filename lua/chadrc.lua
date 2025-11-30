@@ -40,7 +40,7 @@ M.ui = {
     enabled = false,
   },
   winbar = {
-    enabled = false,
+    enabled = true,
   },
   statuscol = {
     enabled = true,

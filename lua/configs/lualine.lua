@@ -1,24 +1,11 @@
-return {
-  "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  config = function()
-
-    -- Función para mostrar CWD o root del proyecto
-    local function project_and_cwd()
-      local cwd = vim.fn.getcwd()
-      local root = vim.fn.finddir(".git", cwd .. ";")
-      if root ~= "" then
-        root = vim.fn.fnamemodify(root, ":h")
-      else
-        root = cwd
-      end
-      return string.format(" %s ", cwd)
+function reload_lualine(ar)
+    if ar == "custom" then
+      vim.g.colors_name = "gruvbox"
     end
-
-    -- Configuración de lualine con bloques cuadrados y colores dinámicos
     require("lualine").setup({
       options = {
         padding= 1,
+        
         theme =  vim.g.colors_name,
         -- theme = {
         --   normal = {
@@ -83,6 +70,27 @@ return {
       },
       extensions = { "fugitive", "nvim-tree", "lazy", "quickfix" },
     })
+end
+return {
+  "nvim-lualine/lualine.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = function()
+
+    -- Función para mostrar CWD o root del proyecto
+    local function project_and_cwd()
+      local cwd = vim.fn.getcwd()
+      local root = vim.fn.finddir(".git", cwd .. ";")
+      if root ~= "" then
+        root = vim.fn.fnamemodify(root, ":h")
+      else
+        root = cwd
+      end
+      return string.format(" %s ", cwd)
+    end
+
+    
+    reload_lualine()
+    -- Configuración de lualine con bloques cuadrados y colores dinámicos
 
   end,
 }

@@ -91,14 +91,9 @@ return {
     priority = 1000,
     opts = {},
   },
-
   {
     "mellow-theme/mellow.nvim",
     lazy = false,
-    priority = 1000,
-    config = function()
-      transparent = true,
-      -- NO hay setup(), solo aplicá el colorscheme
-      vim.cmd.colorscheme("mellow")
-    end,  }
+    
+  }
 }

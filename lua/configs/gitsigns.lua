@@ -52,8 +52,8 @@ return {
         map("n", "<leader>gu", gs.undo_stage_hunk, "Undo Stage Hunk")
         map("n", "<leader>gp", gs.preview_hunk, "Preview Hunk")
         map("n", "<leader>gb", function() gs.blame_line { full = true } end, "Blame Line")
-        map("n", "<leader>gd", gs.diffthis, "Diff This")
-        map("n", "<leader>gD", function() gs.diffthis("~") end, "Diff This ~")
+        map("n", "<leader>gD", gs.diffthis, "Diff This")
+        map("n", "<leader>gd", function() gs.diffthis("~") end, "Diff This ~")
       end,
     }
   end,

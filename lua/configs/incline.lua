@@ -6,6 +6,7 @@ return {
   event = "VeryLazy",
 
   config = function()
+
     require("incline").setup({
       debounce_threshold = { falling = 50, rising = 10 },
       hide = {
@@ -24,29 +25,54 @@ return {
       window = {
         margin = { horizontal = 0, vertical = 0 },
         padding = 1,
+
         placement = {
           horizontal = "right",
           vertical = "top",
         },
         zindex = 50,
       },
-      render = function(props)
-        local bufname = vim.api.nvim_buf_get_name(props.buf)
-        local filename = vim.fn.fnamemodify(bufname, ":t")
 
+      render = function(props)
+        local buf = props.buf
+
+        -----------------------------------------------------------
+        -- 1) NOMBRE DE ARCHIVO
+        -----------------------------------------------------------
+        local bufname = vim.api.nvim_buf_get_name(buf)
+        local filename = vim.fn.fnamemodify(bufname, ":t")
         if filename == "" then
           filename = "[No Name]"
         end
 
-        -- Simplemente retornar el string completo
-        if require("nvim-navic").is_available(props.buf) then
-          local location = require("nvim-navic").get_location({}, props.buf)
-          if location and location ~= "" then
-            return filename .. " > " .. location
-          end
+        -----------------------------------------------------------
+        -- 2) DIAGNÓSTICOS
+        -----------------------------------------------------------
+        local errors = #vim.diagnostic.get(buf, { severity = vim.diagnostic.severity.ERROR })
+        local warnings = #vim.diagnostic.get(buf, { severity = vim.diagnostic.severity.WARN })
+        local hints = #vim.diagnostic.get(buf, { severity = vim.diagnostic.severity.HINT })
+        local info = #vim.diagnostic.get(buf, { severity = vim.diagnostic.severity.INFO })
+
+        local diag_parts = {}
+        if errors > 0 then table.insert(diag_parts, " " .. errors) end
+        if warnings > 0 then table.insert(diag_parts, " " .. warnings) end
+        if info > 0 then table.insert(diag_parts, " " .. info) end
+        if hints > 0 then table.insert(diag_parts, " " .. hints) end
+
+        local diag_text = ""
+        if #diag_parts > 0 then
+          diag_text = "  " .. table.concat(diag_parts, " ")
         end
 
-        return filename
+        -----------------------------------------------------------
+        -- 3) NAVIC BREADCRUMBS
+        -----------------------------------------------------------
+     
+
+        -----------------------------------------------------------
+        -- FINAL: filename + diagnostics + location
+        -----------------------------------------------------------
+        return filename .. diag_text
       end,
     })
   end

@@ -21,12 +21,10 @@ return {
         retain_hidden_root_indent = false,
         
         source_selector = {
-          winbar = true,
+          winbar = false,
           statusline = false,
           sources = {
             { source = "filesystem", display_name = " 󰉋 Files " },
-            { source = "buffers", display_name = " 󰈚 Buffers " },
-            { source = "git_status", display_name = " 󰊢 Git " },
           },
           content_layout = "center",
           tabs_layout = "equal",
@@ -132,8 +130,9 @@ return {
             enabled = false,  -- Deshabilitar para mejor performance
           },
           group_empty_dirs = false,
-          show_unloaded = false,  -- No mostrar buffers no cargados
-          bind_to_cwd = false,
+          show_unloaded = true,  -- No mostrar buffers no cargados
+          bind_to_cwd = true,
+          auto_refresh = false,
           
           window = {
             mappings = {
@@ -154,8 +153,9 @@ return {
             },
           },
         },
-        
+
         git_status = {
+          async_directory_scan = "auto",
           window = {
             position = "float",
             mappings = {
@@ -175,9 +175,10 @@ return {
               ["<S-Tab>"] = "prev_source",
             },
           },
+          auto_refresh = false,
         },
       })
-      
+
       -- Keymaps
       vim.keymap.set("n", "<A-n>", ":Neotree toggle<CR>", { silent = true, noremap = true, desc = "Toggle Neo-tree" })
       vim.keymap.set("n", "<leader>ee", ":Neotree filesystem reveal left<CR>", { silent = true, noremap = true, desc = "Explorer" })
@@ -185,7 +186,7 @@ return {
 
       vim.keymap.set("n", "<leader>ge", ":Neotree git_status reveal float<CR>", { silent = true, noremap = true, desc = "Git Status" })
       vim.keymap.set("n", "<leader>be", ":Neotree buffers reveal float<CR>", { silent = true, noremap = true, desc = "Git Status" })
-      
+
       -- Navegación directa entre sources
       vim.keymap.set("n", "<leader>1", ":Neotree filesystem show left<CR>", { silent = true, noremap = true, desc = "Files" })
       vim.keymap.set("n", "<leader>2", ":Neotree buffers show left<CR>", { silent = true, noremap = true, desc = "Buffers" })

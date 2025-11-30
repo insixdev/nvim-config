@@ -221,7 +221,7 @@ end
 -- })
 -- vim.keymap.set("n", "<A-S-e>",function() fyler.open({ kind = "split_left_most" }) end,  { desc = "Open Fyler View" })
 --
-vim.keymap.set("n", "<A-r>", ":exe @:<CR>", { desc = "Open Fyler View" })
+vim.keymap.set("n", "<A-r>", ":exe @:<CR>", { desc = "Run last command" })
 -- Or via lua api
 vim.opt.verbose = 0
 
@@ -234,3 +234,6 @@ vim.api.nvim_create_user_command('BufExec', function(opts)
   vim.bo.buftype = 'nofile'
   vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(output, '\n'))
 end, { nargs = '+' })
+
+vim.keymap.set("n", "<A-g>", ":CodeDiff<CR>", { desc = "Open CodeDiff vscode like View" })
+
