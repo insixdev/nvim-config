@@ -139,6 +139,4 @@ link("@punctuation.bracket", "Delimiter")
 link("@punctuation.delimiter", "Delimiter")
 -- ─────────────────────────────────────────────────────────────
 -- Al final de colors/custom-newest.lua
-vim.defer_fn(function()
-  vim.cmd('TSToggle highlight')
-end, 100)
+

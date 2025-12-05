@@ -185,7 +185,7 @@ require('mini.icons').setup()
 
 vim.defer_fn(function()
   vim.cmd('TSToggle highlight')
-end, 200)
+end, 300)
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   group = vim.api.nvim_create_augroup("LualineThemeReload", { clear = true }),
@@ -222,3 +222,5 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd('BufWinEnter', {
     command = 'set formatoptions-=cro',
 })
+
+vim.opt.guicursor = ""
