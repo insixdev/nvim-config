@@ -181,7 +181,6 @@ vim.opt.signcolumn = "yes:1"
 vim.opt.numberwidth = 2
 
 
-require('mini.icons').setup()
 
 vim.defer_fn(function()
   vim.cmd('TSToggle highlight')
@@ -199,9 +198,9 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 local navic = require("nvim-navic")
 local devicons = require("nvim-web-devicons")
 vim.o.autochdir = false
-
-vim.o.winbar =
-  "%f %{%v:lua.WinbarIcon()%} > " .. "%{%v:lua.require'nvim-navic'.get_location()%}"
+--
+-- vim.o.winbar =
+--   "%f %{%v:lua.WinbarIcon()%} > " .. "%{%v:lua.require'nvim-navic'.get_location()%}"
 
 -- porfin es asi p
 vim.api.nvim_create_autocmd("BufEnter", {

@@ -8,6 +8,7 @@ return {
   },
   config = function()
     require("nvim-treesitter.configs").setup({
+
       -- Instalación automática de parsers
       ensure_installed = {
         -- Lenguajes principales

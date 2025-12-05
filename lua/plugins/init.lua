@@ -2,6 +2,7 @@ return {
   {import = "configs.snacks"},
   {import = "configs.neo-tree"},
   {import = "configs.snacks"},
+  {import = "configs.barbe"},
 
   {import = "configs.navic"},
   {import = "configs.difs"},
@@ -19,9 +20,7 @@ return {
   },
 {
     "rachartier/tiny-devicons-auto-colors.nvim",
-    dependencies = {
-        "nvim-tree/nvim-web-devicons"
-    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
         require('tiny-devicons-auto-colors').setup()
