@@ -20,6 +20,14 @@ highlight NormalFloat   guifg=#edddc0 guibg=#202020
 
 highlight @variable guifg=#f5e7ce
 
+highlight RainbowDelimiterRed    guifg=#cf95a9  " Rosado (como tu Number)
+highlight RainbowDelimiterYellow guifg=#DEBF7C  " Amarillo dorado (como tu Operator)
+highlight RainbowDelimiterBlue   guifg=#8aa19a  " Verde azulado (como @variable.builtin)
+highlight RainbowDelimiterOrange guifg=#c78f69  " Naranja (como tu SpecialChar)
+highlight RainbowDelimiterGreen  guifg=#A2A970  " Verde (como tu String)
+highlight RainbowDelimiterViolet guifg=#8f8ccc  " Violeta (como tu StatusLineNC)
+highlight RainbowDelimiterCyan   guifg=#a7ccb4  " Cyan (como tu @tag.html)
+
 highlight Comment       guifg=#6f7b68 gui=Italic
 highlight Conceal       guibg=#262626
 highlight Constant      guifg=#edddcc
