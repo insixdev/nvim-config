@@ -14,11 +14,11 @@ let g:colors_name = 'custom'
 " Core groups
 " ─────────────────────────────────────────────────────────────
 highlight CursorLine cterm=NONE ctermbg=236 guibg=#1d1d1b
-highlight Normal        guifg=#edddc0 guibg=#1c1b1b"#1f1f1f"#121212
+highlight Normal        guifg=#edddc0 guibg=#181818"#1f1f1f"#121212
 " guibg=#181818
-highlight NormalFloat   guifg=#edddc0 guibg=#202020
+highlight NormalFloat   guifg=#95a99f guibg=#202020
 
-highlight @variable guifg=#f5e7ce
+highlight @variable guifg=#dbc5b4
 
 highlight RainbowDelimiterRed    guifg=#cf95a9  " Rosado (como tu Number)
 highlight RainbowDelimiterYellow guifg=#DEBF7C  " Amarillo dorado (como tu Operator)
