@@ -208,8 +208,9 @@ local server_configs = {
       "--offset-encoding=utf-16",
     },
     init_options = {
-      usePlaceholders = true,
+      usePlaceholders = false,
       clangdFileStatus = true,
+      completeMacros = true,
       completeUnimported = true,
     },
   },

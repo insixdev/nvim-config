@@ -6,6 +6,7 @@ return {
     local fzf = require("fzf-lua")
     local actions = require("fzf-lua.actions")
     fzf.setup({
+
           keymap = {
         builtin = {
           ["<F1>"] = "toggle-help",
@@ -145,8 +146,12 @@ return {
         git_icons = true,
         file_icons = true,
         color_icons = true,
-        cmd = "fd --type f --hidden --follow --exclude .git",
-        -- Mostrar preview de archivos
+        cmd = "fd --type f --hidden --follow "
+         .. "--exclude .git "
+         .. "--exclude build "
+         .. "--exclude target "
+         .. "--exclude node_modules ",
+                        -- Mostrar preview de archivos
         previewer = "builtin",
         actions = {
           ["default"] = actions.file_edit,
@@ -212,7 +217,8 @@ return {
         git_icons = true,
         file_icons = true,
        color_icons = true,
-        cmd = "rg --column --line-number --no-heading --color=always --smart-case",
+      cmd = "rg --column --line-number --no-heading --color=always --smart-case "
+    .. "--glob=!build/* --glob=!target/* --glob=!node_modules/*",
         -- Preview del resultado con contexto
         previewer = "builtin",
         actions = {

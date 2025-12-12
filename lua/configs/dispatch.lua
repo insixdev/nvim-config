@@ -8,7 +8,7 @@ return {
       vim.g.dispatch_no_maps = 1
 
       -- Mapeos personalizados
-      local opts = { noremap = true, silent = true }
+      local opts = { noremap = true, silent = false}
 
       -- :Dispatch <cmd>
       vim.api.nvim_set_keymap("n", "D", ":Dispatch ", opts)

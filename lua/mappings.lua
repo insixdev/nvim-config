@@ -154,10 +154,9 @@ vim.keymap.set("n", "<C-c>", function()
   })
 end, { desc = "Telescope Colorscheme Picker" })
 
-vim.keymap.set({"n", "v", "i", "o"}, "<C-a>", "$", {noremap = true, silent = true})
+vim.keymap.set({"n", "v", "o"}, "<C-a>", "$", {noremap = true, silent = true})
 
 vim.keymap.set("n", "<A-c>", ":copen<CR>", { noremap = true, silent = true })
-vim.keymap.set("n", "c", ":tabprevious<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
 vim.defer_fn(function()
   vim.cmd("colorscheme custom")
@@ -185,9 +184,6 @@ vim.api.nvim_set_keymap('n', '<C-A-k>', ':resize -5<CR>', { noremap = true, sile
 -- })
 --
 --
-
-vim.keymap.set("n", "<M-f>", ":lua browse_dirs()<CR>", { noremap = true, silent = true })
-
 if vim.g.neovide then
   -- Asegúrate de tener una fuente por defecto
   if vim.o.guifont == "" then
@@ -210,10 +206,22 @@ if vim.g.neovide then
     vim.o.guifont = font:gsub("h%d+", "h"..size)
   end, { desc = "Neovide Zoom Out" })
 end
--- fyler lo agarrare mas adelant-- fyler lo agarrare mas adelantee
+
+--fyler lo agarrare mas adelant-- fyler lo agarrare mas adelantee
 -- local fyler = require("fyler")
--- vim.keymap.set("n", "<A-e>", ":Fyler<CR>", { desc = "Open Fyler View" })
+-- vim.keymap.set(
+--   "n",
+--   "<A-e>",
+--   function()  fyler.toggle({ kind = "split_left" }) end,
+--   { desc = "Open Fyler View" }
+-- )
+--
 -- fyler.setup({
+--   view = {
+--     width = 10,
+--     adaptive_size = false,  -- mantiene un ancho fijo estilo tree
+--     relativenumber = true,
+--   },
 --   mappings = {
 --     ["<C-e>"] = "GotoParent",
 --   },
@@ -237,3 +245,58 @@ end, { nargs = '+' })
 
 vim.keymap.set("n", "<A-g>", ":CodeDiff<CR>", { desc = "Open CodeDiff vscode like View" })
 
+local diagnostics_enabled = true
+
+-- función toggle
+function ToggleDiagnostics()
+    if diagnostics_enabled then
+        vim.diagnostic.disable()
+        diagnostics_enabled = false
+        print("Diagnostics OFF")
+    else
+        vim.diagnostic.enable()
+        diagnostics_enabled = true
+        print("Diagnostics ON")
+    end
+end
+
+function ToggleBlink()
+    blink_enabled = not blink_enabled
+    require("blink.cmp").setup({ auto_complete = blink_enabled })
+    print("Blink autocomplete:", blink_enabled and "ON" or "OFF")
+end
+-- Desactiva todos los diagnósticos automáticamente
+vim.keymap.set("n","<A-d>", function() ToggleBlink() end, {desc = "thisn"}) 
+vim.keymap.set("n","<A-s>", function() ToggleDiagnostics() end, {desc = "thisn"}) 
+
+
+vim.keymap.set("n", "<M-f>", function()
+  require("telescope").extensions.file_browser.file_browser({
+    layout_strategy = "bottom_pane",
+    path = vim.fn.expand("%:p:h"),   -- <== carpeta del archivo actual
+    cwd  = vim.fn.expand("%:p:h"),   -- opcional, pero recomendado
+    layout_config = {
+      height = 0.30,
+      preview_cutoff = 1,
+    },
+    sorting_strategy = "ascending",
+  })
+end)
+
+
+
+vim.keymap.set("n", "<M-b>", function()
+  require("telescope.builtin").buffers({
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 0.30,
+      preview_cutoff = 1, -- sin preview
+    },
+    sorting_strategy = "ascending",
+    prompt_position = "top",
+  })
+end)
+
+vim.keymap.set("i", "<A-l>", "<C-Left>")
+vim.keymap.set("i", "<A-j>", "<C-Right>")
+vim.keymap.set("i", "<A-e>", "<C-o>dw")

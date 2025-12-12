@@ -3,6 +3,7 @@ local options = {
     -- LSP servers
     "rust-analyzer",
     "clangd", 
+    "zls",
     "pyright",
     "pylsp",
     "typescript-language-server",

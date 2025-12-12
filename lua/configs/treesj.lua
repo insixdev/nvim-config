@@ -1,6 +1,14 @@
 
 return {
 
+  {
+    lazy = false,
+    "nvim-treesitter/nvim-treesitter-context",
+    opts = {
+      separator = "-",
+    }
+
+  },
   "Wansmer/treesj",
   dependencies = { "nvim-treesitter/nvim-treesitter" },
   config = function()

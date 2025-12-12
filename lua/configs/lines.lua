@@ -8,6 +8,7 @@ return {
     vim.diagnostic.config({
       virtual_text = false, -- desactiva el inline clásico
       virtual_lines = { only_current_line = true},
+
     })
   end,
 }

@@ -11,6 +11,7 @@ return {
     default_file_explorer = true, -- Id is automatically added at the beginning, and name at the end
     -- See :help oil-columns
     columns = {
+     "git_status",
       "icon",
       "permissions",
       "size",

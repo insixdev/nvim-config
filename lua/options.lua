@@ -93,42 +93,42 @@ require("gruvbox").setup({
   transparent_mode = true,
 })
 -- TREEE CONFIGURATIO=N 
--- require("nvim-tree").setup({
---   disable_netrw = true,           -- desactiva netrw
---   hijack_netrw = true,            -- nvim-tree reemplaza netrw
---   view = {
---     width = 25,                   -- ancho del panel
---     side = "left",
---     hide_root_folder = true,      -- oculta el root folder
---     mappings = {
---       list = {
---         { key = "q", action = "close" }, -- cerrar con q
---       },
---     },
---   },
---   renderer = {
---     icons = {
---       show = {
---         git = false,
---         folder = true,
---         file = true,
---       },
---     },
---   },
---   view = {
---     number = false,
---     relativenumber = false,
---     signcolumn = "no",
---   },
---   update_focused_file = {
---     enable = true,
---     update_cwd = true,
---   },
---   filters = {
---     dotfiles = true,               -- oculta archivos .dot
---     custom = { "node_modules" },   -- oculta node_modules
---   },
--- })
+require("nvim-tree").setup({
+  disable_netrw = true,           -- desactiva netrw
+  hijack_netrw = true,            -- nvim-tree reemplaza netrw
+  view = {
+    width = 25,                   -- ancho del panel
+    side = "left",
+    hide_root_folder = true,      -- oculta el root folder
+    mappings = {
+      list = {
+        { key = "q", action = "close" }, -- cerrar con q
+      },
+    },
+  },
+  renderer = {
+    icons = {
+      show = {
+        git = true,
+        folder = true,
+        file = true,
+      },
+    },
+  },
+  view = {
+    number = false,
+    relativenumber = false,
+    signcolumn = "no",
+  },
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
+  filters = {
+    dotfiles = true,               -- oculta archivos .dot
+    custom = { "node_modules" },   -- oculta node_modules
+  },
+})
 
 -- loual ine arriba aa 
 --
@@ -223,3 +223,22 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 })
 
 vim.opt.guicursor = ""
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = {"kanso","kanso-zen", "kanso-mist", "kanso-pearl"}, 
+  callback = function()
+    vim.cmd [[
+      highlight RainbowDelimiterRed    guifg=#cf95a9
+      highlight RainbowDelimiterYellow guifg=#DEBF7C
+      highlight RainbowDelimiterBlue   guifg=#8aa19a
+      highlight RainbowDelimiterOrange guifg=#c78f69
+      highlight RainbowDelimiterGreen  guifg=#A2A970
+      highlight RainbowDelimiterViolet guifg=#8f8ccc
+      highlight RainbowDelimiterCyan   guifg=#a7ccb4
+
+      highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
+      highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
+    ]]
+  end,
+})
+

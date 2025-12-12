@@ -79,7 +79,7 @@ return {
             },
           },
           follow_current_file = {
-            enabled = false,  -- Deshabilitar para mejor performance
+            enabled = true,  -- Deshabilitar para mejor performance
             leave_dirs_open = false,
           },
           group_empty_dirs = false,

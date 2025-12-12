@@ -27,10 +27,13 @@ highlight RainbowDelimiterOrange guifg=#c78f69  " Naranja (como tu SpecialChar)
 highlight RainbowDelimiterGreen  guifg=#A2A970  " Verde (como tu String)
 highlight RainbowDelimiterViolet guifg=#8f8ccc  " Violeta (como tu StatusLineNC)
 highlight RainbowDelimiterCyan   guifg=#a7ccb4  " Cyan (como tu @tag.html)
+highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
+highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
 
-highlight Comment       guifg=#6f7b68 gui=Italic
+" #6f7b68 
+highlight Comment       guifg=#cc8c3c gui=Italic
 highlight Conceal       guibg=#262626
-highlight Constant      guifg=#edddcc
+highlight Constant      guifg=#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
 highlight DiffChange    guifg=#FFFEDB guibg=#262636
 highlight DiffDelete    guifg=#C34143 guibg=#42242B
@@ -76,9 +79,9 @@ highlight WarningMsg    guifg=#FFFEDB
 highlight Float         guifg=#6f7b68
 highlight Number        guifg=#cf95a9
 highlight Boolean       guifg=#6f7b68
-highlight WinSeparator  guibg=#1d1d1b guifg=#888888
-highlight WinBar         guibg=#1c1b1b guifg=#888888
-highlight WinBarNC    guibg=#1c1b1b guifg=#888888
+highlight WinSeparator  guibg=#101010 guifg=#888888
+highlight WinBar         guibg=#101010 guifg=#888888
+highlight WinBarNC    guibg=#101010   guifg=#888888
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────

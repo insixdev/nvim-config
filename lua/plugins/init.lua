@@ -1,9 +1,14 @@
 return {
+
   {import = "configs.snacks"},
-  {import = "configs.neo-tree"},
+  {import = "configs.browser"},
+  -- {import = "configs.neo-tree"},
   {import = "configs.snacks"},
   {import = "configs.barbe"},
-
+  {
+    lazy = false,
+    "dhruvasagar/vim-zoom"
+  },
   {import = "configs.navic"},
   {import = "configs.difs"},
   { import = "configs.zen"},
@@ -18,20 +23,20 @@ return {
   {
     import = "configs.blinkcmp"
   },
-{
+  {
     "rachartier/tiny-devicons-auto-colors.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
     config = function()
-        require('tiny-devicons-auto-colors').setup()
+      require('tiny-devicons-auto-colors').setup()
     end
-},
-{
-  "hedyhli/outline.nvim",
+  },
+  {
+    "hedyhli/outline.nvim",
     lazy = false,
-  config = function()
-    -- Example mapping to toggle outline
-    vim.keymap.set("n", "gc", "<cmd>Outline<CR>",
+    config = function()
+      -- Example mapping to toggle outline
+      vim.keymap.set("n", "gc", "<cmd>Outline<CR>",
       { desc = "Toggle Outline" })
 
     require("outline").setup {
@@ -246,7 +251,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    enabled = false,
+    enabled = true,
   },
 {
     dir = vim.fn.stdpath("config") .. "/lua",
@@ -255,6 +260,7 @@ return {
     config = function()
       require("custom-newest").setup()
     end,
+
   },
 
 }
