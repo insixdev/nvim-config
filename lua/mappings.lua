@@ -18,6 +18,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })
+vim.keymap.set("n", "¡", "<CMD>Dired<CR>", { desc = "Abrir Oil en el dir actual" })
 -- no se para que pero interferia en neotree
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --     callback = function()

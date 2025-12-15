@@ -1,0 +1,9 @@
+Blue (keywords)        #6ebad7
+Blue (functions)      #6a90d0
+Green (strings)       #a3c679
+Yellow (types)        #d5b05f
+Orange (numbers)      #cd775c
+Red (classes/vars)    #c85e60
+Pink (booleans)       #d6808f
+Purple (storage)     #a178c4
+Gray (comments)      #45454A

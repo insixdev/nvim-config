@@ -5,7 +5,10 @@ return {
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
-    dashboard = { enabled = true },
+    dashboard = {
+      enabled = false,
+      auto_resize = false,
+    },
     input = { enabled = true },
     notifier = { enabled = true, timeout = 5000 },
     profile = { enabled = false },
@@ -30,13 +33,7 @@ return {
             },
           },
           explorer = {
-            win = {
-              list = {
-                keys = {
-                  ["<space>"] = "toggle",  -- Seleccionar/deseleccionar archivos
-                },
-              },
-            },
+            enable = false,
           },
         },
       },

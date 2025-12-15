@@ -242,3 +242,122 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
+local actions = require("telescope.actions")
+local action_state = require("telescope.actions.state")
+
+local function open_in_oil(prompt_bufnr)
+  local entry = action_state.get_selected_entry()
+  actions.close(prompt_bufnr)
+
+  local path = entry.path or entry.value
+  if path then
+    require("oil").open(path)
+  end
+end
+
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-o>"] = open_in_oil,
+      },
+      n = {
+        ["o"] = open_in_oil,
+      },
+    },
+  },
+})
+
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "dired",
+  callback = function()
+    vim.keymap.set("n", "'", function()
+      vim.cmd.tcd(vim.fn.expand("%:p:h"))
+    end, { buffer = true })
+  end,
+})
+
+vim.keymap.set("n", "0", function()
+  local dir = vim.fn.expand("%:p:h")
+  vim.cmd.lcd(dir)
+  require("dired").open(dir)
+end, { buffer = true })
+
+require('fff').setup({
+    base_path = vim.fn.getcwd(),
+    prompt = '🪿 ',
+    title = 'FFFiles',
+    max_results = 100,
+    max_threads = 4,
+    lazy_sync = true, -- set to false if you want file indexing to start on open
+    layout = {
+      height = 0.8,
+      width = 0.8,
+      prompt_position = 'bottom', -- or 'top'
+      preview_position = 'right', -- or 'left', 'right', 'top', 'bottom'
+      preview_size = 0.5,
+    },
+    preview = {
+      enabled = true,
+      max_size = 10 * 1024 * 1024, -- Do not try to read files larger than 10MB
+      chunk_size = 8192, -- Bytes per chunk for dynamic loading (8kb - fits ~100-200 lines)
+      binary_file_threshold = 1024, -- amount of bytes to scan for binary content (set 0 to disable)
+      imagemagick_info_format_str = '%m: %wx%h, %[colorspace], %q-bit',
+      line_numbers = false,
+      wrap_lines = false,
+      show_file_info = true,
+      filetypes = {
+        svg = { wrap_lines = true },
+        markdown = { wrap_lines = true },
+        text = { wrap_lines = true },
+      },
+    },
+    keymaps = {
+      close = '<Esc>',
+      select = '<CR>',
+      select_split = '<C-s>',
+      select_vsplit = '<C-v>',
+      select_tab = '<C-t>',
+      -- you can assign multiple keys to any action
+      move_up = { '<Tab>', '<C-p>' },
+      move_down = { '<S-Tab>', '<C-n>' },
+      preview_scroll_up = '<C-u>',
+      preview_scroll_down = '<C-d>',
+      toggle_debug = '<F2>',
+      -- goes to the previous query in history
+      cycle_previous_query = '<C-Up>',
+    },
+    hl = {
+      border = 'FloatBorder',
+      normal = 'Normal',
+      cursor = 'CursorLine',
+      matched = 'IncSearch',
+      title = 'Title',
+      prompt = 'Question',
+      active_file = 'Visual',
+      frecency = 'Number',
+      debug = 'Comment',
+    },
+    -- Store file open frecency 
+    frecency = {
+      enabled = true,
+      db_path = vim.fn.stdpath('cache') .. '/fff_nvim',
+    },
+    -- Store successfully opened queries with respective matches
+    history = {
+      enabled = true,
+      db_path = vim.fn.stdpath('data') .. '/fff_queries',
+      min_combo_count = 3, -- file will get a boost if it was selected 3 in a row times per specific query
+      combo_boost_score_multiplier = 100, -- Score multiplier for combo matches 
+    },
+    debug = {
+      enabled = false, -- Set to true to show scores in the UI
+      show_scores = false,
+    },
+    logging = {
+      enabled = true,
+      log_file = vim.fn.stdpath('log') .. '/fff.log',
+      log_level = 'info',
+    }
+})

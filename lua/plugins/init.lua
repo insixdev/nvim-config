@@ -1,6 +1,7 @@
 return {
-
+  {import = "configs.dired"},
   {import = "configs.snacks"},
+  {import = "configs.fff"},
   {import = "configs.browser"},
   -- {import = "configs.neo-tree"},
   {import = "configs.snacks"},
@@ -142,7 +143,7 @@ return {
 
   { import = "configs.base16" },
   { import = "configs.treesj" },
-  -- { import = "configs.obsidian" },
+  --{ import = "configs.obsidian" },
 
   { import = "configs.surround" },
   { import = "configs.markdown-preview" },

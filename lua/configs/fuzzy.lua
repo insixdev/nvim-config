@@ -341,7 +341,25 @@ return {
     vim.keymap.set("n", "<leader>gc", fzf.git_commits, { desc = "Git Commits" })
     vim.keymap.set("n", "<leader>gC", fzf.git_bcommits, { desc = "Buffer Commits" })
     vim.keymap.set("n", "<leader>gb", fzf.git_branches, { desc = "Git Branches" })
-    
+
+    vim.keymap.set("n", "<leader>fF", function()
+      require("fzf-lua").files({
+        prompt = "Dirs❯ ",
+        cmd =
+        "printf '.\n' && fd --type d --hidden --follow "
+        .. "--exclude .git "
+        .. "--exclude build "
+        .. "--exclude target "
+        .. "--exclude node_modules ",
+        winopts = {
+          relative = "editor",
+          row = 1.0,
+          height = 0.25,
+          width = 1.0,
+          border = "none",
+          preview = { hidden = "hidden" },      }
+      })
+    end)
     -- LSP
     vim.keymap.set("n", "<leader>jr", fzf.lsp_references, { desc = "LSP References" })
     vim.keymap.set("n", "<leader>jd", fzf.lsp_definitions, { desc = "LSP Definitions" })

@@ -45,6 +45,9 @@ M.ui = {
   statuscol = {
     enabled = true,
   },
+  colorify = {
+    enabled = false,
+  },
   lualine = {
     enabled = false,
     icons_enabled = true,       -- desactiva iconos

@@ -12,9 +12,9 @@ return {
       },
     },
 
-    completion = { nvim_cmp = true },
+    completion = { nvim_cmp = false},
 
-    legacy_commands = false, -- 🔥 desactiva warnings por comandos viejos
+    legacy_commands = false, 
 
     callbacks = {
       enter_note = function(_, note)
