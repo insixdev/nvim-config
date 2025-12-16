@@ -39,22 +39,21 @@ vim.api.nvim_create_autocmd("FileType", {
 
 local actions = require("oil.actions")
 local oil = require("oil")
--- joder tio cost
+
 vim.api.nvim_create_autocmd("DirChanged", {
   callback = function()
-    -- Simula una "promesa": esperar a que Neovim termine la operación
-    vim.schedule(function()
-      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.bo[buf].filetype == "oil" then
-          oil.open(vim.fn.getcwd())
-          vim.api.nvim_buf_call(buf, function()
-            -- Primero refresca la lista de archivos
-            actions.refresh.callback({ force = true })
-            -- Luego abre el cwd actual
-          end)
-        end
+    local ok, oil = pcall(require, "oil")
+    if not ok then
+      return
+    end
+
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+      if vim.api.nvim_buf_is_loaded(buf)
+        and vim.bo[buf].filetype == "oil"
+      then
+        oil.refresh(buf)
       end
-    end)
+    end
   end,
 })
 -- Mapear _ solo en buffers de Oil
@@ -65,6 +64,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "_", "<cmd>Yazi toggle<cr>", { buffer = true, desc = "Toggle Yazi desde Oil" })
   end,
 })
+
 
 require("gruvbox").setup({
   terminal_colors = true, -- add neovim terminal colors
@@ -361,3 +361,4 @@ require('fff').setup({
       log_level = 'info',
     }
 })
+

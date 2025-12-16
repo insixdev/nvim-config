@@ -157,7 +157,6 @@ end, { desc = "Telescope Colorscheme Picker" })
 
 vim.keymap.set({"n", "v", "o"}, "<C-a>", "$", {noremap = true, silent = true})
 
-vim.keymap.set("n", "<A-c>", ":copen<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
 vim.defer_fn(function()
   vim.cmd("colorscheme custom")
@@ -301,3 +300,72 @@ end)
 vim.keymap.set("i", "<A-l>", "<C-Left>")
 vim.keymap.set("i", "<A-j>", "<C-Right>")
 vim.keymap.set("i", "<A-e>", "<C-o>dw")
+
+local function toggle_qf()
+  local curwin = vim.api.nvim_get_current_win()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    if vim.bo[vim.api.nvim_win_get_buf(win)].buftype == "quickfix" then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  vim.cmd("copen")
+  vim.api.nvim_set_current_win(curwin)
+end
+
+
+vim.keymap.set("n", "<A-c>", function() toggle_qf() end, { noremap = true, silent = true })
+
+vim.keymap.set("v", "&", function()
+  local oil = require("oil")
+  local bufnr = vim.api.nvim_get_current_buf()
+  local dir = oil.get_current_dir()
+  if not dir then return end
+
+  -- rango visual real
+  local start_line = vim.fn.line("'<")
+  local end_line = vim.fn.line("'>")
+
+  local paths = {}
+
+  for lnum = start_line, end_line do
+    local entry = oil.get_entry_on_line(bufnr, lnum)
+    if entry and entry.name then
+      table.insert(paths, vim.fn.shellescape(dir .. entry.name))
+    end
+  end
+
+  if #paths == 0 then return end
+
+  vim.ui.input({ prompt = "Command: " }, function(cmd)
+    if not cmd or cmd == "" then return end
+    vim.fn.system(cmd .. " " .. table.concat(paths, " "))
+  end)
+end, { desc = "Oil: apply shell command to visual selection" })
+
+
+vim.keymap.set("n", "yp", function()
+  local oil = require("oil")
+  local entry = oil.get_cursor_entry()
+  if not entry then return end
+
+  local path = oil.get_current_dir() .. entry.name
+  vim.fn.setreg("+", path)
+  print("Yanked: " .. path)
+end)
+
+vim.keymap.set("n", "!", function()
+  local oil = require("oil")
+  local entry = oil.get_cursor_entry()
+  if not entry then return end
+
+  local path = oil.get_current_dir() .. entry.name
+  print("Executing: " .. path)
+
+  vim.ui.input({ prompt = "Command: " }, function(cmd)
+    if not cmd or cmd == "" then return end
+    local final_term = "R " .. cmd .. " " .. vim.fn.shellescape(path)
+    print(final_term)
+    vim.cmd(final_term)
+  end)
+end, { desc = "Oil: apply shell command to entry" })
