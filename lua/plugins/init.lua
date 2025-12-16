@@ -1,4 +1,6 @@
 return {
+
+  {import = "configs.others"},
   {import = "configs.dired"},
   {import = "configs.snacks"},
   {import = "configs.fff"},
