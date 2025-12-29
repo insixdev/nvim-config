@@ -1,5 +1,6 @@
 return {
 
+  {import = "configs.comments"};
   {import = "configs.others"},
   {import = "configs.dired"},
   {import = "configs.snacks"},

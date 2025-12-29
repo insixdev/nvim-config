@@ -13,9 +13,11 @@ local servers = {
   "ts_ls",
   "cssls",
   "tailwindcss",
+  "csharp-language-server",
   "emmet_ls",
   "marksman",
   "lua_ls",
+  "ast-grep",
   "bashls",
   "jsonls",
   "yamlls",
@@ -38,8 +40,20 @@ local server_configs = {
           constantValues = true,
           functionTypeParameters = true,
           parameterNames = true,
+
           rangeVariableTypes = true,
         },
+      },
+    },
+  },
+
+  csharp_ls = {
+    cmd = { "/usr/bin/OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+    filetypes = { "cs" },
+    root_dir = require("lspconfig.util").root_pattern("*.sln", "*.csproj", ".git"),
+    settings = {
+      csharp = {
+        roslynAnalyzerExecutable = nil,
       },
     },
   },

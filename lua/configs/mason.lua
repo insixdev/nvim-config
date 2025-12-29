@@ -15,6 +15,7 @@ local options = {
     "emmet-ls",
     "lua-language-server",
     "ast-grep",
+    "csharp-language-server",
     "bash-language-server",
     "json-lsp",
     "yaml-language-server",

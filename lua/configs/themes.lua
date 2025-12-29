@@ -20,6 +20,10 @@ return {
     end,
   },
   {
+    lazy= false,
+    "scottmckendry/cyberdream.nvim"
+  },
+  {
     lazy = false,
     "dapovich/anysphere.nvim",
 

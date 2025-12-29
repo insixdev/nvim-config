@@ -82,8 +82,18 @@ vim.lsp.inlay_hint.enable(true)
 -- ~/.config/nvim/lua/colors.lua
 local current = vim.g.colors_name  -- obtiene el colorscheme activo
 -- treesj config keymap
-vim.keymap.set("n", "gS", require("treesj").split, { desc = "Split code block" })
+vim.keymap.set(
+  "n",
+  "gS",
+  function() 
+    require("treesj").split()
+    vim.cmd([[silent! %s/\n\s*,/, /g]])  -- mueve comas
+  end,
+  { desc = "Split code block" }
+)
+
 vim.keymap.set("n", "gJ", require("treesj").join,  { desc = "Join code block" })
+
 vim.keymap.set(
   "n",
   "<leader>u",
@@ -354,18 +364,68 @@ vim.keymap.set("n", "yp", function()
   print("Yanked: " .. path)
 end)
 
+function exec(path) 
+  print("Executing: " .. path)
+  local final_cmd = "." .. path
+  vim.cmd("R " .. path)
+end
+
 vim.keymap.set("n", "!", function()
   local oil = require("oil")
   local entry = oil.get_cursor_entry()
   if not entry then return end
 
   local path = oil.get_current_dir() .. entry.name
-  print("Executing: " .. path)
+  local current_path = oil.get_current_dir()
 
   vim.ui.input({ prompt = "Command: " }, function(cmd)
     if not cmd or cmd == "" then return end
-    local final_term = "R " .. cmd .. " " .. vim.fn.shellescape(path)
-    print(final_term)
-    vim.cmd(final_term)
+
+    if cmd == "." then 
+      exec(oil.get_current_dir() .. entry.name)
+      return 
+    end 
+    local function run(args_before)
+      local full_cmd
+      if args_before then
+        local args_path = " " .. current_path .. args_before   
+        full_cmd = cmd .. " " .. vim.fn.shellescape(path) .. args_path
+      else
+        full_cmd = cmd .. " " .. vim.fn.shellescape(path)
+      end
+
+      print("Executing:", full_cmd)
+      vim.cmd("R " .. full_cmd)
+    end
+
+    -- si contiene o al final
+    local is_open = cmd:sub(1, 2) == "! "
+    if is_open then
+      cmd = cmd:gsub("^%s*o%s+", "")
+      print(cmd)
+      vim.ui.input({ prompt = "Args before path: " }, function(args)
+        if args == "" then args = nil end
+        run(args)
+      end)
+    else
+      run(nil)
+    end
   end)
 end, { desc = "Oil: apply shell command to entry" })
+
+local function find_list()
+  local vim_ui = require("marker-groups.pickers.vim_ui")
+  vim_ui.show_markers()
+end
+
+vim.api.nvim_create_user_command("FindList", find_list, {})
+
+vim.keymap.set(
+  "n",
+  "<leader>mf",
+  ":FindList<CR>",
+  { desc = "Abrir Oil en el dir actual" }
+)
+
+
+

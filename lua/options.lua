@@ -43,27 +43,25 @@ local oil = require("oil")
 vim.api.nvim_create_autocmd("DirChanged", {
   callback = function()
     local ok, oil = pcall(require, "oil")
-    if not ok then
-      return
-    end
-
+    local ok2, act = pcall(require, "oil.actions")
+    if not ok then return end
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-      if vim.api.nvim_buf_is_loaded(buf)
-        and vim.bo[buf].filetype == "oil"
-      then
-        oil.refresh(buf)
+      if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].filetype == "oil"
+        then
+          -- usamos la API interna de Oil para refrescar el buffer existente
+          pcall(oil.refresh, buf)
+        end
       end
-    end
-  end,
-})
--- Mapear _ solo en buffers de Oil
--- Mapear _ solo en buffers de Oil
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "oil",
-  callback = function()
-    vim.keymap.set("n", "_", "<cmd>Yazi toggle<cr>", { buffer = true, desc = "Toggle Yazi desde Oil" })
-  end,
-})
+    end,
+  })
+    -- Mapear _ solo en buffers de Oil
+    -- Mapear _ solo en buffers de Oil
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "oil",
+      callback = function()
+        vim.keymap.set("n", "_", "<cmd>Yazi toggle<cr>", { buffer = true, desc = "Toggle Yazi desde Oil" })
+      end,
+    })
 
 
 require("gruvbox").setup({
@@ -225,7 +223,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 vim.opt.guicursor = ""
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = {"kanso","kanso-zen", "kanso-mist", "kanso-pearl"}, 
+  pattern = {"kanso","kanso-zen", "kanso-mist", "kanso-pearl", "base16-ayu-dark"}, 
   callback = function()
     vim.cmd [[
       highlight RainbowDelimiterRed    guifg=#cf95a9
@@ -278,7 +276,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.keymap.set("n", "0", function()
+vim.keymap.set("n", "¿", function()
   local dir = vim.fn.expand("%:p:h")
   vim.cmd.lcd(dir)
   require("dired").open(dir)
@@ -361,4 +359,5 @@ require('fff').setup({
       log_level = 'info',
     }
 })
+
 
