@@ -1,19 +1,28 @@
 
 return {
   {
-    event= "BufReadPost",
     "folke/todo-comments.nvim",
+    event= "BufReadPost",
     dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "oil",
+        callback = function(args)
+          vim.b[args.buf].todo_comments_disable = true
+        end,
+      })
+    end,
     opts = {
       sources = {
         lsp = true,
         treesitter = true,
-
-      };
+      },
       signs = true,
 
       search = {
         command = "rg",
+        exclude = { "oil" },
         args = {
           "--color=never",
           "--no-heading",
@@ -37,6 +46,7 @@ return {
       -- * after: highlights after the keyword (todo text)
       highlight = {
         multiline = true, -- enable multine todo comments
+        exclude = {"oil"},
         multiline_pattern = "^.", -- lua pattern to match the next multiline from the start of the matched keyword
         multiline_context = 10, -- extra lines that will be re-evaluated when changing a line
         before = "", -- "fg" or "bg" or empty
@@ -47,7 +57,6 @@ return {
         -- pattern = { [[.*<(KEYWORDS)\s*:]], [[.*\@(KEYWORDS)\s*]] }, -- pattern used for highlightng (vim regex)
         comments_only = true, -- uses treesitter to match keywords in comments only
         max_line_len = 400, -- ignore lines longer than this
-        exclude = {}, -- list of file types to exclude highlighting
         throttle = 200,
       },
       keywords = {
