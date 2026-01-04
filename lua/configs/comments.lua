@@ -5,6 +5,11 @@ return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
+      sources = {
+        lsp = true,
+        treesitter = true,
+
+      };
       signs = true,
 
       search = {
@@ -17,7 +22,7 @@ return {
           "--column",
         },
         -- regex that will be used to match keywords.
-        -- don't replace the (KEYWORDS) placeholder
+        -- don't replace the () placeholder
         pattern = [[\b(KEYWORDS):]], -- ripgrep regex
         -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
       },
