@@ -388,3 +388,9 @@ if is_godot_project and not is_server_running then
     vim.fn.serverstart(godot_project_path .. '/server.pipe')
 end
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "oil",
+  callback = function(args)
+    vim.b[args.buf].todo_comments_disable = true
+  end,
+})

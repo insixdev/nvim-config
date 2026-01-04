@@ -4,20 +4,20 @@ return {
     "folke/todo-comments.nvim",
     event= "BufReadPost",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = "oil",
-        callback = function(args)
-          vim.b[args.buf].todo_comments_disable = true
-        end,
-      })
-    end,
+    -- config = function()
+    --   vim.api.nvim_create_autocmd("FileType", {
+    --     pattern = "oil",
+    --     callback = function(args)
+    --       vim.b[args.buf].todo_comments_disable = true
+    --     end,
+    --   })
+    -- end,
     opts = {
-      sources = {
-        lsp = true,
-        treesitter = true,
-      },
+      -- sources = {
+      --   file = true,
+      --   lsp = true,
+      --   treesitter = true,
+      -- },
       signs = true,
 
       search = {
