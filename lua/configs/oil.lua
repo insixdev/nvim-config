@@ -98,8 +98,17 @@ return {
       show_hidden = false,
       -- This function defines what is considered a "hidden" file
       is_hidden_file = function(name, bufnr)
-        local m = name:match("^%.")
-        return m ~= nil
+      if vim.endswith(name, ".uid") then
+        return true
+      end
+      -- También puedes ocultar otros archivos molestos de Godot/C#
+      if name == ".godot" or name == "bin" or name == "obj" then
+        return true
+      end
+      
+      -- Comportamiento por defecto (oculta archivos que empiezan con punto)
+
+        return vim.startswith(name, ".")
       end,
       -- This function defines what will never be shown, even when `show_hidden` is set
       is_always_hidden = function(name, bufnr)
@@ -208,6 +217,7 @@ return {
         winblend = 0,
       },
     },
+    ignore_filetypes = { "uid" },
     -- Configuration for the floating SSH window
     ssh = {
       border = "rounded",

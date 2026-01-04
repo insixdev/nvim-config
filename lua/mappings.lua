@@ -275,37 +275,12 @@ function ToggleBlink()
     require("blink.cmp").setup({ auto_complete = blink_enabled })
     print("Blink autocomplete:", blink_enabled and "ON" or "OFF")
 end
+
 -- Desactiva todos los diagnósticos automáticamente
 vim.keymap.set("n","<A-d>", function() ToggleBlink() end, {desc = "thisn"}) 
 vim.keymap.set("n","<A-s>", function() ToggleDiagnostics() end, {desc = "thisn"}) 
 
 
-vim.keymap.set("n", "<M-f>", function()
-  require("telescope").extensions.file_browser.file_browser({
-    layout_strategy = "bottom_pane",
-    path = vim.fn.expand("%:p:h"),   -- <== carpeta del archivo actual
-    cwd  = vim.fn.expand("%:p:h"),   -- opcional, pero recomendado
-    layout_config = {
-      height = 0.30,
-      preview_cutoff = 1,
-    },
-    sorting_strategy = "ascending",
-  })
-end)
-
-
-
-vim.keymap.set("n", "<M-b>", function()
-  require("telescope.builtin").buffers({
-    layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 0.30,
-      preview_cutoff = 1, -- sin preview
-    },
-    sorting_strategy = "ascending",
-    prompt_position = "top",
-  })
-end)
 
 vim.keymap.set("i", "<A-l>", "<C-Left>")
 vim.keymap.set("i", "<A-j>", "<C-Right>")
@@ -428,4 +403,62 @@ vim.keymap.set(
 )
 
 
+-- Guardamos la ventana del file_browser
+local fb_win = nil
+
+local function toggle_file_browser()
+  -- Si la ventana existe y es válida, la cerramos
+  if fb_win and vim.api.nvim_win_is_valid(fb_win) then
+    vim.api.nvim_win_close(fb_win, true)
+    fb_win = nil
+    return
+  end
+
+  -- Path real, Oil-safe
+  local path = vim.fn.expand("%:p:h")
+  if path:match("^oil://") then
+    path = require("oil").get_current_dir()
+  end
+
+  -- Abrir file_browser
+  require("telescope").extensions.file_browser.file_browser({
+    path = path,
+    cwd = path,
+    layout_strategy = "bottom_pane",
+    layout_config = { height = 0.30, preview_cutoff = 1 },
+    sorting_strategy = "ascending",
+    file_ignore_patterns = {
+      "%.uid$",           -- archivos *.uid
+      "^uid$",            -- carpeta llamada uid
+      "^uid%d+$",         -- uid123, uid456
+      "%d%d%d%d%d%d+",    -- IDs largos
+    },
+  })
+
+  -- Guardamos la ventana después de que Telescope se abra
+  vim.defer_fn(function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      if vim.bo[buf].filetype == "TelescopePrompt" then
+        fb_win = win
+        break
+      end
+    end
+  end, 50)
+end
+
+-- Map solo en modo normal
+vim.keymap.set("n", "<M-f>", toggle_file_browser, { desc = "Toggle Telescope File Browser" })
+
+vim.keymap.set("n", "<M-b>", function()
+  require("telescope.builtin").buffers({
+    layout_strategy = "bottom_pane",
+    layout_config = {
+      height = 0.30,
+      preview_cutoff = 1, -- sin preview
+    },
+    sorting_strategy = "ascending",
+    prompt_position = "top",
+  })
+end)
 

@@ -59,7 +59,7 @@ highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 gui=Italic
-highlight Statement     guifg=#c4a184 
+highlight Statement     guifg=#e8887b
 highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
 highlight PreProc       guifg=#c9a393
 highlight StatusLine    guifg=#ffccff guibg=#33302b

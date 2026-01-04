@@ -1,5 +1,6 @@
 return {
 
+{"folke/lazy.nvim"},
   {import = "configs.comments"};
   {import = "configs.others"},
   {import = "configs.dired"},

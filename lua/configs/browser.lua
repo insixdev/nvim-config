@@ -12,6 +12,16 @@ return {
       local actions = require("telescope.actions")
 
       require("telescope").setup({
+        file_browser = {
+          
+  file_ignore_patterns = {
+        "%.uid$",            -- archivos *.uid
+        "^uid$",             -- carpeta literalmente llamada uid
+        "^uid%d+$",          -- uid123, uid456
+        "%d%d%d%d%d%d+",     -- números largos (IDs)
+        "[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]+", -- hashes
+      },
+        },
         defaults = {
           -- Estética: Bordes redondeados y estilo flotante
           path_display = { "smart" },
@@ -68,5 +78,6 @@ return {
         },
       })
     end
-  }}
+  }
+}
 

@@ -37,8 +37,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
-local actions = require("oil.actions")
-local oil = require("oil")
 
 vim.api.nvim_create_autocmd("DirChanged", {
   callback = function()
@@ -54,14 +52,14 @@ vim.api.nvim_create_autocmd("DirChanged", {
       end
     end,
   })
-    -- Mapear _ solo en buffers de Oil
-    -- Mapear _ solo en buffers de Oil
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "oil",
-      callback = function()
-        vim.keymap.set("n", "_", "<cmd>Yazi toggle<cr>", { buffer = true, desc = "Toggle Yazi desde Oil" })
-      end,
-    })
+  -- Mapear _ solo en buffers de Oil
+  -- Mapear _ solo en buffers de Oil
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "oil",
+    callback = function()
+      vim.keymap.set("n", "_", "<cmd>Yazi toggle<cr>", { buffer = true, desc = "Toggle Yazi desde Oil" })
+    end,
+  })
 
 
 require("gruvbox").setup({
@@ -223,10 +221,20 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
 vim.opt.guicursor = ""
 
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = {"kanso","kanso-zen", "kanso-mist", "kanso-pearl", "base16-ayu-dark"}, 
+  pattern = {
+    "kanso",
+    "kanso-zen",
+    "kanso-mist",
+    "kanso-pearl",
+    "base16-ayu-dark",
+    "base16-gruvbox-material-dark-medium",
+    "custom_v2",
+    "gruvbox",
+    "vague"
+  }, 
   callback = function()
     vim.cmd [[
-      highlight RainbowDelimiterRed    guifg=#cf95a9
+      highlight RainbowDelimiterRed    guifg=#DDCca9
       highlight RainbowDelimiterYellow guifg=#DEBF7C
       highlight RainbowDelimiterBlue   guifg=#8aa19a
       highlight RainbowDelimiterOrange guifg=#c78f69
@@ -266,16 +274,16 @@ require("telescope").setup({
   },
 })
 
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "dired",
-  callback = function()
-    vim.keymap.set("n", "'", function()
-      vim.cmd.tcd(vim.fn.expand("%:p:h"))
-    end, { buffer = true })
-  end,
-})
-
+--
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "dired",
+--   callback = function()
+--     vim.keymap.set("n", "'", function()
+--       vim.cmd.tcd(vim.fn.expand("%:p:h"))
+--     end, { buffer = true })
+--   end,
+-- })
+--
 vim.keymap.set("n", "¿", function()
   local dir = vim.fn.expand("%:p:h")
   vim.cmd.lcd(dir)
@@ -360,4 +368,23 @@ require('fff').setup({
     }
 })
 
+local paths_to_check = {'/', '/../'}
+local is_godot_project = false
+local godot_project_path = ''
+local cwd = vim.fn.getcwd()
+-- iterate over paths and check
+for key, value in pairs(paths_to_check) do
+    if vim.uv.fs_stat(cwd .. value .. 'project.godot') then
+        is_godot_project = true
+        godot_project_path = cwd .. value
+        break
+    end
+end
+
+-- check if server is already running in godot project path
+local is_server_running = vim.uv.fs_stat(godot_project_path .. '/server.pipe')
+-- start server, if not already running
+if is_godot_project and not is_server_running then
+    vim.fn.serverstart(godot_project_path .. '/server.pipe')
+end
 
