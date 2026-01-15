@@ -1,5 +1,5 @@
- return {
-
+return {
+  {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "mason.nvim", "nvim-lspconfig" },
     config = function()
@@ -9,12 +9,23 @@
           "clangd",
           "zls",
           "pyright",
-          "ts_ls",
-          "html",
-          "cssls",
           "lua_ls",
+          "roslyn"
         },
         automatic_installation = true,
       })
     end,
+  },
+  {
+    -- En tu configuración de mason.nvim
+    {
+      "williamboman/mason.nvim",
+      opts = {
+        registries = {
+          "github:mason-org/mason-registry",
+          "github:Crashdummyy/mason-registry", -- OBLIGATORIO para roslyn
+        },
+      },
+    }
   }
+}
