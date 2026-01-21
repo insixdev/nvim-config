@@ -46,7 +46,7 @@ highlight Function      guifg=#d8e0e3 ""#8f9698
 
 highlight Identifier    guifg=#FFFEDB "98a3a6
 highlight Type          guifg=#8f9698 gui=Italic
-highlight PreProc       guifg= #b8c0c2 "#8f9698  IMPORTNATJk
+highlight PreProc       guifg=#d6b4c8 "#8f9698  IMPORTNATJk
 highlight Statement     guifg=#cd775c
 
 highlight LineNrAbove   guifg=#888888 guibg=#1d1d1b 

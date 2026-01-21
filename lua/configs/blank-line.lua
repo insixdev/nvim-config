@@ -38,13 +38,18 @@ return {
       -- 2️⃣ Configuración del plugin
       ibl.setup({
         indent = {
-          char = "⏐",--┆
+          char = "‧",--┆
         },
         whitespace = {
           highlight = { "Whitespace" },
           remove_blankline_trail = true,
         },
-        scope = { enabled = false, char = "|", show_start = false, show_end = true}, -- si usás mini.indentscope // ENABLE para que remarque donde estoy luego hay otro plugin para ver la animacion:
+        scope = {
+          enabled = false,
+          char = "‧",
+          show_start = false,
+          show_end = true,
+        }, -- si usás mini.indentscope // ENABLE para que remarque donde estoy luego hay otro plugin para ver la animacion:
       })
 
       -- 3️⃣ Re-aplicar al cambiar de colorscheme

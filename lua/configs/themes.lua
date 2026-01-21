@@ -7,6 +7,17 @@ return {
   lazy = false,
   -- Or with configuration
   {
+    {
+      lazy=false,
+      "borekb/darker-plus-theme"
+    },
+
+    {
+      lazy = false,
+      "dunstontc/vim-vscode-theme",
+      config = function()
+      end,
+    },
     'projekt0n/github-nvim-theme',
     name = 'github-theme',
     lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -111,6 +122,11 @@ return {
   "ramojus/mellifluous.nvim"
 
 
+},
+
+{
+  lazy = false,
+  "srijs/vim-colors-rusty"
 },
 {
   "kvrohit/rasmus.nvim",

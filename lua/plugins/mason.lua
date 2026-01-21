@@ -10,7 +10,6 @@ return {
           "zls",
           "pyright",
           "lua_ls",
-          "roslyn"
         },
         automatic_installation = true,
       })

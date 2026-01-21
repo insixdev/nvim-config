@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
-
+vim.o.guifont = "Consolas Fonts:h12"  
 vim.g.incline_enabled = true,
 
 -- load plugins

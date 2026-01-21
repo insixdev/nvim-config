@@ -1,5 +1,6 @@
 require "nvchad.options"
 require("custom.fzf")
+
 vim.opt.conceallevel = 2
 vim.o.swapfile = false       -- Desactiva archivos swap
 vim.o.writebackup = false    -- Desactiva backup al guardar
@@ -222,6 +223,10 @@ vim.opt.guicursor = ""
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = {
+    "base16-gruvbox-dark-pale",
+    "kanagawa-dragon",
+    "cold",
+    "dark_plus",
     "kanso",
     "ayu",
     "kanso-zen",
@@ -393,3 +398,20 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.b[args.buf].todo_comments_disable = true
   end,
 })
+
+-- vim.opt.list = true
+--
+-- vim.opt.listchars = {
+--   space= "‧",
+-- }
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "dark_plus",
+  callback = function(args)
+    vim.cmd("highlight LspReferenceText guibg=#6f7b68")
+    vim.cmd("highlight LspReferenceRead guibg=#6f7b68")
+  end,
+})
+
+vim.lsp.inlay_hint.enable(false)
+

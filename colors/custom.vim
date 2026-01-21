@@ -13,7 +13,10 @@ let g:colors_name = 'custom'
 " ─────────────────────────────────────────────────────────────
 " Core groups
 " ─────────────────────────────────────────────────────────────
-highlight CursorLine cterm=NONE ctermbg=236 guibg=#1d1d1b
+highlight CursorLine cterm=NONE ctermbg=126 guibg=#1d1d1b
+
+"highlight LspReferenceRead gui=underline guisp=#7b7b68
+highlight CursorLineNr cterm=NONE ctermbg=126 guibg=#1d1d1b
 highlight Normal        guifg=#edddc0 guibg=#181818"#1f1f1f"#121212
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
@@ -41,7 +44,7 @@ highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
 highlight Function      guifg=#f5e6d5
-highlight Identifier    guifg=#e0b79b
+highlight Identifier    guifg=#f0b79b
 
 highlight LineNrAbove   guifg=#888888 guibg=#1d1d1b 
 highlight LineNrBelow   guifg=#888888 guibg=#1d1d1b 
@@ -119,4 +122,4 @@ highlight @tag.tsx guifg=#a7ccb4
 highlight! @tag.delimiter.tsx guifg=#b5bdb8   " mismo color que HTML delimiter
 highlight! link @tag.delimiter.tsx @tag.delimiter.html
 
-
+"highlight rustFoldBraces guifg=#f7ccb4

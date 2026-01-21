@@ -8,6 +8,7 @@ vim.api.nvim_set_keymap("n", "<leader>fd",
   ":call fzf#run({'source': 'fd --type d', 'sink': 'edit'})<CR>",
   { noremap = true, silent = true })
 -- Siempre repetir f/t como en Vim clásico
+
 map("i", "jk", "<ESC>")
 
 vim.api.nvim_create_autocmd("ColorScheme", {
