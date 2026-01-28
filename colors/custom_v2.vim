@@ -1,3 +1,4 @@
+
 " took many of these colors from github.com/Coselau
 " Custom minimal theme
 " Took inspiration from github.com/CosecSecCot/cosec-twilight.nvim
@@ -13,33 +14,46 @@ let g:colors_name = 'custom'
 " ─────────────────────────────────────────────────────────────
 " Core groups
 " ─────────────────────────────────────────────────────────────
-highlight Normal        guifg=#b09e82 guibg=#111212"#1f1f1f"#121212
+highlight CursorLine cterm=NONE ctermbg=236 guibg=#181818
+highlight Normal        guifg=#edddc0 guibg=#181818"#0d1117"#181818
 " guibg=#181818
-highlight NormalFloat   guifg=#edddc0 guibg=#1a1c1c
+highlight NormalFloat   guifg=#95a99f guibg=#202020
 
-highlight @variable guifg=#f5e7ce
+highlight @variable guifg=#dbc5b4
 
-highlight Comment       guifg=#6f7b68 gui=Italic
+highlight RainbowDelimiterRed    guifg=#cf95a9  " Rosado (como tu Number)
+
+highlight RainbowDelimiterYellow guifg=#fa7a2f "Amarillo dorado (como tu Operator)
+highlight RainbowDelimiterBlue   guifg=#8aa19a  " Verde azulado (como @variable.builtin)
+highlight RainbowDelimiterOrange guifg=#c78f69  " Naranja (como tu SpecialChar)
+highlight RainbowDelimiterGreen  guifg=#A2A970  " Verde (como tu String)
+highlight RainbowDelimiterViolet guifg=#8f8ccc  " Violeta (como tu StatusLineNC)
+highlight RainbowDelimiterCyan   guifg=#a7ccb4  " Cyan (como tu @tag.html)
+highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
+highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
+
+" #6f7b68 
+highlight Comment       guifg=#e6d76a gui=Italic
 highlight Conceal       guibg=#262626
-highlight Constant      guifg=#edddcc
+highlight Constant      guifg=#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
 highlight DiffChange    guifg=#FFFEDB guibg=#262636
 highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
-highlight Function      guifg=#feb454
-highlight Identifier    guifg=#e0b79b
+highlight Function      guifg=#fcdfb3
+highlight Identifier    guifg=#edb451k"#ffa74a"#fcb838
 
-highlight LineNrAbove   guifg=#888888 guibg=#262626
-highlight LineNrBelow   guifg=#888888 guibg=#262626
+highlight LineNrAbove   guifg=#888888 guibg=#181818
+highlight LineNrBelow   guifg=#888888 guibg=#181818
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
-highlight Operator      guifg=#DEBF7C
+highlight Operator      guifg=#fffffe
 highlight Pmenu         guifg=#8f9988 guibg=#303030
 highlight PmenuSbar     guifg=#918988 guibg=#262626
-highlight PmenuSel      guifg=#BFBBBA guibg=#303030
+highlight PmenuSel      guifg=#ba9279 guibg=#303030
 highlight PmenuThumb    guifg=#918988 guibg=#262626 gui=reverse
 highlight Question      guifg=#9b8d7f
 highlight QuickFixLine  guibg=#303030
@@ -47,13 +61,12 @@ highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 gui=Italic
-highlight Statement     guifg=#fa8d3f
-highlight StatusLineNC  guifg=#888ccc guibg=#c22222
-highlight PreProc       guifg=#c9a393
-highlight StatusLine    guifg=#ffcccB guibg=#34383C
+highlight Statement     guifg=#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48
+highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
+highlight PreProc       guifg=#E6B973
+highlight StatusLine    guifg=#ffccff guibg=#33302b
 highlight String        guifg=#A2A970
 highlight Structure     guifg=#dbcdab
-highlight WinBar        guifg=#1A1A1A guibg=#C1C88D
 highlight Substitute    guifg=#1A1A1A guibg=#C1C88D
 highlight TabLine       guifg=#c4a584 guibg=#212121
 highlight TabLineFill   guifg=#A09998 guibg=#212121
@@ -68,8 +81,18 @@ highlight WarningMsg    guifg=#FFFEDB
 highlight Float         guifg=#6f7b68
 highlight Number        guifg=#cf95a9
 highlight Boolean       guifg=#6f7b68
-highlight WinSeparator  guibg=#111212 guifg=#f88888
+highlight WinSeparator  guibg=#101010 guifg=#888888
+highlight WinBar         guibg=#101010 guifg=#888888
+highlight WinBarNC    guibg=#101010   guifg=#888888
 
+hi clear RustEnum 
+hi RustEnum guifg=#ffcc85 gui=Italic
+
+hi clear RustAttribute 
+hi RustAttribute guifg=#79c0ff"#a37e98"#ff8f85 gui=Italic
+
+hi clear rustFoldBraces 
+hi rustFoldBraces guifg=#e8a72e 
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────
@@ -106,4 +129,5 @@ highlight @tag.tsx guifg=#a7ccb4
 " TSX delimiters
 highlight! @tag.delimiter.tsx guifg=#b5bdb8   " mismo color que HTML delimiter
 highlight! link @tag.delimiter.tsx @tag.delimiter.html
+
 
