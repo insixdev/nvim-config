@@ -195,28 +195,8 @@ vim.api.nvim_set_keymap('n', '<C-A-k>', ':resize -5<CR>', { noremap = true, sile
 -- })
 --
 --
-if vim.g.neovide then
-  -- Asegúrate de tener una fuente por defecto
-  if vim.o.guifont == "" then
-    vim.o.guifont = "Hack:h14"
-  end
 
-  -- Zoom in
-  vim.keymap.set('n', '<C-=>', function()
-    local font = vim.o.guifont
-    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
-    size = size + 1
-    vim.o.guifont = font:gsub("h%d+", "h"..size)
-  end, { desc = "Neovide Zoom In" })
 
-  -- Zoom out
-  vim.keymap.set('n', '<C-->', function()
-    local font = vim.o.guifont
-    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
-    size = size - 1
-    vim.o.guifont = font:gsub("h%d+", "h"..size)
-  end, { desc = "Neovide Zoom Out" })
-end
 
 --fyler lo agarrare mas adelant-- fyler lo agarrare mas adelantee
 -- local fyler = require("fyler")

@@ -1,5 +1,6 @@
 return {
 
+  {import = "configs.http"},
   {import = "configs.rust"},
   {import = "configs.roslyn"};
   {import = "configs.comments"};

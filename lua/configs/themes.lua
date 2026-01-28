@@ -11,6 +11,22 @@ return {
       lazy=false,
       "borekb/darker-plus-theme"
     },
+    {
+
+      "lifepillar/vim-gruvbox8",
+
+    },
+    {
+
+      lazy = false,
+      "shinchu/lightline-gruvbox.vim"
+
+    },
+    {
+      
+      lazy = false,
+      "morhetz/gruvbox"
+    },
 
     {
       lazy = false,
@@ -29,6 +45,16 @@ return {
 
       vim.cmd('colorscheme github_dark')
     end,
+  },
+  {
+    lazy = false,
+    "bluz71/vim-moonfly-colors",
+
+  },
+  {
+    lazy = false,
+    "nasccped/rustheme.nvim"
+
   },
   {
     lazy= false,
@@ -98,8 +124,7 @@ return {
     -- Optionally configure and load the colorscheme
     -- directly inside the plugin declaration.
     vim.g.gruvbox_material_enable_italic = true
-    vim.cmd.colorscheme('gruvbox-material')
-  end
+      end
 },
 {
   lazy = false,

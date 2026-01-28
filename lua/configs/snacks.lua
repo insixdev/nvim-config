@@ -40,23 +40,24 @@ return {
     },
 
       indent = {
-        enabled = true,
+        enabled = false,
         animate = {
-          enabled = true,
-          duration = 40,
+          enabled = false,
+          duration = 20,
         },
+
         scope = {
           enabled = true,
-          underline = true,
+          underline = false,
           end_underline = true,
-          highlight = "SnacksScopeBorder",
+          highlight = "SnacksIndentScope",
         },
       },
 
       highlight = {
         scope = {
           enabled = true,
-          blend = 0.12,
+          blend = 0.5,
           priority = 1200,
       },
     },

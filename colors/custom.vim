@@ -17,7 +17,7 @@ highlight CursorLine cterm=NONE ctermbg=126 guibg=#1d1d1b
 
 "highlight LspReferenceRead gui=underline guisp=#7b7b68
 highlight CursorLineNr cterm=NONE ctermbg=126 guibg=#1d1d1b
-highlight Normal        guifg=#edddc0 guibg=#181818"#1f1f1f"#121212
+highlight Normal        guifg=#edddc0 guibg=#1f1f1f  "#181818 "#121212
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
 
@@ -43,7 +43,7 @@ highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
-highlight Function      guifg=#f5e6d5
+highlight Function      guifg=#debeaf
 highlight Identifier    guifg=#f0b79b
 
 highlight LineNrAbove   guifg=#888888 guibg=#1d1d1b 
@@ -61,8 +61,8 @@ highlight QuickFixLine  guibg=#303030
 highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
-highlight SpecialKey    guifg=#676767 gui=Italic
-highlight Statement     guifg=#e8887b
+highlight SpecialKey    guifg=#676767 
+highlight Statement     guifg=#e8887b 
 highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
 highlight PreProc       guifg=#c9a393
 highlight StatusLine    guifg=#ffccff guibg=#33302b
@@ -74,7 +74,7 @@ highlight TabLineFill   guifg=#A09998 guibg=#212121
 highlight TabLineSel    guifg=#A09998 guibg=#40474F
 highlight Title         guifg=#FFFEDB term=none cterm=none
 highlight Todo          guifg=#8B9698
-highlight Type          guifg=#a89f8f gui=Italic
+highlight Type          guifg=#a89f8f 
 highlight Underlined    gui=undercurl
 highlight VertSplit     guifg=#303030
 highlight Visual        guibg=#454545

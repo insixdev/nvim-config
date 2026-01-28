@@ -1,3 +1,6 @@
+
+vim.env.PATH = vim.env.PATH .. ':/home/insidev/.cargo/bin'
+
 require "nvchad.options"
 require("custom.fzf")
 
@@ -13,11 +16,6 @@ vim.o.cursorlineopt ='both' -- to enable cursorline!
 vim.opt.wildmenu = true
 vim.opt.cursorline = true
 vim.opt.linebreak = true 
-
-
---vim.g.neovide_font = "Hack:h12"  -- Fuente y tamaño
-vim.g.neovide_antialiasing = true
-vim.g.neovide_cursor_antialiasing = true
 
 vim.o.termguicolors = true 
 
@@ -80,10 +78,10 @@ require("gruvbox").setup({
   invert_signs = false,
   invert_tabline = false,
   inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "hard", -- can be "hard", "soft" or empty string
+  contrast = "soft", -- can be "hard", "soft" or empty string
   palette_overrides = {},
   overrides = {
-    Keyword = { fg = "#859285", bold = true },
+    Keyword = { fg = "#e65449", bold = true },
     Type    = { fg = "#ebc96c", italic = true },
   },
   dim_inactive = false,
@@ -236,8 +234,10 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     "base16-gruvbox-material-dark-medium",
     "custom_v2",
     "gruvbox",
-    "vague"
-  }, 
+    "vague",
+    "github_dark_default",
+    "github_dark_dimmed"
+  },
   callback = function()
     vim.cmd [[
       highlight RainbowDelimiterRed    guifg=#DDCca9
@@ -399,11 +399,16 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- vim.opt.list = true
---
--- vim.opt.listchars = {
---   space= "‧",
--- }
+vim.opt.list =false 
+
+vim.opt.listchars = {
+  eol = " ",
+  nbsp = " ",
+  trail = "•",
+  extends = "⟩",
+  precedes = "⟨",
+  space= "‧",
+}
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "dark_plus",
@@ -414,4 +419,54 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.lsp.inlay_hint.enable(false)
+
+vim.o.statuscolumn = " %C%l%s"
+-- vim.o.statuscolumn = "%C%{v:relnum?v:relnum:v:lnum}%s"
+vim.o.signcolumn = "yes"
+vim.g.rest_nvim = {
+  response = {
+    hooks = {
+      decode_url = true,
+      format = true,
+      custom = function(response)
+        local ok, json = pcall(vim.json.decode, response.body)
+        if ok then
+          response.body = vim.inspect(json)
+        end
+        return response
+      end,
+    }
+  }
+}
+
+if vim.g.neovide then
+  -- Asegúrate de tener una fuente por defecto
+  if vim.o.guifont == "" then
+    -- vim.o.guifont = "Hack:h9:b:#e-subpixelantialias:#h-none"
+
+    vim.o.guifont = "Google Sans Code:h9:b:#e-subpixelantialias:#h-none"
+    -- vim.o.guifont = "Hack:h10:b:#h-none:#alias"
+  end
+
+vim.g.neovide_text_gamma = 2
+vim.g.neovide_text_contrast =-2
+  vim.o.linespace = -2
+  -- Zoom in
+  vim.keymap.set('n', '<C-+>', function()
+    local font = vim.o.guifont
+    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
+    size = size + 1
+    vim.o.guifont = font:gsub("h%d+", "h"..size)
+  end, { desc = "Neovide Zoom In" })
+
+  -- Zoom out
+  vim.keymap.set('n', '<C-->', function()
+    local font = vim.o.guifont
+    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
+    size = size - 1
+    vim.o.guifont = font:gsub("h%d+", "h"..size)
+  end, { desc = "Neovide Zoom Out" })
+end
+
+
 
