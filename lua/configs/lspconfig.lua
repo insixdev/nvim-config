@@ -4,6 +4,7 @@ local configs = require("nvchad.configs.lspconfig")
 -- Lista de servidores LSP
 local servers = {
   "rust_analyzer",
+  "c3-lsp",
   "clangd",
   "gopls",
   "pyright",
@@ -21,8 +22,31 @@ local servers = {
   "bashls",
   "jsonls",
   "yamlls",
+  "zc lsp"
 }
 
+local lspconfig = require('lspconfig')
+local configs = require('lspconfig.configs')
+
+-- 1. Definir la configuración de Zen C si no existe
+if not configs.zenc_lsp then
+  configs.zenc_lsp = {
+    default_config = {
+      cmd = { 'zc', 'lsp' }, -- El binario zc con el flag de lsp
+      filetypes = { 'zc', 'zen-c' },
+      root_dir = lspconfig.util.root_pattern('zc.json', '.git'),
+      settings = {},
+    },
+  }
+end
+
+-- 2. Activar el servidor
+lspconfig.zenc_lsp.setup{
+  on_attach = function(client, bufnr)
+    -- Aquí puedes poner tus shortcuts habituales de LSP
+    print("Zen C LSP conectado!")
+  end
+}
 -- Configuraciones específicas para cada servidor
 local server_configs = {
   gopls = {
@@ -91,6 +115,11 @@ local server_configs = {
         validate = true
       }
     }
+  },
+
+  c3_lsp = {
+    cmd = { "c3lsp" },
+    filetypes = { "c3" },
   },
 
   jdtls = {
@@ -340,9 +369,7 @@ for _, lsp in ipairs(servers) do
         vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end)
     end
-    -- navic
-
-
+    -- navi
     -- Fix específico para rust-analyzer
     if client.name == "rust_analyzer" then
       client.server_capabilities.semanticTokensProvider = nil
@@ -363,6 +390,7 @@ for _, lsp in ipairs(servers) do
       ts_ls = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
       lua_ls = { "lua" },
       rust_analyzer = { "rust" },
+      zenc_lsp = {"zenc"},
       clangd = { "c", "cpp" },
       gopls = { "go" },
       pyright = { "python" },
@@ -393,6 +421,7 @@ vim.api.nvim_create_autocmd("FileType", {
       rust = "rust_analyzer",
       c = "clangd",
       cpp = "clangd",
+      c3 = "c3_lsp",
       go = "gopls",
       python = "pyright",
       java = "jdtls",
@@ -466,9 +495,9 @@ vim.diagnostic.config({
   },
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "✘",
+      [vim.diagnostic.severity.ERROR] = ">",
       [vim.diagnostic.severity.WARN] = "▲",
-      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.INFO] = "!",
       [vim.diagnostic.severity.HINT] = "⚑",
     }
   },

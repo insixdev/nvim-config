@@ -2,10 +2,11 @@ local options = {
   ensure_installed = {
     -- LSP servers
     "rust-analyzer",
-    "clangd", 
+    "clangd",
     "zls",
     "pyright",
     "pylsp",
+    "c3",
     "typescript-language-server",
     "html-lsp",
     "css-lsp", 

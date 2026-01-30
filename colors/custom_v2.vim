@@ -15,13 +15,15 @@ let g:colors_name = 'custom'
 " Core groups
 " ─────────────────────────────────────────────────────────────
 highlight CursorLine cterm=NONE ctermbg=236 guibg=#181818
-highlight Normal        guifg=#edddc0 guibg=#181818"#0d1117"#181818
+highlight Normal        guifg=#edddc0 guibg=#262626"#181818"#0d1117"#181818
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
 
 highlight @variable guifg=#dbc5b4
 
 highlight RainbowDelimiterRed    guifg=#cf95a9  " Rosado (como tu Number)
+
+highlight clear rustDerive 
 
 highlight RainbowDelimiterYellow guifg=#fa7a2f "Amarillo dorado (como tu Operator)
 highlight RainbowDelimiterBlue   guifg=#8aa19a  " Verde azulado (como @variable.builtin)
@@ -42,11 +44,13 @@ highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
-highlight Function      guifg=#fcdfb3
-highlight Identifier    guifg=#edb451k"#ffa74a"#fcb838
+highlight Function      guifg=#ffe3e1"#b3b7bd"#dde0cc"#FFCC8A
+highlight PreProc       guifg=#ffcbb3
+highlight Identifier    guifg=#FFC272"#ffa74a"#fcb838
+highlight Statement     guifg=#FF7B72"#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48
 
-highlight LineNrAbove   guifg=#888888 guibg=#181818
-highlight LineNrBelow   guifg=#888888 guibg=#181818
+highlight LineNrAbove   guifg=#888888 guibg=#262626
+highlight LineNrBelow   guifg=#888888 guibg=#262626
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
@@ -61,9 +65,7 @@ highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 gui=Italic
-highlight Statement     guifg=#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48
 highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
-highlight PreProc       guifg=#E6B973
 highlight StatusLine    guifg=#ffccff guibg=#33302b
 highlight String        guifg=#A2A970
 highlight Structure     guifg=#dbcdab
@@ -86,13 +88,13 @@ highlight WinBar         guibg=#101010 guifg=#888888
 highlight WinBarNC    guibg=#101010   guifg=#888888
 
 hi clear RustEnum 
-hi RustEnum guifg=#ffcc85 gui=Italic
+hi RustEnum guifg=#FFC272 gui=Italic
 
 hi clear RustAttribute 
-hi RustAttribute guifg=#79c0ff"#a37e98"#ff8f85 gui=Italic
+hi RustAttribute guifg=#caa393"#899BAD "#79C0FF"#a37e98"#ff8f85 gui=Italic
 
 hi clear rustFoldBraces 
-hi rustFoldBraces guifg=#e8a72e 
+"hi rustFoldBraces guifg=#e8a72e 
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────

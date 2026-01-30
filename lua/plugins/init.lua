@@ -1,5 +1,7 @@
 return {
 
+  {import = "configs.c3"},
+
   {import = "configs.http"},
   {import = "configs.rust"},
   {import = "configs.roslyn"};

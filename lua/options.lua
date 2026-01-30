@@ -61,185 +61,186 @@ vim.api.nvim_create_autocmd("DirChanged", {
   })
 
 
-require("gruvbox").setup({
-  terminal_colors = true, -- add neovim terminal colors
-  undercurl = true,
-  underline = true,
-  bold = true,
-  italic = {
-    strings = true,
-    emphasis = true,
-    comments = true,
-    operators = false,
-    folds = true,
-  },
-  strikethrough = true,
-  invert_selection = false,
-  invert_signs = false,
-  invert_tabline = false,
-  inverse = true, -- invert background for search, diffs, statuslines and errors
-  contrast = "soft", -- can be "hard", "soft" or empty string
-  palette_overrides = {},
-  overrides = {
-    Keyword = { fg = "#e65449", bold = true },
-    Type    = { fg = "#ebc96c", italic = true },
-  },
-  dim_inactive = false,
-  transparent_mode = true,
-})
--- TREEE CONFIGURATIO=N 
-require("nvim-tree").setup({
-  disable_netrw = true,           -- desactiva netrw
-  hijack_netrw = true,            -- nvim-tree reemplaza netrw
-  view = {
-    width = 25,                   -- ancho del panel
-    side = "left",
-    hide_root_folder = true,      -- oculta el root folder
-    mappings = {
-      list = {
-        { key = "q", action = "close" }, -- cerrar con q
+  require("gruvbox").setup({
+    terminal_colors = true, -- add neovim terminal colors
+    undercurl = true,
+    underline = true,
+    bold = true,
+    italic = {
+      strings = true,
+      emphasis = true,
+      comments = true,
+      operators = false,
+      folds = true,
+    },
+    strikethrough = true,
+    invert_selection = false,
+    invert_signs = false,
+    invert_tabline = false,
+    inverse = true, -- invert background for search, diffs, statuslines and errors
+    contrast = "soft", -- can be "hard", "soft" or empty string
+    palette_overrides = {},
+    overrides = {
+      Keyword = { fg = "#e65449", bold = true },
+      Type    = { fg = "#ebc96c", italic = true },
+    },
+    dim_inactive = false,
+    transparent_mode = true,
+  })
+  -- TREEE CONFIGURATIO=N 
+  require("nvim-tree").setup({
+    disable_netrw = true,           -- desactiva netrw
+    hijack_netrw = true,            -- nvim-tree reemplaza netrw
+    view = {
+      width = 25,                   -- ancho del panel
+      side = "left",
+      hide_root_folder = true,      -- oculta el root folder
+      mappings = {
+        list = {
+          { key = "q", action = "close" }, -- cerrar con q
+        },
       },
     },
-  },
-  renderer = {
-    icons = {
-      show = {
-        git = true,
-        folder = true,
-        file = true,
+    renderer = {
+      icons = {
+        show = {
+          git = true,
+          folder = true,
+          file = true,
+        },
       },
     },
-  },
-  view = {
-    number = false,
-    relativenumber = false,
-    signcolumn = "no",
-  },
-  update_focused_file = {
-    enable = true,
-    update_cwd = true,
-  },
-  filters = {
-    dotfiles = true,               -- oculta archivos .dot
-    custom = { "node_modules" },   -- oculta node_modules
-  },
-})
+    view = {
+      number = false,
+      relativenumber = false,
+      signcolumn = "no",
+    },
+    update_focused_file = {
+      enable = true,
+      update_cwd = true,
+    },
+    filters = {
+      dotfiles = true,               -- oculta archivos .dot
+      custom = { "node_modules" },   -- oculta node_modules
+    },
+  })
 
--- loual ine arriba aa 
---
---
--- Habilitar winbar global
-vim.o.showtabline = 0  -- desactiva statusline de abajo
---vim.o.winbar = ""
-vim.opt.fillchars:append({ eob = "~" })
-vim.opt.statusline = "f"
+  -- loual ine arriba aa 
+  --
+  --
+  -- Habilitar winbar global
+  vim.o.showtabline = 0  -- desactiva statusline de abajo
+  --vim.o.winbar = ""
+  vim.opt.fillchars:append({ eob = "~" })
+  vim.opt.statusline = "f"
 
--- NEOVIDEJko
-vim.api.nvim_create_user_command("OpenInNewNeovide", function()
-  local file = vim.fn.expand("%:p")
-  vim.fn.jobstart({ "neovide", "--", file }, { detach = true })
-end, {})
-
-
-vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
-vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
--- zen
-
--- Apagar y prender incline al entrar/salir de ZenMode
-vim.api.nvim_create_autocmd("User", {
-  pattern = "ZenModeEnter",
-  callback = function()
-    vim.g.incline_enabled = false
-    require("incline").disable()
-  end,
-})
-
-vim.api.nvim_create_autocmd("User", {
-  pattern = "ZenModeLeave",
-  callback = function()
-    vim.g.incline_enabled = true
-    require("incline").enable()
-  end,
-})
+  -- NEOVIDEJko
+  vim.api.nvim_create_user_command("OpenInNewNeovide", function()
+    local file = vim.fn.expand("%:p")
+    vim.fn.jobstart({ "neovide", "--", file }, { detach = true })
+  end, {})
 
 
+  vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+  vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+  -- zen
 
-vim.notify = function(msg, log_level, opts)
-  if msg:match("Autocmd BufEnter fired!") then
-    return
+  -- Apagar y prender incline al entrar/salir de ZenMode
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "ZenModeEnter",
+    callback = function()
+      vim.g.incline_enabled = false
+      require("incline").disable()
+    end,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "ZenModeLeave",
+    callback = function()
+      vim.g.incline_enabled = true
+      require("incline").enable()
+    end,
+  })
+
+
+
+  vim.notify = function(msg, log_level, opts)
+    if msg:match("Autocmd BufEnter fired!") then
+      return
+    end
+    vim.api.nvim_echo({{msg}}, true, {})
   end
-  vim.api.nvim_echo({{msg}}, true, {})
-end
 
 
-vim.opt.signcolumn = "yes:1"
-vim.opt.numberwidth = 2
+  vim.opt.signcolumn = "yes:1"
+  vim.opt.numberwidth = 2
 
 
 
-vim.defer_fn(function()
-  vim.cmd('TSToggle highlight')
-end, 300)
+  vim.defer_fn(function()
+    vim.cmd('TSToggle highlight')
+  end, 300)
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  group = vim.api.nvim_create_augroup("LualineThemeReload", { clear = true }),
-  callback = function()
-    local cs = vim.g.colors_name
-    reload_lualine(cs)
-  end,
-})
-
-
-local navic = require("nvim-navic")
-local devicons = require("nvim-web-devicons")
-vim.o.autochdir = false
---
--- vim.o.winbar =
---   "%f %{%v:lua.WinbarIcon()%} > " .. "%{%v:lua.require'nvim-navic'.get_location()%}"
-
--- porfin es asi p
-vim.api.nvim_create_autocmd("BufEnter", {
-  callback = function()
-    -- Restaurar cwd real automáticamente
-    vim.cmd("cd .")
-
-    -- Refrescar winbar + navic
-    pcall(function()
-      require("nvim-navic").refresh()
-    end)
-
-    vim.cmd("redrawstatus")
-  end,
-})
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    group = vim.api.nvim_create_augroup("LualineThemeReload", { clear = true }),
+    callback = function()
+      local cs = vim.g.colors_name
+      reload_lualine(cs)
+    end,
+  })
 
 
-vim.api.nvim_create_autocmd('BufWinEnter', {
+  local navic = require("nvim-navic")
+  local devicons = require("nvim-web-devicons")
+  vim.o.autochdir = false
+  --
+  -- vim.o.winbar =
+  --   "%f %{%v:lua.WinbarIcon()%} > " .. "%{%v:lua.require'nvim-navic'.get_location()%}"
+
+  -- porfin es asi p
+  vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+      -- Restaurar cwd real automáticamente
+      vim.cmd("cd .")
+
+      -- Refrescar winbar + navic
+      pcall(function()
+        require("nvim-navic").refresh()
+      end)
+
+      vim.cmd("redrawstatus")
+    end,
+  })
+
+
+  vim.api.nvim_create_autocmd('BufWinEnter', {
     command = 'set formatoptions-=cro',
-})
+  })
 
-vim.opt.guicursor = ""
+  vim.opt.guicursor = ""
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = {
-    "base16-gruvbox-dark-pale",
-    "kanagawa-dragon",
-    "cold",
-    "dark_plus",
-    "kanso",
-    "ayu",
-    "kanso-zen",
-    "kanso-mist",
-    "kanso-pearl",
-    "base16-ayu-dark",
-    "base16-gruvbox-material-dark-medium",
-    "custom_v2",
-    "gruvbox",
-    "vague",
-    "github_dark_default",
-    "github_dark_dimmed"
-  },
-  callback = function()
-    vim.cmd [[
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = {
+      "mello",
+      "base16-gruvbox-dark-pale",
+      "kanagawa-dragon",
+      "cold",
+      "dark_plus",
+      "kanso",
+      "ayu",
+      "kanso-zen",
+      "kanso-mist",
+      "kanso-pearl",
+      "base16-ayu-dark",
+      "base16-gruvbox-material-dark-medium",
+      "custom_v2",
+      "gruvbox",
+      "vague",
+      "github_dark_default",
+      "github_dark_dimmed"
+    },
+    callback = function()
+      vim.cmd [[
       highlight RainbowDelimiterRed    guifg=#DDCca9
       highlight RainbowDelimiterYellow guifg=#DEBF7C
       highlight RainbowDelimiterBlue   guifg=#8aa19a
@@ -250,53 +251,43 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 
       highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
       highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
-    ]]
-  end,
-})
+      ]]
+    end,
+  })
 
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
+  local actions = require("telescope.actions")
+  local action_state = require("telescope.actions.state")
 
-local function open_in_oil(prompt_bufnr)
-  local entry = action_state.get_selected_entry()
-  actions.close(prompt_bufnr)
+  local function open_in_oil(prompt_bufnr)
+    local entry = action_state.get_selected_entry()
+    actions.close(prompt_bufnr)
 
-  local path = entry.path or entry.value
-  if path then
-    require("oil").open(path)
+    local path = entry.path or entry.value
+    if path then
+      require("oil").open(path)
+    end
   end
-end
 
-require("telescope").setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-o>"] = open_in_oil,
-      },
-      n = {
-        ["o"] = open_in_oil,
+  require("telescope").setup({
+    defaults = {
+      mappings = {
+        i = {
+          ["<C-o>"] = open_in_oil,
+        },
+        n = {
+          ["o"] = open_in_oil,
+        },
       },
     },
-  },
-})
+  })
 
---
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "dired",
---   callback = function()
---     vim.keymap.set("n", "'", function()
---       vim.cmd.tcd(vim.fn.expand("%:p:h"))
---     end, { buffer = true })
---   end,
--- })
---
-vim.keymap.set("n", "¿", function()
-  local dir = vim.fn.expand("%:p:h")
-  vim.cmd.lcd(dir)
-  require("dired").open(dir)
-end, { buffer = true })
+  vim.keymap.set("n", "¿", function()
+    local dir = vim.fn.expand("%:p:h")
+    vim.cmd.lcd(dir)
+    require("dired").open(dir)
+  end, { buffer = true })
 
-require('fff').setup({
+  require('fff').setup({
     base_path = vim.fn.getcwd(),
     prompt = '🪿 ',
     title = 'FFFiles',
@@ -372,101 +363,178 @@ require('fff').setup({
       log_file = vim.fn.stdpath('log') .. '/fff.log',
       log_level = 'info',
     }
-})
+  })
 
-local cwd = vim.fn.getcwd()
-local project_file = cwd .. '/project.godot'
-local is_godot_project = vim.uv.fs_stat(project_file) ~= nil
-local godot_project_path = cwd
+  local cwd = vim.fn.getcwd()
+  local project_file = cwd .. '/project.godot'
+  local is_godot_project = vim.uv.fs_stat(project_file) ~= nil
+  local godot_project_path = cwd
 
-if is_godot_project then
+  if is_godot_project then
     local server_pipe = godot_project_path .. '/server.pipe'
     local is_server_running = vim.uv.fs_stat(server_pipe) ~= nil
 
     if not is_server_running then
-        vim.fn.serverstart(server_pipe)
-        print("Godot server started at " .. server_pipe)
+      vim.fn.serverstart(server_pipe)
+      print("Godot server started at " .. server_pipe)
     else
-        print("Godot server already running")
+      print("Godot server already running")
     end
-else
-  -- not a godot proyect
-end
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "oil",
-  callback = function(args)
-    vim.b[args.buf].todo_comments_disable = true
-  end,
-})
+  else
+    -- not a godot proyect
+  end
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "oil",
+    callback = function(args)
+      vim.b[args.buf].todo_comments_disable = true
+    end,
+  })
 
-vim.opt.list =false 
+  vim.opt.list =false 
 
-vim.opt.listchars = {
-  eol = " ",
-  nbsp = " ",
-  trail = "•",
-  extends = "⟩",
-  precedes = "⟨",
-  space= "‧",
-}
+  vim.opt.listchars = {
+    eol = " ",
+    nbsp = " ",
+    trail = "•",
+    extends = "⟩",
+    precedes = "⟨",
+    space= "‧",
+  }
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "dark_plus",
-  callback = function(args)
-    vim.cmd("highlight LspReferenceText guibg=#6f7b68")
-    vim.cmd("highlight LspReferenceRead guibg=#6f7b68")
-  end,
-})
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "dark_plus",
+    callback = function(args)
+      vim.cmd("highlight LspReferenceText guibg=#6f7b68")
+      vim.cmd("highlight LspReferenceRead guibg=#6f7b68")
+    end,
+  })
 
-vim.lsp.inlay_hint.enable(false)
+  vim.lsp.inlay_hint.enable(false)
 
-vim.o.statuscolumn = " %C%l%s"
--- vim.o.statuscolumn = "%C%{v:relnum?v:relnum:v:lnum}%s"
-vim.o.signcolumn = "yes"
-vim.g.rest_nvim = {
-  response = {
-    hooks = {
-      decode_url = true,
-      format = true,
-      custom = function(response)
-        local ok, json = pcall(vim.json.decode, response.body)
-        if ok then
-          response.body = vim.inspect(json)
-        end
-        return response
-      end,
+  vim.o.statuscolumn = " %C%l%s "
+  -- vim.o.statuscolumn = " %C%l%s"
+  -- vim.o.statuscolumn = "%C%{v:relnum?v:relnum:v:lnum}%s"
+  vim.o.signcolumn = "yes"
+  vim.g.rest_nvim = {
+    response = {
+      hooks = {
+        decode_url = true,
+        format = true,
+        custom = function(response)
+          local ok, json = pcall(vim.json.decode, response.body)
+          if ok then
+            response.body = vim.inspect(json)
+          end
+          return response
+        end,
+      }
     }
   }
-}
 
-if vim.g.neovide then
-  -- Asegúrate de tener una fuente por defecto
-  if vim.o.guifont == "" then
-    -- vim.o.guifont = "Hack:h9:b:#e-subpixelantialias:#h-none"
+  if vim.g.neovide then
+    -- Asegúrate de tener una fuente por defecto
+    if vim.o.guifont == "" then
+      -- vim.o.guifont = "Hack:h9:b:#e-subpixelantialias:#h-none"
 
-    vim.o.guifont = "Google Sans Code:h9:b:#e-subpixelantialias:#h-none"
-    -- vim.o.guifont = "Hack:h10:b:#h-none:#alias"
+      vim.o.guifont = "Consolas:h11:b:#e-subpixelantialias:#h-none:"
+      -- vim.o.guifont = "Hack:h10:b:#h-none:#alias"
+    end
+
+    vim.g.neovide_text_gamma = 2
+    vim.g.neovide_text_contrast =-2
+    vim.o.linespace = -2
+    -- Zoom in
+    vim.keymap.set('n', '<C-+>', function()
+      local font = vim.o.guifont
+      local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
+      size = size + 1
+      vim.o.guifont = font:gsub("h%d+", "h"..size)
+    end, { desc = "Neovide Zoom In" })
+
+    -- Zoom out
+    vim.keymap.set('n', '<C-->', function()
+      local font = vim.o.guifont
+      local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
+      size = size - 1
+      vim.o.guifont = font:gsub("h%d+", "h"..size)
+    end, { desc = "Neovide Zoom Out" })
   end
 
-vim.g.neovide_text_gamma = 2
-vim.g.neovide_text_contrast =-2
-  vim.o.linespace = -2
-  -- Zoom in
-  vim.keymap.set('n', '<C-+>', function()
-    local font = vim.o.guifont
-    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
-    size = size + 1
-    vim.o.guifont = font:gsub("h%d+", "h"..size)
-  end, { desc = "Neovide Zoom In" })
-
-  -- Zoom out
-  vim.keymap.set('n', '<C-->', function()
-    local font = vim.o.guifont
-    local size = tonumber(font:match("h(%d+)")) or 14  -- fallback a 14 si es nil
-    size = size - 1
-    vim.o.guifont = font:gsub("h%d+", "h"..size)
-  end, { desc = "Neovide Zoom Out" })
-end
 
 
+  -- Forzar resaltado básico de C para archivos .zc hasta que salga el parser oficial
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "zc",
+    callback = function()
+      vim.bo.syntax = "c"
+    end,
+  })
+
+  vim.filetype.add({
+    extension = {
+      zc = "zenc",
+    },
+  })
+
+  vim.filetype.add({
+    extension = {
+      c3 = "c3",
+      c3i = "c3",
+      c3t = "c3",
+    },
+  });
+  vim.treesitter.language.register("c", "c3")
+  -- Si usas Goneovim, esto ayuda a que las ventanas se sientan independientes
+
+if vim.g.goneovim then
+    local font = "Consolas" -- cambiá por tu fuente
+    local initial_font = font .. ":h10:b"
+    vim.o.guifont = initial_font
+
+
+  vim.opt.guicursor =
+    "n-v-c:block-blinkwait700-blinkon400-blinkoff250," ..
+    "i-ci-ve:ver25-blinkwait700-blinkon300-blinkoff200," ..
+    "r-cr:hor20,o:hor50"
+    local code_groups = {
+      "Comment", "Constant", "Identifier", "Statement",
+      "PreProc", "Type", "Special", "Underlined",
+      "Function", "Keyword", "String", "Number", "Boolean"
+    }
+
+    for _, group in ipairs(code_groups) do
+      vim.api.nvim_set_hl(0, group, {bold = true})
+    end
+    -- vim.cmd("GonvimGridFont " .. initial_font)
+    local win_font_size = 10
+
+    local function default_font()
+      -- TODO: Extract all window and apply
+      win_font_size = 10
+      local new = ('"' .. font .. ":h" .. win_font_size .. ":b" .. '"')
+      local command= ('GonvimGridFont ' .. new)
+      print(command)
+      vim.cmd(command)
+    end
+
+    local function default_gui()
+      local font_reset= font .. ":h" .. win_font_size ..":b"
+      vim.o.guifont = font_reset
+    end
+    local function zoom_font(delta)
+      win_font_size = win_font_size + delta
+
+      local new = ('"' .. font .. ":h" .. win_font_size .. ":b" .. '"')
+      local command= ('GonvimGridFont ' .. new)
+      print(command)
+
+      vim.cmd(command)
+
+
+    end
+    vim.keymap.set("n", "<C-+>", function() zoom_font(1) end)
+    vim.keymap.set("n", "<C-->", function() zoom_font(-1) end)
+    vim.keymap.set("n", "¿", function() default_font() end)
+    vim.keymap.set("n", "¡", function() default_gui() end)
+  end
 

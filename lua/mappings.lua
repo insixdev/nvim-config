@@ -8,7 +8,6 @@ vim.api.nvim_set_keymap("n", "<leader>fd",
   ":call fzf#run({'source': 'fd --type d', 'sink': 'edit'})<CR>",
   { noremap = true, silent = true })
 -- Siempre repetir f/t como en Vim clásico
-
 map("i", "jk", "<ESC>")
 
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -19,7 +18,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Abrir Oil en el dir actual" })
-vim.keymap.set("n", "¡", "<CMD>Dired<CR>", { desc = "Abrir Oil en el dir actual" })
+-- vim.keymap.set("n", "¡", "<CMD>Dired<CR>", { desc = "Abrir Oil en el dir actual" })
 -- no se para que pero interferia en neotree
 -- vim.api.nvim_create_autocmd("BufEnter", {
 --     callback = function()
@@ -149,7 +148,10 @@ vim.keymap.set("n", "<C-S-l>",  ":vertical resize -2<CR>")
 vim.keymap.set("n", "<C-S-h>", ":vertical resize +2<CR>")
 
 vim.api.nvim_create_autocmd("BufEnter", { 
+
   callback = function()
+
+    vim.cmd("TSEnable highlight")
     local ft = vim.bo.filetype
     -- Solo asignar Tab si NO es un buffer de plugin
     -- print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)  -- COMENTADA O ELIMINADA
@@ -170,7 +172,7 @@ vim.keymap.set({"n", "v", "o"}, "<C-a>", "$", {noremap = true, silent = true})
 
 vim.keymap.set("n", "ñ", ":tabNext<CR>", { noremap = true, silent = true })
 vim.defer_fn(function()
-  vim.cmd("colorscheme custom")
+  vim.cmd("colorscheme custom_v2")
 end, 100)
 
 vim.keymap.set(
@@ -442,4 +444,15 @@ vim.keymap.set("n", "<M-b>", function()
     prompt_position = "top",
   })
 end)
+
+local opts = { noremap = true, silent = false }
+vim.keymap.set(
+  "n",
+  "L",
+  function ()
+    vim.fn.feedkeys(":AsyncRun ", "n")
+   vim.cmd("copen 10")
+  end,
+  opts
+)
 

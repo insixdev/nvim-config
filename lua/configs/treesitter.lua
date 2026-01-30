@@ -9,6 +9,17 @@ return {
     "nvim-treesitter/nvim-treesitter-context",
   },
   config = function()
+
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.c3 = {
+  install_info = {
+    url = "https://github.com/c3lang/tree-sitter-c3",
+    files = { "src/parser.c" },
+    branch = "main",
+  },
+  filetype = "c3",
+}
     require("nvim-treesitter.configs").setup({
 
       -- Instalación automática de parsers
@@ -16,6 +27,7 @@ return {
         -- Lenguajes principales
         "rust",
         "c",
+        "c3",
         "cpp",
         "typescript",
         "javascript",
@@ -69,7 +81,19 @@ return {
         -- Necesario para spellcheck en comentarios
         additional_vim_regex_highlighting = false,
       },
-      
+
+        parser_install_info = {
+                c3 = {
+                    install_info = {
+                        url = "https://github.com/c3lang/tree-sitter-c3",
+                        files = { "src/parser.c", "src/scanner.c" },
+                        branch = "main",
+                    },
+                    sync_install = false, -- Set to true if you want to install synchronously
+                    auto_install = true,  -- Automatically install when opening a file
+                    filetype = "c3",      -- if filetype does not match the parser name
+                },
+            },
       -- Indentación basada en Tree-sitter
       indent = {
         enable = false,

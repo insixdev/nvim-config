@@ -1,5 +1,9 @@
 return {
   {
+    lazy = false,
+    "paretje/nvim-man",
+  },
+  {
 
     lazy = false,
     'norcalli/nvim-colorizer.lua'
