@@ -1,5 +1,11 @@
 return {
   {
+
+    lazy = false,
+    "nanotee/zoxide.vim"
+  },
+  {
+
     lazy = false,
     "paretje/nvim-man",
   },

@@ -456,3 +456,9 @@ vim.keymap.set(
   opts
 )
 
+vim.keymap.set(
+  "n",
+  "Z",
+  ":Zi<CR>",
+  opts
+)

@@ -10,7 +10,6 @@ vim.o.writebackup = false    -- Desactiva backup al guardar
 -- add yours here!
 vim.wo.relativenumber = true
 
-vim.o.showtabline = 0  -- 0 = nunca mostrar, 1 = solo si hay >1 tab, 2 = siempre mostrar
 -- local o = vim.o
 vim.o.cursorlineopt ='both' -- to enable cursorline!
 vim.opt.wildmenu = true
@@ -129,7 +128,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
   --
   --
   -- Habilitar winbar global
-  vim.o.showtabline = 0  -- desactiva statusline de abajo
+  vim.o.showtabline = 0 -- desactiva statusline de abajo
   --vim.o.winbar = ""
   vim.opt.fillchars:append({ eob = "~" })
   vim.opt.statusline = "f"
@@ -534,7 +533,7 @@ if vim.g.goneovim then
     end
     vim.keymap.set("n", "<C-+>", function() zoom_font(1) end)
     vim.keymap.set("n", "<C-->", function() zoom_font(-1) end)
-    vim.keymap.set("n", "¿", function() default_font() end)
-    vim.keymap.set("n", "¡", function() default_gui() end)
+    vim.keymap.set("n", "¡", function() default_font() end)
+    vim.keymap.set("n", "¿", function() default_gui() end)
   end
 
