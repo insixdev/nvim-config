@@ -15,7 +15,7 @@ let g:colors_name = 'custom'
 " Core groups
 " ─────────────────────────────────────────────────────────────
 highlight CursorLine cterm=NONE ctermbg=236 guibg=#181818
-highlight Normal        guifg=#edddc0 guibg=#262626"#181818"#0d1117"#181818
+highlight Normal        guifg=#edddc0 guibg=#1F1F1F"#262626"#181818"#0d1117"#181818
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
 
@@ -35,7 +35,7 @@ highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
 highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
 
 " #6f7b68 
-highlight Comment       guifg=#e6d76a gui=Italic
+highlight Comment       guifg=#a18e78 gui=Italic
 highlight Conceal       guibg=#262626
 highlight Constant      guifg=#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
@@ -46,11 +46,11 @@ highlight Directory     guifg=#ccac93
 highlight Error         guifg=#C34143 gui=undercurl
 highlight Function      guifg=#ffe3e1"#b3b7bd"#dde0cc"#FFCC8A
 highlight PreProc       guifg=#ffcbb3
-highlight Identifier    guifg=#FFC272"#ffa74a"#fcb838
+highlight Identifier    guifg=#cedea0"#FFC272"#ffa74a"#fcb838
 highlight Statement     guifg=#FF7B72"#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48
 
-highlight LineNrAbove   guifg=#888888 guibg=#262626
-highlight LineNrBelow   guifg=#888888 guibg=#262626
+highlight LineNrAbove   guifg=#888888 guibg=#1F1F1F
+highlight LineNrBelow   guifg=#888888 guibg=#1F1F1F
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
@@ -64,7 +64,7 @@ highlight QuickFixLine  guibg=#303030
 highlight Search        guibg=#5F5958
 highlight Special       guifg=#b3ae96
 highlight SpecialChar   guifg=#c78f69 
-highlight SpecialKey    guifg=#676767 gui=Italic
+highlight SpecialKey    guifg=#676767 
 highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
 highlight StatusLine    guifg=#ffccff guibg=#33302b
 highlight String        guifg=#A2A970
@@ -75,7 +75,7 @@ highlight TabLineFill   guifg=#A09998 guibg=#212121
 highlight TabLineSel    guifg=#A09998 guibg=#40474F
 highlight Title         guifg=#FFFEDB term=none cterm=none
 highlight Todo          guifg=#8B9698
-highlight Type          guifg=#a89f8f gui=Italic
+highlight Type          guifg=#a89f8f 
 highlight Underlined    gui=undercurl
 highlight VertSplit     guifg=#303030
 highlight Visual        guibg=#454545
@@ -83,15 +83,15 @@ highlight WarningMsg    guifg=#FFFEDB
 highlight Float         guifg=#6f7b68
 highlight Number        guifg=#cf95a9
 highlight Boolean       guifg=#6f7b68
-highlight WinSeparator  guibg=#101010 guifg=#888888
+highlight WinSeparator  guibg=#101010 guifg=#333232
 highlight WinBar         guibg=#101010 guifg=#888888
 highlight WinBarNC    guibg=#101010   guifg=#888888
 
 hi clear RustEnum 
-hi RustEnum guifg=#FFC272 gui=Italic
+hi RustEnum guifg=#FFC272 
 
 hi clear RustAttribute 
-hi RustAttribute guifg=#caa393"#899BAD "#79C0FF"#a37e98"#ff8f85 gui=Italic
+hi RustAttribute guifg=#caa393"#899BAD "#79C0FF"#a37e98"#ff8f85 
 
 hi clear rustFoldBraces 
 "hi rustFoldBraces guifg=#e8a72e 

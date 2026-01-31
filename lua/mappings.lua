@@ -151,7 +151,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
   callback = function()
 
-    vim.cmd("TSEnable highlight")
+    -- vim.cmd("TSEnable highlight")
     local ft = vim.bo.filetype
     -- Solo asignar Tab si NO es un buffer de plugin
     -- print("Autocmd BufEnter fired! Filetype: " .. vim.bo.filetype)  -- COMENTADA O ELIMINADA

@@ -9,12 +9,12 @@ return {
 
     return {
       signs = {
-        add          = { text = " ▎", texthl = "GitSignsAdd", numhl = "GitSignsAddNr" },
-        change       = { text = " ▎", texthl = "GitSignsChange", numhl = "GitSignsChangeNr" },
-        delete       = { text = " ▎", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
-        topdelete    = { text = " ▎", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
-        changedelete = { text = " ▎", texthl = "GitSignsChange", numhl = "GitSignsChangeNr" },
-        untracked    = { text = " ▎", texthl = "GitSignsAdd", numhl = "GitSignsAddNr" },
+        add          = { text = "┃", texthl = "GitSignsAdd", numhl = "GitSignsAddNr" },
+        change       = { text = "┃", texthl = "GitSignsChange", numhl = "GitSignsChangeNr" },
+        delete       = { text = "┃", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
+        topdelete    = { text = "┃", texthl = "GitSignsDelete", numhl = "GitSignsDeleteNr" },
+        changedelete = { text = "┃", texthl = "GitSignsChange", numhl = "GitSignsChangeNr" },
+        untracked    = { text = "┃", texthl = "GitSignsAdd", numhl = "GitSignsAddNr" },
       },
 
       current_line_blame = true,

@@ -486,15 +486,19 @@ vim.api.nvim_create_autocmd("DirChanged", {
   -- Si usas Goneovim, esto ayuda a que las ventanas se sientan independientes
 
 if vim.g.goneovim then
-    local font = "Consolas" -- cambiá por tu fuente
-    local initial_font = font .. ":h10:b"
+    local font = "Iosevka" -- cambiá por tu fuente
+    local initial_font = font .. ":h13:b"
     vim.o.guifont = initial_font
 
 
-  vim.opt.guicursor =
-    "n-v-c:block-blinkwait700-blinkon400-blinkoff250," ..
-    "i-ci-ve:ver25-blinkwait700-blinkon300-blinkoff200," ..
-    "r-cr:hor20,o:hor50"
+
+vim.opt.guicursor =
+  "n-v-c:block," ..
+  "i:block-blinkwait700-blinkon400-blinkoff250," ..
+  "ci-ve:ver25-blinkwait700-blinkon300-blinkoff200," ..
+  "r-cr:hor20,o:hor50"
+  vim.opt.linespace = -3
+
     local code_groups = {
       "Comment", "Constant", "Identifier", "Statement",
       "PreProc", "Type", "Special", "Underlined",
@@ -505,11 +509,11 @@ if vim.g.goneovim then
       vim.api.nvim_set_hl(0, group, {bold = true})
     end
     -- vim.cmd("GonvimGridFont " .. initial_font)
-    local win_font_size = 10
+    local win_font_size = 13
 
     local function default_font()
       -- TODO: Extract all window and apply
-      win_font_size = 10
+      win_font_size = 13
       local new = ('"' .. font .. ":h" .. win_font_size .. ":b" .. '"')
       local command= ('GonvimGridFont ' .. new)
       print(command)
@@ -529,8 +533,8 @@ if vim.g.goneovim then
 
       vim.cmd(command)
 
-
     end
+
     vim.keymap.set("n", "<C-+>", function() zoom_font(1) end)
     vim.keymap.set("n", "<C-->", function() zoom_font(-1) end)
     vim.keymap.set("n", "¡", function() default_font() end)
