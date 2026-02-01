@@ -541,3 +541,42 @@ vim.opt.guicursor =
     vim.keymap.set("n", "¿", function() default_gui() end)
   end
 
+
+  vim.o.statuscolumn = " %C%l%s"
+vim.filetype.add({
+  extension = {
+    zc = "zc",
+  },
+})
+
+local ns = vim.api.nvim_create_namespace("diagnostics")
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*.zig",
+  callback = function()
+    local file = vim.fn.expand("%:p")
+
+    vim.fn.jobstart({ "zig", "build-exe", file, "-fno-emit-bin" }, {
+      stderr_buffered = true,
+      on_stderr = function(_, data)
+        if not data then return end
+
+        local diag = {}
+        for _, line in ipairs(data) do
+          local f, l, c, msg = line:match("(.+):(%d+):(%d+): (.+)")
+          if f then
+            table.insert(diag, {
+              lnum = tonumber(l) - 1,
+              col = tonumber(c) - 1,
+              message = msg,
+              severity = vim.diagnostic.severity.ERROR,
+              source = "zig build", 
+            })
+          end
+        end
+
+        vim.diagnostic.set(ns, 0, diag, {})
+      end,
+    })
+  end,
+})
+

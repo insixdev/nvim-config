@@ -10,14 +10,15 @@ return {
   --     })
   --   end,d
   -- },
-  {
-    lazy = false,
-    "nvim-treesitter/nvim-treesitter-context",
-    opts = {
-      separator = "-",
-    }
-
-  },
+  --
+  -- {
+  --   lazy = false,
+  --   "nvim-treesitter/nvim-treesitter-context",
+  --   opts = {
+  --     separator = "-",
+  --   }
+  --
+  -- },
   {
     lazy = false,
     "Wansmer/treesj",
