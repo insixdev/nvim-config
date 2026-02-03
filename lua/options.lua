@@ -176,9 +176,9 @@ vim.api.nvim_create_autocmd("DirChanged", {
 
 
 
-  vim.defer_fn(function()
-    vim.cmd('TSToggle highlight')
-  end, 300)
+  -- vim.defer_fn(function()
+  --   vim.cmd('TSToggle highlight')
+  -- end, 300)
 
   vim.api.nvim_create_autocmd("ColorScheme", {
     group = vim.api.nvim_create_augroup("LualineThemeReload", { clear = true }),
@@ -460,7 +460,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
     end, { desc = "Neovide Zoom Out" })
   end
 
- vim.treesitter.language.register("c", "c3")
+ -- vim.treesitter.language.register("c", "c3")
   -- Si usas Goneovim, esto ayuda a que las ventanas se sientan independientes
 
   if vim.g.goneovim then
@@ -564,3 +564,17 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     vim.bo.filetype = "c"
   end,
 })
+
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern =  "c3" ,
+      callback = function()
+        vim.defer_fn(function()
+          vim.notify("c3 loaded", vim.log.levels.INFO)
+          vim.treesitter.start()
+        end,
+        300
+      )
+    end,
+  })
+

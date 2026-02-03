@@ -1,202 +1,50 @@
 return {
+  lazy = false,
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  lazy = false,
-  -- event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    "windwp/nvim-ts-autotag",
     "nvim-treesitter/nvim-treesitter-context",
   },
+  
   config = function()
+    -- Verifica que el módulo existe antes de cargarlo
+    local ok, configs = pcall(require, "nvim-treesitter.configs")
+    if not ok then
+      vim.notify("nvim-treesitter not loaded yet", vim.log.levels.WARN)
+      return
+    end
+    
+    configs.setup({
 
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-
-parser_config.c3 = {
-  install_info = {
-    url = "https://github.com/c3lang/tree-sitter-c3",
-    files = { "src/parser.c" },
-    branch = "main",
-  },
-  filetype = "c3",
-}
-    require("nvim-treesitter.configs").setup({
-
-      -- Instalación automática de parsers
       ensure_installed = {
-        -- Lenguajes principales
-        "rust",
-        "c",
-        "c3",
-        "cpp",
-        "typescript",
-        "javascript",
-        "lua",
-        "python",
-        "bash",
-        
-        -- Web
-        "html",
-        "css",
-        "tsx",
-        "vue",
-        "svelte",
-        
-        -- Configuración
-        "json",
-        "yaml",
-        "toml",
-        
-        -- Markdown y documentación
-        "markdown",
-        "markdown_inline",
-        
-        -- Otros útiles
-        "vim",
-        "vimdoc",
-        "regex",
-        "go",
-        "java",
+        "lua", "vim","c3", "vimdoc", "markdown", "markdown_inline",
+        "bash", "c", "cpp", "rust", "python", 
+        "javascript", "typescript", "tsx",
+        "html", "css", "json", "yaml", "toml",
+        "go", "java",
       },
-      
-      -- Instalar parsers de forma sincrónica (solo aplicable a ensure_installed)
-      sync_install = false,
-      
-      -- Instalar parsers automáticamente cuando abras un archivo
-      auto_install = true,
-      
-      -- Resaltado de sintaxis
       highlight = {
         enable = true,
-          additional_vim_regex_highlighting = false, -- 
-        -- Desactivar en archivos grandes para mantener performance
-        disable = function(lang, buf)
-          local max_filesize = 100 * 1024 -- 100 KB
-          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-          if ok and stats and stats.size > max_filesize then
-            return true
-          end
-        end,
-        
-        -- Necesario para spellcheck en comentarios
         additional_vim_regex_highlighting = false,
       },
 
-        parser_install_info = {
-                c3 = {
-                    install_info = {
-                        url = "https://github.com/c3lang/tree-sitter-c3",
-                        files = { "src/parser.c", "src/scanner.c" },
-                        branch = "main",
-                    },
-                    sync_install = false, -- Set to true if you want to install synchronously
-                    auto_install = true,  -- Automatically install when opening a file
-                    filetype = "c3",      -- if filetype does not match the parser name
-                },
-            },
-      -- Indentación basada en Tree-sitter
-      indent = {
-        enable = false,
-        -- Python a veces tiene problemas, ajusta según necesites
-        disable = {},
+      indent = { enable = false },
+    })
+    local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+    parser_config.c3 = {
+      install_info = {
+        url = "https://github.com/c3lang/tree-sitter-c3",
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "main",
       },
-      
-      -- Selección incremental
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = "<CR>",
-          node_incremental = "<CR>",
-          scope_incremental = "<S-CR>",
-          node_decremental = "<BS>",
-        },
-      },
-      
-      -- Text objects para movimiento y manipulación de código
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true,
-          keymaps = {
-            -- Funciones
-            ["af"] = "@function.outer",
-            ["if"] = "@function.inner",
-            
-            -- Clases
-            ["ac"] = "@class.outer",
-            ["ic"] = "@class.inner",
-            
-            -- Parámetros/argumentos
-            ["aa"] = "@parameter.outer",
-            ["ia"] = "@parameter.inner",
-            
-            -- Bloques
-            ["ab"] = "@block.outer",
-            ["ib"] = "@block.inner",
-            
-            -- Condicionales
-            ["ai"] = "@conditional.outer",
-            ["ii"] = "@conditional.inner",
-            
-            -- Loops
-            ["al"] = "@loop.outer",
-            ["il"] = "@loop.inner",
-          },
-        },
-        
-        -- Moverse entre funciones, clases, etc.
-        move = {
-          enable = true,
-          set_jumps = true,
-          goto_next_start = {
-            ["]f"] = "@function.outer",
-            ["]c"] = "@class.outer",
-            ["]a"] = "@parameter.inner",
-          },
-          goto_next_end = {
-            ["]F"] = "@function.outer",
-            ["]C"] = "@class.outer",
-            ["]A"] = "@parameter.inner",
-          },
-          goto_previous_start = {
-            ["[f"] = "@function.outer",
-            ["[c"] = "@class.outer",
-            ["[a"] = "@parameter.inner",
-          },
-          goto_previous_end = {
-            ["[F"] = "@function.outer",
-            ["[C"] = "@class.outer",
-            ["[A"] = "@parameter.inner",
-          },
-        },
-        
-        -- Swap de nodos (intercambiar parámetros, etc.)
-        swap = {
-          enable = true,
-          swap_next = {
-            ["<leader>sp"] = "@parameter.inner",
-          },
-          swap_previous = {
-            ["<leader>sP"] = "@parameter.inner",
-          },
-        },
-      },
-      
-      -- Auto-cerrado de tags HTML/JSX
-      autotag = {
-        enable = true,
-        enable_rename = true,
-        enable_close = true,
-        enable_close_on_slash = true,
+      filetype = "c3",
+    }
+    vim.filetype.add({
+      extension = {
+        c3 = "c3",
       },
     })
-    
-    -- Habilitar colores verdaderos
-    vim.opt.termguicolors = true
-    
-    -- Folding basado en Tree-sitter (opcional)
-    vim.opt.foldmethod = "expr"
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-    vim.opt.foldenable = false -- Empezar con folds abiertos
-  end,
+end,
 }
