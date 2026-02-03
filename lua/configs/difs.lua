@@ -1,6 +1,6 @@
 return {
   lazy = false,
-  "esmuellert/vscode-diff.nvim",
+  "esmuellert/codediff.nvim",
   dependencies = { "MunifTanjim/nui.nvim" },
   config = function()
     require("vscode-diff").setup({

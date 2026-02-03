@@ -389,15 +389,17 @@ vim.api.nvim_create_autocmd("DirChanged", {
     end,
   })
 
-  vim.opt.list =false 
+  vim.opt.list = false 
 
   vim.opt.listchars = {
-    eol = " ",
-    nbsp = " ",
+    -- eol = " ",
+    -- nbsp = " ",
+    -- tab = ".",
     trail = "•",
     extends = "⟩",
-    precedes = "⟨",
-    space= "‧",
+    -- space= ""
+    -- nbsp = "",
+    -- precedes = "⟨",
   }
 
   vim.api.nvim_create_autocmd("ColorScheme", {
@@ -410,7 +412,6 @@ vim.api.nvim_create_autocmd("DirChanged", {
 
   vim.lsp.inlay_hint.enable(false)
 
-  vim.o.statuscolumn = " %C%l%s "
   -- vim.o.statuscolumn = " %C%l%s"
   -- vim.o.statuscolumn = "%C%{v:relnum?v:relnum:v:lnum}%s"
   vim.o.signcolumn = "yes"
@@ -459,45 +460,20 @@ vim.api.nvim_create_autocmd("DirChanged", {
     end, { desc = "Neovide Zoom Out" })
   end
 
-
-
-  -- Forzar resaltado básico de C para archivos .zc hasta que salga el parser oficial
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "zc",
-    callback = function()
-      vim.bo.syntax = "c"
-    end,
-  })
-
-  vim.filetype.add({
-    extension = {
-      zc = "zenc",
-    },
-  })
-
-  vim.filetype.add({
-    extension = {
-      c3 = "c3",
-      c3i = "c3",
-      c3t = "c3",
-    },
-  });
-  vim.treesitter.language.register("c", "c3")
+ vim.treesitter.language.register("c", "c3")
   -- Si usas Goneovim, esto ayuda a que las ventanas se sientan independientes
 
-if vim.g.goneovim then
-    local font = "Iosevka" -- cambiá por tu fuente
-    local initial_font = font .. ":h13:b"
+  if vim.g.goneovim then
+    local font = "Iosevka Term" -- cambiá por tu fuente
+    local initial_font = font .. ":h12:b"
     vim.o.guifont = initial_font
 
-
-
-vim.opt.guicursor =
-  "n-v-c:block," ..
-  "i:block-blinkwait700-blinkon400-blinkoff250," ..
-  "ci-ve:ver25-blinkwait700-blinkon300-blinkoff200," ..
-  "r-cr:hor20,o:hor50"
-  vim.opt.linespace = -3
+    vim.opt.guicursor =
+    "n-v-c:block," ..
+    "i:block-blinkwait700-blinkon400-blinkoff250," ..
+    "ci-ve:ver25-blinkwait700-blinkon300-blinkoff200," ..
+    "r-cr:hor20,o:hor50"
+    vim.opt.linespace = -2
 
     local code_groups = {
       "Comment", "Constant", "Identifier", "Statement",
@@ -532,7 +508,6 @@ vim.opt.guicursor =
       print(command)
 
       vim.cmd(command)
-
     end
 
     vim.keymap.set("n", "<C-+>", function() zoom_font(1) end)
@@ -542,7 +517,7 @@ vim.opt.guicursor =
   end
 
 
-  vim.o.statuscolumn = " %C%l%s"
+  vim.o.statuscolumn = " %l%s"
 vim.filetype.add({
   extension = {
     zc = "zc",
@@ -555,7 +530,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = function()
     local file = vim.fn.expand("%:p")
 
-    vim.fn.jobstart({ "zig", "build-exe", file, "-fno-emit-bin" }, {
+    vim.fn.jobstart({"zig", "build"}, {
       stderr_buffered = true,
       on_stderr = function(_, data)
         if not data then return end
@@ -569,7 +544,7 @@ vim.api.nvim_create_autocmd("BufWritePost", {
               col = tonumber(c) - 1,
               message = msg,
               severity = vim.diagnostic.severity.ERROR,
-              source = "zig build", 
+              source = "zig build",
             })
           end
         end
@@ -580,3 +555,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   end,
 })
 
+
+vim.keymap.set("n", "<C-b>", ":NvimTreeToggle<CR>")
+vim.g.c_syntax_for_h = 1
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = {"*.h"},
+  callback = function()
+    vim.bo.filetype = "c"
+  end,
+})

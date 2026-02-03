@@ -8,6 +8,8 @@ local servers = {
   "clangd",
   "gopls",
   "pyright",
+  "zls",
+  "zcls",
   "pylsp",
   "jdtls",
   "ts_language_server",
@@ -22,33 +24,34 @@ local servers = {
   "bashls",
   "jsonls",
   "yamlls",
-  "zc lsp"
+  "zclsp"
 }
 
 local lspconfig = require('lspconfig')
 local configs = require('lspconfig.configs')
-
--- 1. Definir la configuración de Zen C si no existe
-if not configs.zenc_lsp then
-  configs.zenc_lsp = {
-    default_config = {
-      cmd = { 'zc', 'lsp' }, -- El binario zc con el flag de lsp
-      filetypes = { 'zc', 'zen-c' },
-      root_dir = lspconfig.util.root_pattern('zc.json', '.git'),
-      settings = {},
-    },
-  }
-end
-
--- 2. Activar el servidor
-lspconfig.zenc_lsp.setup{
-  on_attach = function(client, bufnr)
-    -- Aquí puedes poner tus shortcuts habituales de LSP
-    print("Zen C LSP conectado!")
-  end
-}
+--
+-- -- 1. Definir la configuración de Zen C si no existe
+-- if not configs.zenc_lsp then
+--   configs.zenc_lsp = {
+--     default_config = {
+--       cmd = { 'zc', 'lsp' }, -- El binario zc con el flag de lsp
+--       filetypes = { 'zc', 'zen-c' },
+--       root_dir = lspconfig.util.root_pattern('zc.json', '.git'),
+--       settings = {},
+--     },
+--   }
+-- end
+--
+-- -- 2. Activar el servidor
+-- lspconfig.zenc_lsp.setup{
+--   on_attach = function(client, bufnr)
+--     -- Aquí puedes poner tus shortcuts habituales de LSP
+--     print("Zen C LSP conectado!")
+--   end
+-- }
 -- Configuraciones específicas para cada servidor
 local server_configs = {
+
   gopls = {
     settings = {
       gopls = {
@@ -116,6 +119,14 @@ local server_configs = {
       }
     }
   },
+  zcls = {
+    cmd = { "zc","lsp" },
+    filetypes = { "zc" },
+    on_attach = function(client, bufnr)
+      -- Aquí puedes poner tus shortcuts habituales de LSP
+      print("Zen C LSP conectado!")
+    end
+  },
 
   c3_lsp = {
     cmd = { "c3lsp" },
@@ -152,6 +163,29 @@ local server_configs = {
       },
     },
   },
+
+  zls = {
+    cmd = { "zls" },
+    filetypes = { "zig" },
+       -- inlay
+  settings = {
+    zig = {
+
+      build_on_save = true,
+      enable_build_on_save = true,
+      inlayHints = {
+        enable = false, -- 👈 mejor activarlo
+        show_parameter_name = true,
+        show_variable_type_hints = false,
+        show_builtin = true,
+        show_stdlib = true,
+      },
+      completion = {
+        snippetSupport = true,
+      },
+    },
+  },  
+},
 
   marksman = {
     filetypes = { "markdown" },
@@ -362,17 +396,27 @@ for _, lsp in ipairs(servers) do
     if client.server_capabilities.documentSymbolProvider then
       navic.attach(client, bufnr)
     end
+    --
+    if client.server_capabilities.signatureHelpProvider then
+      require("lsp_signature").on_attach(client, bufnr)
+    end
+
+    if client.server_capabilities.semanticTokensProvider then
+      -- vim.lsp.semantic_tokens.on_attach(client, bufnr)
+      vim.lsp.semantic_tokens.start(bufnr, client.id)
+    end
 
     -- Habilitar inlay hints
     if client.server_capabilities.inlayHintProvider then
       pcall(function()
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+        vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
       end)
     end
     -- navi
+
     -- Fix específico para rust-analyzer
     if client.name == "rust_analyzer" then
-      client.server_capabilities.semanticTokensProvider = nil
+      
       if client.server_capabilities.inlayHintProvider then
         pcall(function()
           vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -390,7 +434,7 @@ for _, lsp in ipairs(servers) do
       ts_ls = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
       lua_ls = { "lua" },
       rust_analyzer = { "rust" },
-      zenc_lsp = {"zenc"},
+      -- zenc_lsp = {"zenc"},
       clangd = { "c", "cpp" },
       gopls = { "go" },
       pyright = { "python" },
@@ -421,7 +465,9 @@ vim.api.nvim_create_autocmd("FileType", {
       rust = "rust_analyzer",
       c = "clangd",
       cpp = "clangd",
+      zc = "zcls",
       c3 = "c3_lsp",
+      zig = "zls",
       go = "gopls",
       python = "pyright",
       java = "jdtls",
@@ -461,7 +507,7 @@ local map = vim.keymap.set
 map("n", "gD", vim.lsp.buf.declaration, { desc = "LSP declaration" })
 map("n", "gi", vim.lsp.buf.implementation, { desc = "LSP implementation" })
 map("n", "gr", vim.lsp.buf.references, { desc = "LSP references" })
-map("n", "<leader>sh", vim.lsp.buf.signature_help, { desc = "LSP signature help" })
+map("n", "<leader>lh", vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "LSP type definition" })
 
 -- Acciones
