@@ -22,11 +22,13 @@ return {
   {import = "configs.difs"},
   { import = "configs.zen"},
   { 's1n7ax/nvim-window-picker', name = 'window-picker', event = 'VeryLazy', version = '2.*' },
+
   { "hrsh7th/nvim-cmp", enabled = false },
   { "hrsh7th/cmp-buffer", enabled = false },
   { "hrsh7th/cmp-path", enabled = false },
   { "hrsh7th/cmp-nvim-lsp", enabled = false },
   { "saadparwaiz1/cmp_luasnip", enabled = false },
+
   { import = "configs.buffer-list" },
   { import = "configs.ui" },
   {
