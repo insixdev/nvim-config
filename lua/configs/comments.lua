@@ -2,7 +2,6 @@
 return {
   {
     "folke/todo-comments.nvim",
-    event= "BufReadPost",
     dependencies = { "nvim-lua/plenary.nvim" },
     -- config = function()
     --   vim.api.nvim_create_autocmd("FileType", {

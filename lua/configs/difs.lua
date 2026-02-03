@@ -1,45 +1,37 @@
+
 return {
-  lazy = false,
   "esmuellert/codediff.nvim",
+  lazy = false,
   dependencies = { "MunifTanjim/nui.nvim" },
-  config = function()
-    require("vscode-diff").setup({
-      -- Highlight configuration
-      highlights = {
-        -- Line-level: accepts highlight group names or hex colors (e.g., "#2ea043")
-        line_insert = "DiffAdd",      -- Line-level insertions
-        line_delete = "DiffDelete",   -- Line-level deletions
-        
-        -- Character-level: accepts highlight group names or hex colors
-        -- If specified, these override char_brightness calculation
-        char_insert = nil,            -- Character-level insertions (nil = auto-derive)
-        char_delete = nil,            -- Character-level deletions (nil = auto-derive)
-        
-        -- Brightness multiplier (only used when char_insert/char_delete are nil)
-        -- nil = auto-detect based on background (1.4 for dark, 0.92 for light)
-        char_brightness = nil,        -- Auto-adjust based on your colorscheme
+
+config = function()
+  require("codediff").setup({
+    highlights = {
+      line_insert = "GitSignsAdd",
+      line_delete = "GitSignsDelete",
+      char_insert = nil,
+      char_delete = nil,
+      char_brightness = nil,
+    },
+    diff = {
+      disable_inlay_hints = true,
+      max_computation_time_ms = 3000,
+    },
+    keymaps = {
+      view = {
+        next_hunk = "]h",
+        prev_hunk = "[h",
+        next_file = "]f",
+        prev_file = "[f",
       },
-      
-      -- Diff view behavior
-      diff = {
-        disable_inlay_hints = true,         -- Disable inlay hints in diff windows for cleaner view
-        max_computation_time_ms = 5000,     -- Maximum time for diff computation (VSCode default)
+      explorer = {
+        select = "<CR>",
+        hover = "K",
+        refresh = "R",
+        quit = "q",
       },
-      
-      -- Keymaps in diff view
-      keymaps = {
-        view = {
-          next_hunk = "]c",   -- Jump to next change
-          prev_hunk = "[c",   -- Jump to previous change
-          next_file = "]f",   -- Next file in explorer mode
-          prev_file = "[f",   -- Previous file in explorer mode
-        },
-        explorer = {
-          select = "<CR>",    -- Open diff for selected file
-          hover = "K",        -- Show file diff preview
-          refresh = "R",      -- Refresh git status
-        },
-      },
-    })
-  end,
+    },
+  })
+end,
 }
+

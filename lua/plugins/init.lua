@@ -1,5 +1,10 @@
 return {
 
+  {
+    import = "configs.treesitter",
+  },
+
+
   {import = "configs.c3"},
 
   {import = "configs.http"},
@@ -81,7 +86,7 @@ return {
   --   import = "configs.lines",
   -- },
   {
-    lazy= false,
+    -- lazy= false,
     "grddavies/tidal.nvim",
     opts = {
       -- Your configuration here
@@ -213,9 +218,6 @@ return {
   -- Tu cmp existente
   -- {
   --   import = "plugins.cmp",
-  {
-    import = "configs.treesitter",
-  },
 
   -- test new blink
   -- { import = "nvchad.blink.lazyspec" },
