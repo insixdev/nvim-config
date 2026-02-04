@@ -473,7 +473,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
     "i:block-blinkwait700-blinkon400-blinkoff250," ..
     "ci-ve:ver25-blinkwait700-blinkon300-blinkoff200," ..
     "r-cr:hor20,o:hor50"
-    vim.opt.linespace = -2
+    vim.opt.linespace = -3
 
     local code_groups = {
       "Comment", "Constant", "Identifier", "Statement",
@@ -578,4 +578,28 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     end,
   })
 
+local function ejecutar_comando_personalizado()
+  local comandos = { "Toggle Quickfix", "Limpiar Errores", "Listar Archivos" }
+  
+  -- Verificamos si vim.ui.select existe (por seguridad)
+  vim.ui.select(comandos, {
+    prompt = 'Comandos disponibles > ',
+    telescope = require('telescope.themes').get_cursor(),
+    -- kind = 'center', -- Algunos backends de dressing usan esto
+  }, function(choice)
+    if not choice then return end
 
+    if choice == "Toggle Quickfix" then
+      vim.cmd("copen")
+    elseif choice == "Limpiar Errores" then
+      vim.fn.setqflist({}, "r")
+      print("Quickfix limpiado")
+    elseif choice == "Listar Archivos" then
+      -- Si usas Telescope para listar archivos, esto ya debería ir fluido
+      require('telescope.builtin').find_files()
+    end
+  end)
+end
+
+vim.keymap.set('n', '<leader>x', ejecutar_comando_personalizado)
+-- require('fzf-lua').register_ui_select()

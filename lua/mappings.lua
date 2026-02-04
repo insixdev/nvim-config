@@ -62,11 +62,13 @@ vim.api.nvim_set_keymap(
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- Este comando se cargará cada vez que inicies Neovim
 vim.api.nvim_create_user_command('Runcommand', function(opts)
+  local current = vim.fn.getcwd()
   vim.cmd.split()
   -- resizear para que sea mas baja
   vim.cmd.resize(15)
   vim.cmd.terminal(opts.args)
-end, { nargs = '*' })
+  vim.cmd("startinsert")
+end, { nargs = '*', complete = 'file' })
 
 vim.api.nvim_create_user_command('D', function(opts)
   -- resizear para que sea mas baja
@@ -328,7 +330,7 @@ function exec(path)
   vim.cmd("Runcommand " .. path)
 end
 
-vim.keymap.set("n", "!", function()
+vim.keymap.set("n", "&", function()
   local oil = require("oil")
   local entry = oil.get_cursor_entry()
   if not entry then return end
