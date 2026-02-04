@@ -1,11 +1,28 @@
 return {
 {
-  "ray-x/lsp_signature.nvim",
-  event = "InsertEnter",
-  opts = {
-    bind = true,
-    handler_opts = {
-      border = "rounded"
+  "stevearc/dressing.nvim",
+  lazy = false, -- FORZAMOS que cargue al arrancar
+  config = function()
+    require("dressing").setup({
+      select = {
+        backend = { "builtin" },
+        builtin = {
+          relative = "editor",
+          position = "bottom",
+          size = { height = 10 },
+          border = "none",
+        }
+      }
+    })
+  end
+},
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "InsertEnter",
+    opts = {
+      bind = true,
+      handler_opts = {
+        border = "rounded"
     }
   },
   -- or use config
@@ -32,6 +49,8 @@ return {
         set({"n", "x"}, "<leader>s", function() mc.matchSkipCursor(1) end)
         set({"n", "x"}, "<leader>N", function() mc.matchAddCursor(-1) end)
         set({"n", "x"}, "<leader>sm", function() mc.matchSkipCursor(-1) end)
+-- Añade un cursor en la posición actual
+        set({"n", "x"}, "<leader>a", mc.addCursor)
 
         -- Add and remove cursors with control + left click.
         set("n", "<c-leftmouse>", mc.handleMouse)

@@ -31,9 +31,7 @@ function M.run_in_saved_dir()
     vim.notify("No saved directories", vim.log.levels.WARN)
     return
   end
-  
   local last_dir = M.dirs[1].path
-  
   vim.ui.input({ prompt = "Command in " .. last_dir .. ": " }, function(cmd)
     if not cmd or cmd == "" then return end
 
@@ -43,6 +41,7 @@ function M.run_in_saved_dir()
       on_stdout = function(_, data)
         if data and #data > 0 then
           -- new buffer
+
           for _, line in ipairs(data) do
             table.insert(qf_items, {
               text = line, -- texto que se muestra
@@ -51,18 +50,35 @@ function M.run_in_saved_dir()
 
           vim.fn.setqflist(qf_items, "r") -- "r" = replace
           vim.cmd("copen") -- abrir quickfix
-          vim.cmd("resize 23")
+          vim.cmd("resize 15")
 
         end
       end,
+
       on_stderr = function(_, data)
         if data and #data > 0 then
-          qf_items = {}
-          print("perras test")
-          vim.notify(table.concat(data , "\n"), vim.log.levels.ERROR)
+
+          local cur = vim.fn.line('.') -1
+          local currentqf = vim.fn.getqflist()
+
+          for _, line in ipairs(data) do
+            table.insert(qf_items, {
+              text = line, -- texto que se muestra
+            })
+          end
+
+          if #qf_items > 0 then
+            print("err")
+            vim.fn.setqflist(qf_items, "r") -- "r" = replace
+            vim.cmd("copen") -- abrir quickfix
+            vim.cmd("resize 15")
+            vim.cmd("normal!! G")
+          end
+          -- qf_items = {}
         end
       end,
     })
+
   end)
 end
 

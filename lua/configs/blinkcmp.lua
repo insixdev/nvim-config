@@ -3,7 +3,6 @@
 local trigger_text = ";"
 
 return {
-
   {
     "ray-x/lsp_signature.nvim",
     lazy = false,
@@ -111,7 +110,7 @@ return {
             enabled = true,
             max_items = 13,
             min_keyword_length = 0,
-            score_offset = 120,
+            score_offset = 210,
 
             should_show_items = function()
               return true

@@ -1,13 +1,17 @@
 return {
 
   {
+    import = "configs.snippet"
+  },
+  {
     import = "configs.treesitter",
   },
-  { 
-    require("custom.oil-dirs").setup()
+  {
+    require("custom.oil-dirs").setup(),
   },
 
   {import = "configs.c3"},
+  {import = "configs.dressing"},
 
   {import = "configs.http"},
   {import = "configs.rust"},
