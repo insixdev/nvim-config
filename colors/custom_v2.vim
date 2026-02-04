@@ -15,7 +15,7 @@ let g:colors_name = 'custom'
 " Core groups
 " ─────────────────────────────────────────────────────────────
 highlight CursorLine cterm=NONE ctermbg=236 guibg=#181818
-highlight Normal        guifg=#edddc0 guibg=#1F1F1F"#262626"#181818"#0d1117"#181818
+highlight Normal        guifg=#edddc0 guibg=#1c1c1c"#262626"#181818"#0d1117"#181818
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
 

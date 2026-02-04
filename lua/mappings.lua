@@ -61,10 +61,10 @@ vim.api.nvim_set_keymap(
 )
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- Este comando se cargará cada vez que inicies Neovim
-vim.api.nvim_create_user_command('R', function(opts)
+vim.api.nvim_create_user_command('Runcommand', function(opts)
   vim.cmd.split()
   -- resizear para que sea mas baja
-  vim.cmd.resize(10)
+  vim.cmd.resize(15)
   vim.cmd.terminal(opts.args)
 end, { nargs = '*' })
 
@@ -74,7 +74,7 @@ vim.api.nvim_create_user_command('D', function(opts)
 end, { nargs = '*' })
 
 
-vim.keymap.set("n", "<C-A-a>", ":R ")
+vim.keymap.set("n", "<A-a>", ":Runcommand ")
 -- Reemplaza tu keymap problemático con este:
 map("n", "<esc><esc>", "<CMD>q<CR>")
 
@@ -325,7 +325,7 @@ end)
 function exec(path) 
   print("Executing: " .. path)
   local final_cmd = "." .. path
-  vim.cmd("R " .. path)
+  vim.cmd("Runcommand " .. path)
 end
 
 vim.keymap.set("n", "!", function()
@@ -353,7 +353,7 @@ vim.keymap.set("n", "!", function()
       end
 
       print("Executing:", full_cmd)
-      vim.cmd("R " .. full_cmd)
+      vim.cmd("Runcommand " .. full_cmd)
     end
 
     -- si contiene o al final
@@ -433,17 +433,7 @@ end
 -- Map solo en modo normal
 vim.keymap.set("n", "<M-f>", toggle_file_browser, { desc = "Toggle Telescope File Browser" })
 
-vim.keymap.set("n", "<M-b>", function()
-  require("telescope.builtin").buffers({
-    layout_strategy = "bottom_pane",
-    layout_config = {
-      height = 0.30,
-      preview_cutoff = 1, -- sin preview
-    },
-    sorting_strategy = "ascending",
-    prompt_position = "top",
-  })
-end)
+vim.keymap.set("n", "<M-b>", ":Unite buffer<CR>", { noremap = true, silent = true })
 
 local opts = { noremap = true, silent = false }
 vim.keymap.set(

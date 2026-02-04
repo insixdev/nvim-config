@@ -3,7 +3,9 @@ return {
   {
     import = "configs.treesitter",
   },
-
+  { 
+    require("custom.oil-dirs").setup()
+  },
 
   {import = "configs.c3"},
 
