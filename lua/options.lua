@@ -510,6 +510,14 @@ vim.api.nvim_create_autocmd("DirChanged", {
       vim.cmd(command)
     end
 
+    vim.keymap.set("n", "sm", function ()
+      local font_reset= '"' .. font .. ":h24" .. ':b"'
+      win_font_size = 24
+      vim.cmd(('GonvimGridFont ' .. font_reset))
+
+    end)
+
+
     vim.keymap.set("n", "<C-+>", function() zoom_font(1) end)
     vim.keymap.set("n", "<C-->", function() zoom_font(-1) end)
     vim.keymap.set("n", "¡", function() default_font() end)
@@ -602,4 +610,4 @@ local function ejecutar_comando_personalizado()
 end
 
 vim.keymap.set('n', '<leader>x', ejecutar_comando_personalizado)
--- require('fzf-lua').register_ui_select()
+

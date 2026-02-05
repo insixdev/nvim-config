@@ -67,13 +67,18 @@ vim.api.nvim_create_user_command('Runcommand', function(opts)
   -- resizear para que sea mas baja
   vim.cmd.resize(15)
   vim.cmd.terminal(opts.args)
-  vim.cmd("startinsert")
 end, { nargs = '*', complete = 'file' })
 
-vim.api.nvim_create_user_command('D', function(opts)
+vim.api.nvim_create_user_command('CompileCommand', function(opts)
+  vim.cmd("Dispatch " .. opts.args)
+  vim.cmd("resize 30")
+end, {bang = true, nargs = '*' })
+
+vim.api.nvim_create_user_command('D', function()
+  vim.cmd("CompileCommand ")
   -- resizear para que sea mas baja
-  vim.cmd("Dispatch" .. opts.args)
 end, { nargs = '*' })
+
 
 
 vim.keymap.set("n", "<A-a>", ":Runcommand ")
@@ -140,14 +145,6 @@ vim.keymap.set('n', '<C-x>', function()
     -- Borrar el buffer actual
     vim.cmd('silent! bd ' .. cur)
 end, { noremap = true, silent = true })
-
--- aumentar/disminuir alto
-vim.keymap.set("n", "<C-S-j>",    ":resize +2<CR>")
-vim.keymap.set("n", "<C-S-k>",  ":resize -2<CR>")
-
--- aumentar/disminuir ancho
-vim.keymap.set("n", "<C-S-l>",  ":vertical resize -2<CR>")
-vim.keymap.set("n", "<C-S-h>", ":vertical resize +2<CR>")
 
 vim.api.nvim_create_autocmd("BufEnter", { 
 
@@ -454,3 +451,81 @@ vim.keymap.set(
   ":Zi<CR>",
   opts
 )
+-- require('fzf-lua').register_ui_select()
+local function vis_expand(dire)
+    local mode = vim.api.nvim_get_mode().mode
+    local is_visual = mode:sub(1, 1) == "v" or mode:sub(1, 1) == "V"
+
+    if not is_visual then
+        -- PRIMER TOQUE (Desde modo Normal)
+        if dire == "atras" then
+            -- v (activar) -> b (atrás) -> o (anclar al final)
+            vim.cmd("normal! vbo")
+        else
+            -- v (activar) -> e (final de palabra) -> o (anclar al inicio)
+            vim.cmd("normal! veo")
+        end
+    else
+        -- SIGUIENTES TOQUES (Ya en modo Visual)
+        if dire == "atras" then
+            -- o (ir al extremo izquierdo) -> b (retroceder más) -> o (volver al ancla derecha)
+            vim.cmd("normal! obo")
+        else
+            -- o (ir al extremo derecho) -> w (avanzar) -> e (asegurar palabra) -> o (volver al ancla izquierda)
+            vim.cmd("normal! oweo")
+        end
+    end
+end
+
+-- Mapeos
+-- vv: Expandir hacia adelante (cursor al inicio)
+vim.keymap.set({ "n", "x" }, "vv", function() vis_expand("adelante") end, { desc = "Expandir selección hacia adelante" })
+
+-- vr: Expandir hacia atrás (cursor al final)
+vim.keymap.set({ "n", "x" }, "vr", function() vis_expand("atras") end, { desc = "Expandir selección hacia atrás" })-- Mover el cursor letra a letra sin usar las flechas
+vim.keymap.set('c', '<C-h>', '<C-Left>')
+vim.keymap.set('c', '<C-l>', '<C-Right>')
+vim.keymap.set('c', '<C-a>', '<C-w>')
+
+local function vis_expand_smart(direction)
+    local mode = vim.api.nvim_get_mode().mode
+    local is_visual = mode:sub(1, 1) == "v" or mode:sub(1, 1) == "V"
+
+    if not is_visual then
+        -- PRIMER TOQUE (Desde modo Normal)
+        -- Activamos visual, movemos y regresamos al inicio
+        vim.cmd("normal! v" .. direction .. "o")
+    else
+        -- TOQUES SUCESIVOS
+        if direction == "W" or direction == "w" or direction == "e" then
+            -- Expandir hacia ADELANTE:
+            -- 1. o (ir al frente móvil) 
+            -- 2. W (avanzar) 
+            -- 3. o (volver al ancla fija atrás)
+            vim.cmd("normal! owo")
+        else
+            -- Expandir hacia ATRÁS (B):
+            -- 1. o (ir al frente móvil que ahora está a la izquierda)
+            -- 2. B (retroceder)
+            -- 3. o (volver al ancla fija que está a la derecha)
+            vim.cmd("normal! obo")
+        end
+    end
+end
+
+-- IMPORTANTE: Usamos {"n", "x"} para que funcione desde modo normal y visual
+vim.keymap.set("x", "W", function() vis_expand_smart("W") end, { desc = "Expandir selección adelante" })
+
+vim.keymap.set("x", "B", function() vis_expand_smart("B") end, { desc = "Expandir selección atrás" })
+
+map("n", "<A-X>", function()
+	vim.opt.cmdheight = 0
+   vim.api.nvim_create_autocmd("CmdwinEnter", {
+	  once = true,
+	  callback = function()
+    		vim.o.laststatus = 0
+		  vim.opt_local.filetype = "minibuffer"
+	  end
+   })
+	return "q:i <BS>"
+end, { expr = true })

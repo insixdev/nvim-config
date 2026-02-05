@@ -11,11 +11,10 @@ return {
     default_file_explorer = true, -- Id is automatically added at the beginning, and name at the end
     -- See :help oil-columns
     columns = {
-     "git_status",
-      "icon",
+      "git_status",
       "permissions",
-      "size",
-      "mtime",
+      {"size", highlight= "Function" },
+      {"mtime", highlight = "Type"},
     },
     -- Buffer-local options to use for oil buffers
     buf_options = {
@@ -127,7 +126,12 @@ return {
       },
       -- Customize the highlight group for the file name
       highlight_filename = function(entry, is_hidden, is_link_target, is_link_orphan)
-        return nil
+        if is_hidden then
+          return "Comment"
+        end
+        if entry.type == "directory" then
+          return "TabLine"
+        end
       end,
     },
     -- Extra arguments to pass to SCP when moving/copying files over SSH

@@ -15,7 +15,7 @@ let g:colors_name = 'custom'
 " Core groups
 " ─────────────────────────────────────────────────────────────
 highlight CursorLine cterm=NONE ctermbg=236 guibg=#181818
-highlight Normal        guifg=#edddc0 guibg=#1c1c1c"#262626"#181818"#0d1117"#181818
+highlight Normal        guifg=#edddc0 guibg=#181818"#262626"#181818"#0d1117"#181818
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
 
@@ -42,7 +42,7 @@ highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
 highlight DiffChange    guifg=#FFFEDB guibg=#262636
 highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
-highlight Directory     guifg=#ccac93
+highlight Directory     guifg=#ff7c69
 highlight Error         guifg=#C34143 gui=undercurl
 highlight Function      guifg=#ffe3e1"#b3b7bd"#dde0cc"#FFCC8A
 highlight PreProc       guifg=#ffcbb3
@@ -86,6 +86,9 @@ highlight Boolean       guifg=#6f7b68
 highlight WinSeparator  guibg=#101010 guifg=#333232
 highlight WinBar         guibg=#101010 guifg=#888888
 highlight WinBarNC    guibg=#101010   guifg=#888888
+
+hi @lsp.type.class.c guifg=#ffe3e1
+hi Structure     guifg=#dbc5b4
 
 hi clear RustEnum 
 hi RustEnum guifg=#FFC272 

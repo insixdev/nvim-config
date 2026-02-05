@@ -11,7 +11,7 @@ return {
       local opts = { noremap = true, silent = false}
 
       -- :Dispatch <cmd>
-      vim.api.nvim_set_keymap("n", "D", ":Dispatch ", opts)
+      vim.api.nvim_set_keymap("n", "D", ":CompileCommand ", opts)
       -- :Make
       vim.api.nvim_set_keymap("n", "S-S", ":Start ", opts)
 

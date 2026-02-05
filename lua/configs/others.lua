@@ -1,4 +1,16 @@
 return {
+-- lazy.nvim example
+{
+  lazy = false,
+"mhinz/vim-grepper",
+},
+{
+  lazy = false,
+  "mghaight/replua.nvim",
+  config = function()
+    require("replua").setup()
+  end,
+},
 {
   "stevearc/dressing.nvim",
   lazy = false, -- FORZAMOS que cargue al arrancar
@@ -39,8 +51,8 @@ return {
         local set = vim.keymap.set
 
         -- Add or skip cursor above/below the main cursor.
-        set({"n", "x"}, "<up>", function() mc.lineAddCursor(-1) end)
-        set({"n", "x"}, "<down>", function() mc.lineAddCursor(1) end)
+        set({"n", "x"}, "<C-S-l>", function() mc.lineAddCursor(-1) end)
+        set({"n", "x"}, "<C-S-k>", function() mc.lineAddCursor(1) end)
         set({"n", "x"}, "<leader><up>", function() mc.lineSkipCursor(-1) end)
         set({"n", "x"}, "<leader><down>", function() mc.lineSkipCursor(1) end)
 
