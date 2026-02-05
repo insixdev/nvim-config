@@ -61,6 +61,65 @@ vim.api.nvim_set_keymap(
 )
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- Este comando se cargará cada vez que inicies Neovim
+
+vim.api.nvim_create_user_command('Run', function(opts)
+  local efm = table.concat({
+    -- 1. FORMATOS CON PREFIJO "||" (Tu salida actual)
+    [[|| %f:]],
+
+    [[|| %f:%l:%c:%m]],        -- Archivo:Línea:Columna:Mensaje
+    [[|| %f:%l:%m]],           -- Archivo:Línea:Mensaje
+    [[|| "%f"\, line %l:%m]],  -- Archivo entre comillas (estilo Python/C3)
+    [[|| %f:%m]],              -- Archivo:Mensaje (asume línea 1)
+    [[|| %f]],                 -- Solo nombre de archivo
+
+    -- 2. FORMATOS ESTÁNDAR (GCC, Clang, C3, Ripgrep)
+    [[%f:%l:%c: %t%*[^:]: %m]], -- Archivo:Línea:Col: Tipo: Mensaje
+    [[%f:%l:%c: %m]],           -- Archivo:Línea:Col: Mensaje
+    [[%f:%l: %t%*[^:]: %m]],    -- Archivo:Línea: Tipo: Mensaje
+    [[%f:%l: %m]],              -- Archivo:Línea: Mensaje
+    [[(%f:%l:%c) %m]],          -- (Archivo:Línea:Col) Mensaje (Estilo C3)
+
+    -- 3. FORMATOS DE PIPE O COMAS (Grep viejo / MSVC)
+    [[%f|%l| %m]],              -- Archivo|Línea| Mensaje
+    [[%f(%l): %m]],             -- Archivo(Línea): Mensaje (Estilo Windows/MSVC)
+    [[%f:%l:%m]],               -- Archivo:Línea:Mensaje (sin espacios)
+
+    -- 4. FORMATOS DE BUSCADORES (Telescope / Ripgrep vimgrep)
+    [[%f:%l:%c:%m]],            -- Sin espacios después de los dos puntos
+
+    -- 5. LÍNEAS DE ERROR MULTI-LÍNEA (Para capturar el contexto)
+    [[%f:%l:%m]],
+    [[%-G%f:%l: %m]],           -- Ignorar líneas que se repitan si es necesario
+
+    -- 6. BASURA Y FILTRADO (Ignorar mensajes informativos)
+    [[-G|| grep: %f: coincidencia en fichero binario]],
+    [[-G|| grep: %f: binary file matches]],
+    [[-G%*\\\|%*\\\| %m]],      -- Ignorar líneas que solo sean || sin nada más
+    [[-G%*\\\|%*\\\|]],         -- Ignorar líneas de solo pipes
+
+    -- 7. CAPTURA FINAL (Si nada de lo anterior funcionó, tómalo como texto)
+    [[%m]]
+  }, ",")
+
+  local command = opts.args
+  local output = vim.fn.systemlist(command)
+
+  vim.fn.setqflist({}, 'r', {
+    title = command,
+    lines = output,
+    efm = efm
+  })
+
+  -- Abrir ventana: copen 15 (altura de 15 líneas)
+  vim.cmd("copen 15")
+  
+  -- Forzar resaltado de sintaxis en la Quickfix para ver qué es link
+  vim.cmd("setlocal syntax=qf")
+end, { bang = true, nargs = '*' })
+
+
+vim.keymap.set("n", "<C-r>", ":Run ")
 vim.api.nvim_create_user_command('Runcommand', function(opts)
   local current = vim.fn.getcwd()
   vim.cmd.split()
@@ -70,6 +129,7 @@ vim.api.nvim_create_user_command('Runcommand', function(opts)
 end, { nargs = '*', complete = 'file' })
 
 vim.api.nvim_create_user_command('CompileCommand', function(opts)
+vim.opt.errorformat = "(%f:%l:%c) %t%*[^:]: %m, %f:%l:%c: %t%*[^:]: %m"
   vim.cmd("Dispatch " .. opts.args)
   vim.cmd("resize 30")
 end, {bang = true, nargs = '*' })
