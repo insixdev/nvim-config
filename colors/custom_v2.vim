@@ -19,7 +19,6 @@ highlight Normal        guifg=#edddc0 guibg=#181818"#262626"#181818"#0d1117"#181
 " guibg=#181818
 highlight NormalFloat   guifg=#95a99f guibg=#202020
 
-highlight @variable guifg=#dbc5b4
 
 highlight RainbowDelimiterRed    guifg=#cf95a9  " Rosado (como tu Number)
 
@@ -37,24 +36,26 @@ highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
 " #6f7b68 
 highlight Comment       guifg=#a18e78 gui=Italic
 highlight Conceal       guibg=#262626
-highlight Constant      guifg=#8c9c94
+highlight Constant      guifg=#95a99f"#96a6c8"#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
 highlight DiffChange    guifg=#FFFEDB guibg=#262636
 highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ff7c69
 highlight Error         guifg=#C34143 gui=undercurl
-highlight Function      guifg=#ffe3e1"#b3b7bd"#dde0cc"#FFCC8A
 highlight PreProc       guifg=#ffcbb3
-highlight Identifier    guifg=#cedea0"#FFC272"#ffa74a"#fcb838
-highlight Statement     guifg=#FF7B72"#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48
+
+highlight @variable guifg=#efe4e7
+highlight Identifier    guifg=#f0b79b "#ffc8c2
+highlight Function      guifg=#ffc9c9""#efe4e7
+highlight Statement     guifg=#FF7B72"#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48 gui=bold
 
 highlight LineNrAbove   guifg=#888888 guibg=#1F1F1F
 highlight LineNrBelow   guifg=#888888 guibg=#1F1F1F
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
-highlight Operator      guifg=#fffffe
+highlight Operator      guifg=#ffd1f0
 highlight Pmenu         guifg=#8f9988 guibg=#303030
 highlight PmenuSbar     guifg=#918988 guibg=#262626
 highlight PmenuSel      guifg=#ba9279 guibg=#303030
@@ -86,18 +87,22 @@ highlight Boolean       guifg=#6f7b68
 highlight WinSeparator  guibg=#101010 guifg=#333232
 highlight WinBar         guibg=#101010 guifg=#888888
 highlight WinBarNC    guibg=#101010   guifg=#888888
-
+hi clear @lsp.typemod.method.associated.rust 
+hi @lsp.typemod.method.associated.rust guifg=#efe4e7
 hi @lsp.type.class.c guifg=#ffe3e1
+"hi clear @lsp.type.struct.rust
+hi clear @lsp.type.typeAlias.rust 
+hi clear @lsp.type.parameter.rust
+hi @lsp.type.struct.rust guifg=#FFC272 
 hi Structure     guifg=#dbc5b4
-
+hi link @lsp.type.typeAlias.rust Identifier
 hi clear RustEnum 
-hi RustEnum guifg=#FFC272 
-
+hi RustEnum guifg=#ffdd33"" #FFC272 
 hi clear RustAttribute 
 hi RustAttribute guifg=#caa393"#899BAD "#79C0FF"#a37e98"#ff8f85 
 
 hi clear rustFoldBraces 
-"hi rustFoldBraces guifg=#e8a72e 
+hi rustFoldBraces guifg=#e8a72e 
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────

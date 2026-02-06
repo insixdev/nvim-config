@@ -573,6 +573,7 @@ end
 -- IMPORTANTE: Usamos {"n", "x"} para que funcione desde modo normal y visual
 vim.keymap.set("x", "W", function() vis_expand_smart("W") end, { desc = "Expandir selección adelante" })
 
+
 vim.keymap.set("x", "B", function() vis_expand_smart("B") end, { desc = "Expandir selección atrás" })
 
 map("n", "<A-X>", function()
@@ -586,4 +587,18 @@ map("n", "<A-X>", function()
    })
 	return "q:i <BS>"
 end, { expr = true })
-
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "qf", -- Solo se activa cuando el cursor está en la Quickfix
+    callback = function()
+        -- Al presionar <C-w>P dentro de la Quickfix:
+        -- 1. Abre el archivo bajo el cursor en un split horizontal
+        -- 2. El cursor se queda en el nuevo split
+        vim.keymap.set("n", "<C-w>p", "<CR><C-w>K", { buffer = true, silent = true })
+    end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "compile",
+    callback = function()
+        vim.cmd("syntax on")
+    end,
+})

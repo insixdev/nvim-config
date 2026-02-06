@@ -464,8 +464,9 @@ vim.api.nvim_create_autocmd("DirChanged", {
   -- Si usas Goneovim, esto ayuda a que las ventanas se sientan independientes
 
   if vim.g.goneovim then
+    local weight = " SemiBold"
     local font = "Iosevka Term" -- cambiá por tu fuente
-    local initial_font = font .. ":h12:b"
+    local initial_font = font  .. weight  .. ":h12:b"
     vim.o.guifont = initial_font
 
     vim.opt.guicursor =
@@ -490,20 +491,20 @@ vim.api.nvim_create_autocmd("DirChanged", {
     local function default_font()
       -- TODO: Extract all window and apply
       win_font_size = 13
-      local new = ('"' .. font .. ":h" .. win_font_size .. ":b" .. '"')
+      local new = ('"' .. font .. weight .. ":h" .. win_font_size .. '"')
       local command= ('GonvimGridFont ' .. new)
       print(command)
       vim.cmd(command)
     end
 
     local function default_gui()
-      local font_reset= font .. ":h" .. win_font_size ..":b"
+      local font_reset= font .. weight .. ":h" .. win_font_size 
       vim.o.guifont = font_reset
     end
     local function zoom_font(delta)
       win_font_size = win_font_size + delta
 
-      local new = ('"' .. font .. ":h" .. win_font_size .. ":b" .. '"')
+      local new = ('"' .. font .. weight .. ":h" .. win_font_size .. '"')
       local command= ('GonvimGridFont ' .. new)
       print(command)
 
@@ -511,7 +512,7 @@ vim.api.nvim_create_autocmd("DirChanged", {
     end
 
     vim.keymap.set("n", "sm", function ()
-      local font_reset= '"' .. font .. ":h24" .. ':b"'
+      local font_reset= '"' .. font .. weight .. ":h24" .. '"'
       win_font_size = 24
       vim.cmd(('GonvimGridFont ' .. font_reset))
 

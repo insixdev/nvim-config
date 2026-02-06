@@ -228,37 +228,39 @@ local server_configs = {
           },
         },
         inlayHints = {
-          bindingModeHints = {
+          -- bindingModeHints = {
             enable = true,
-          },
-          rangeExclusiveHints = {
-            enable = true,
-          },
-          implicitReturnTypeHints = {
-            enable = true,
-          },
+          -- },
+          -- rangeExclusiveHints = {
+          --   enable = true,
+          -- },
+          -- implicitReturnTypeHints = {
+          --   enable = true,
+          -- },
           chainingHints = {
             enable = true,
           },
-          closingBraceHints = {
-            enable = false,
-            minLines = 25,
-          },
-          closureReturnTypeHints = {
-            enable = false,
-          },
+          -- closingBraceHints = {
+          --   enable = false,
+          --   minLines = 25,
+          -- },
+          -- closureReturnTypeHints = {
+          --   enable = false,
+          -- },
+          --
           lifetimeElisionHints = {
-            enable = "always",
+            enable = "skip_trivial",
             useParameterNames = false,
           },
-          maxLength = 25,
+          -- maxLength = 25,
           parameterHints = {
             enable = false,
           },
-          reborrowHints = {
-            enable = true,
-          },
-          renderColons = true,
+          -- reborrowHints = {
+          --   enable = true,
+          -- },
+          -- renderColons = true,
+
           typeHints = {
             enable = false,
             hideClosureInitialization = false,
