@@ -101,7 +101,9 @@ hi clear rustFoldBraces
 " ─────────────────────────────────────────────────────────────
 " Tree-sitter & LSP semantic groups
 " ─────────────────────────────────────────────────────────────
-
+hi compileSuccess guifg=#a6e22e ctermfg=Green
+hi compileFailure guifg=#f92672 ctermfg=Red
+hi compileError   guifg=#f92672 ctermfg=Red gui=bold
 " Core variable/function tweaks
 highlight link @function Function
 highlight link @keyword Statement

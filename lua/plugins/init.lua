@@ -1,6 +1,9 @@
 return {
 
   {
+    require("custom.compile"),
+  },
+  {
     import = "configs.snippet"
   },
   {
@@ -73,7 +76,6 @@ return {
   },
   {
     import = "configs.incline",
-
   },
   {
     "stevearc/conform.nvim",

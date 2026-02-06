@@ -112,7 +112,7 @@ vim.api.nvim_create_user_command('Run', function(opts)
   })
 
   -- Abrir ventana: copen 15 (altura de 15 líneas)
-  vim.cmd("copen 15")
+  vim.cmd("copen 20")
   
   -- Forzar resaltado de sintaxis en la Quickfix para ver qué es link
   vim.cmd("setlocal syntax=qf")
@@ -120,13 +120,6 @@ end, { bang = true, nargs = '*' })
 
 
 vim.keymap.set("n", "<C-r>", ":Run ")
-vim.api.nvim_create_user_command('Runcommand', function(opts)
-  local current = vim.fn.getcwd()
-  vim.cmd.split()
-  -- resizear para que sea mas baja
-  vim.cmd.resize(15)
-  vim.cmd.terminal(opts.args)
-end, { nargs = '*', complete = 'file' })
 
 vim.api.nvim_create_user_command('CompileCommand', function(opts)
 vim.opt.errorformat = "(%f:%l:%c) %t%*[^:]: %m, %f:%l:%c: %t%*[^:]: %m"
@@ -141,7 +134,9 @@ end, { nargs = '*' })
 
 
 
-vim.keymap.set("n", "<A-a>", ":Runcommand ")
+vim.keymap.set("n", "<M-q>", ":Compile<CR>")
+vim.keymap.set("n", "<A-a>", ":CompileCommand ")
+vim.keymap.set("n", "<A-S-q>", ":Compile last")
 -- Reemplaza tu keymap problemático con este:
 map("n", "<esc><esc>", "<CMD>q<CR>")
 
@@ -337,6 +332,7 @@ local function toggle_qf()
     end
   end
   vim.cmd("copen")
+  vim.cmd("resize 20")
   vim.api.nvim_set_current_win(curwin)
 end
 
@@ -511,6 +507,7 @@ vim.keymap.set(
   ":Zi<CR>",
   opts
 )
+-- TODO: refactor this
 -- require('fzf-lua').register_ui_select()
 local function vis_expand(dire)
     local mode = vim.api.nvim_get_mode().mode

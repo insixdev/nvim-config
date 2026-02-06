@@ -1,50 +1,74 @@
 return {
--- lazy.nvim example
+
+  
 {
-  lazy = false,
-"mhinz/vim-grepper",
-},
-{
-  lazy = false,
-  "mghaight/replua.nvim",
-  config = function()
-    require("replua").setup()
-  end,
-},
-{
-  "stevearc/dressing.nvim",
-  lazy = false, -- FORZAMOS que cargue al arrancar
-  config = function()
-    require("dressing").setup({
-      select = {
-        backend = { "builtin" },
-        builtin = {
-          relative = "editor",
-          position = "bottom",
-          size = { height = 10 },
-          border = "none",
-        }
-      }
-    })
-  end
-},
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "InsertEnter",
-    opts = {
-      bind = true,
-      handler_opts = {
-        border = "rounded"
-    }
+  "NeogitOrg/neogit",
+  lazy = true,
+  dependencies = {
+    "nvim-lua/plenary.nvim",         -- required
+    "sindrets/diffview.nvim",        -- optional - Diff integration
+
+    -- Only one of these is needed.
+    -- "nvim-telescope/telescope.nvim", -- optional
+    -- "ibhagwan/fzf-lua",              -- optional
+    -- "nvim-mini/mini.pick",           -- optional
   },
-  -- or use config
-  -- config = function(_, opts) require'lsp_signature'.setup({you options}) end
-},
-{
-  lazy = false,
-    "jake-stewart/multicursor.nvim",
-    branch = "1.0",
-    config = function()
+  cmd = "Neogit",
+  keys = {
+    { "<leader>gG", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
+  },
+
+  },
+  -- lazy.nvim example
+  -- {  
+    --   'stevearc/quicker.nvim',
+    --   ft = "qf",
+    -- },
+    {
+      lazy = false,
+      "mhinz/vim-grepper",
+    },
+    {
+      lazy = false,
+      "mghaight/replua.nvim",
+      config = function()
+        require("replua").setup()
+      end,
+    },
+    {
+      "stevearc/dressing.nvim",
+      lazy = false, -- FORZAMOS que cargue al arrancar
+      config = function()
+        require("dressing").setup({
+          select = {
+            backend = { "builtin" },
+            builtin = {
+              relative = "editor",
+              position = "bottom",
+              size = { height = 10 },
+              border = "none",
+            }
+          }
+        })
+      end
+    },
+    {
+      "ray-x/lsp_signature.nvim",
+      event = "InsertEnter",
+      opts = {
+        bind = true,
+        handler_opts = {
+          border = "rounded"
+        }
+      },
+      -- or use config
+      -- config = function(_, opts) require'lsp_signature'.setup({you options}) end
+    },
+    {
+      lazy = false,
+      "jake-stewart/multicursor.nvim",
+      branch = "1.0",
+      config = function()
         local mc = require("multicursor-nvim")
         mc.setup()
 

@@ -586,6 +586,7 @@ vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
     end,
   })
 
+-- TDOO: refactor this 
 local function ejecutar_comando_personalizado()
   local comandos = { "Toggle Quickfix", "Limpiar Errores", "Listar Archivos" }
   
@@ -610,4 +611,12 @@ local function ejecutar_comando_personalizado()
 end
 
 vim.keymap.set('n', '<leader>x', ejecutar_comando_personalizado)
+
+
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        -- Aplica manualmente las reglas de compile a la quickfix si quieres
+        vim.cmd("runtime! syntax/compile.vim")
+    end,
+})
 
