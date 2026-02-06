@@ -1,7 +1,7 @@
 -- En lua/plugins/navic.lua (o donde tengas la config del plugin)
 return {
   "SmiteshP/nvim-navic",
-  lazy = false,
+  lazy = true,
   config = function()
     require("nvim-navic").setup({
       separator = " > ",

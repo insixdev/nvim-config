@@ -36,14 +36,14 @@ highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
 " #6f7b68 
 highlight Comment       guifg=#a18e78 gui=Italic
 highlight Conceal       guibg=#262626
-highlight Constant      guifg=#95a99f"#96a6c8"#8c9c94
+highlight Constant      guifg=#95a999"#96a6c8"#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
 highlight DiffChange    guifg=#FFFEDB guibg=#262636
 highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ff7c69
 highlight Error         guifg=#C34143 gui=undercurl
-highlight PreProc       guifg=#fbdb9b""#96a6c8""#ffcb73
+highlight PreProc       guifg=#989e9b""#96a6c8""#ffcb73
 
 highlight @variable guifg=#efe4e7
 highlight Identifier    guifg=#f0b79b "#ffc8c2
@@ -63,20 +63,20 @@ highlight PmenuThumb    guifg=#918988 guibg=#262626 gui=reverse
 highlight Question      guifg=#9b8d7f
 highlight QuickFixLine  guibg=#303030
 highlight Search        guibg=#5F5958
-highlight Special       guifg=#b3ae96
+highlight Special       guifg=#919995"#858c88"#b3ae96
 highlight SpecialChar   guifg=#c78f69 
 highlight SpecialKey    guifg=#676767 
 highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
 highlight StatusLine    guifg=#ffccff guibg=#33302b
-highlight String        guifg=#A2A970
-highlight Structure     guifg=#dbcdab
+highlight String        guifg=#bdc771
+highlight Structure     guifg=#FF7B72"#dbcdab
 highlight Substitute    guifg=#1A1A1A guibg=#C1C88D
 highlight TabLine       guifg=#c4a584 guibg=#212121
 highlight TabLineFill   guifg=#A09998 guibg=#212121
 highlight TabLineSel    guifg=#A09998 guibg=#40474F
 highlight Title         guifg=#FFFEDB term=none cterm=none
 highlight Todo          guifg=#8B9698
-highlight Type          guifg=#989e9b"#9aa19d
+highlight Type          guifg=#999688"#999688""#989e9b"#9aa19d
 highlight Underlined    gui=undercurl
 highlight VertSplit     guifg=#303030
 highlight Visual        guibg=#454545
@@ -87,14 +87,20 @@ highlight Boolean       guifg=#6f7b68
 highlight WinSeparator  guibg=#101010 guifg=#333232
 highlight WinBar         guibg=#101010 guifg=#888888
 highlight WinBarNC    guibg=#101010   guifg=#888888
+hi clear cStorageClass 
+hi link cStorageClass Statement
 hi clear @lsp.typemod.method.associated.rust 
 hi @lsp.typemod.method.associated.rust guifg=#efe4e7
-hi @lsp.type.class.c guifg=#ffe3e1
+hi @lsp.type.class.c guifg=#999688
+
+hi clear @lsp.type.namespace.rust 
+hi @lsp.type.namespace.rust guifg=#ffc8c2
+
 "hi clear @lsp.type.struct.rust
 hi clear @lsp.type.typeAlias.rust 
 hi clear @lsp.type.parameter.rust
-hi @lsp.type.struct.rust guifg=#FFC272 
-hi Structure     guifg=#dbc5b4
+"hi @lsp.type.struct.rust guifg=#f99688
+
 hi link @lsp.type.typeAlias.rust Identifier
 hi clear RustEnum 
 hi RustEnum guifg=#ffdd33"" #FFC272 
