@@ -34,7 +34,7 @@ highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
 highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
 
 " #6f7b68 
-highlight Comment       guifg=#a18e78 gui=Italic
+highlight Comment       guifg=#c18c68 gui=Italic
 highlight Conceal       guibg=#262626
 highlight Constant      guifg=#95a999"#96a6c8"#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
