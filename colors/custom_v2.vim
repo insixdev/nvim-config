@@ -43,15 +43,15 @@ highlight DiffDelete    guifg=#C34143 guibg=#42242B
 highlight DiffText      guifg=#FFFEDB guibg=#49443C
 highlight Directory     guifg=#ff7c69
 highlight Error         guifg=#C34143 gui=undercurl
-highlight PreProc       guifg=#ffcbb3
+highlight PreProc       guifg=#fbdb9b""#96a6c8""#ffcb73
 
 highlight @variable guifg=#efe4e7
 highlight Identifier    guifg=#f0b79b "#ffc8c2
-highlight Function      guifg=#ffc9c9""#efe4e7
+highlight Function      guifg=#efe4e7"#ffc9c9""#efe4e7
 highlight Statement     guifg=#FF7B72"#ff7c69"#f29718 "#fd7f1f"#e3692b "#f78e48 gui=bold
 
-highlight LineNrAbove   guifg=#888888 guibg=#1F1F1F
-highlight LineNrBelow   guifg=#888888 guibg=#1F1F1F
+highlight LineNrAbove   guifg=#888888 guibg=#181818
+highlight LineNrBelow   guifg=#888888 guibg=#181818
 highlight LineNr        guifg=#d6d2c8
 highlight MatchParen    guifg=#ddcEDB
 highlight NonText       guifg=#3d3d33
@@ -76,7 +76,7 @@ highlight TabLineFill   guifg=#A09998 guibg=#212121
 highlight TabLineSel    guifg=#A09998 guibg=#40474F
 highlight Title         guifg=#FFFEDB term=none cterm=none
 highlight Todo          guifg=#8B9698
-highlight Type          guifg=#a89f8f 
+highlight Type          guifg=#989e9b"#9aa19d
 highlight Underlined    gui=undercurl
 highlight VertSplit     guifg=#303030
 highlight Visual        guibg=#454545
