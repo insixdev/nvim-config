@@ -72,8 +72,6 @@ return {
     import = "configs.fuzzy",
   },
   {
-    import = "configs.amp" },
-  {
     import = "configs.incline",
 
   },
