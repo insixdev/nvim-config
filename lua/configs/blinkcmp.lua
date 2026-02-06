@@ -110,7 +110,7 @@ return {
             enabled = true,
             max_items = 13,
             min_keyword_length = 0,
-            score_offset = 210,
+            score_offset = 190,
 
             should_show_items = function()
               return true

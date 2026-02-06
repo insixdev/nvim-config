@@ -56,6 +56,12 @@ end
               },
             }),
           },
+          rust = {
+            field_declaration_list = fb(),
+            parameter_list = fb(),
+            argument_list = fb(),
+            initializer_list = fb(),
+          },
           cpp = {
             field_declaration_list = {
               both = { fallback = true },
