@@ -1,7 +1,16 @@
 return {
-
+{
+  "lervag/vimtex",
+  lazy = false, -- Muy importante: VimTeX necesita cargarse al inicio para los archivos .tex
+  config = function()
+    vim.g.vimtex_view_method = "zathura"
+    -- Esto hace que Zathura se abra automáticamente al compilar
+    vim.g.vimtex_view_general_viewer = "zathura"
+  end
+},
   
 {
+
   "NeogitOrg/neogit",
   lazy = true,
   dependencies = {
@@ -199,4 +208,22 @@ return {
     event = 'InsertCharPre', -- Set the event to 'InsertCharPre' for better compatibility
     priority = 1000,
   },
+
+  {
+    lazy = false,
+    "Prometheus1400/markdown-latex-render.nvim",
+    dependencies = { "3rd/image.nvim", "nvim-lua/plenary.nvim" },
+    build = "make install",
+    version = "*",
+    opts = {}
+  },
+
+  {
+  'chomosuke/typst-preview.nvim',
+  lazy = false, -- or ft = 'typst'
+  version = '1.*',
+  opts = {}, -- lazy.nvim will implicitly calls `setup {}`
 }
+
+}
+

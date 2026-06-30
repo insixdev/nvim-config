@@ -48,7 +48,7 @@ return {
         return
       end
 
-      local cwd = M.last_cwd or vim.fn.getcwd()
+        local cwd = vim.fn.getcwd()
 
       M.executor(cmd, cwd)
     end

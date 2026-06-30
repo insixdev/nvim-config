@@ -621,3 +621,30 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "tex", "latex" },
+  callback = function()
+    vim.opt_local.spell = false
+  end,
+})
+-- Deshabilitar que VimTeX gestione el spell de forma automática
+vim.g.vimtex_syntax_conceal_disable = 1
+vim.opt.spell = false
+-- Forma recomendada en Lua para que funcione en cualquier PC
+local spell_path = vim.fn.expand('~') .. '/github/dotfiles-latest/neovim/neobean/spell/en.utf-8.add'
+vim.opt.spellfile = spell_path
+-- Sincronización automática de archivos modificados fuera de Neovim
+vim.opt.autoread = true
+
+-- Forzar el chequeo de cambios cuando el foco vuelve a Neovim o el cursor se mueve
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    pattern = "*",
+    command = "if mode() != 'c' | checktime | endif",
+})
+
+-- Notificación opcional cuando el archivo cambia
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+    callback = function()
+        vim.notify("Archivo actualizado desde el disco", vim.log.levels.INFO)
+    end,
+})

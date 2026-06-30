@@ -8,7 +8,7 @@ return {
     workspaces = {
       {
         name = "Obsidian Vault",
-        path = os.getenv("HOME") .. "/myInsiVault/Obsidian Vault",
+        path = os.getenv("HOME") .. "/myInsiVault/newVault2025",
       },
     },
 

@@ -1,5 +1,6 @@
 return {
 
+
   {
     require("custom.compile"),
   },
@@ -164,7 +165,7 @@ return {
 
   { import = "configs.base16" },
   { import = "configs.treesj" },
-  --{ import = "configs.obsidian" },
+  { import = "configs.obsidian" },
 
   { import = "configs.surround" },
   { import = "configs.markdown-preview" },

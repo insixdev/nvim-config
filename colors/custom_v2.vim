@@ -34,7 +34,7 @@ highlight DiagnosticUnnecessary guibg=NONE guifg=#6f7b68
 highlight FlashBackdrop         guibg=NONE guifg=#6f7b68
 
 " #6f7b68 
-highlight Comment       guifg=#c18c68 gui=Italic
+highlight Comment       guifg=#c18c68gui=Italic
 highlight Conceal       guibg=#262626
 highlight Constant      guifg=#95a999"#96a6c8"#8c9c94
 highlight DiffAdd       guifg=#FFFEDB guibg=#2B3328
@@ -69,7 +69,7 @@ highlight SpecialKey    guifg=#676767
 highlight StatusLineNC  guifg=#8f8ccc guibg=#292621
 highlight StatusLine    guifg=#ffccff guibg=#33302b
 highlight String        guifg=#bdc771
-highlight Structure     guifg=#FF7B72"#dbcdab
+highlight Structure     guifg=#FF7B72
 highlight Substitute    guifg=#1A1A1A guibg=#C1C88D
 highlight TabLine       guifg=#c4a584 guibg=#212121
 highlight TabLineFill   guifg=#A09998 guibg=#212121
